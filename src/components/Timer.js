@@ -11,7 +11,7 @@ class Timer extends React.Component{
 		this.state = {
 			 hours: '',
 			 minutes: '',
-			 seconds:''
+			 seconds: ''
 		 }
  }
 
