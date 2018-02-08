@@ -11,6 +11,7 @@ class App extends Component {
       	<Loading />
 				<Timer />
 				<Counter />
+				<input type="date"></input>
       </div>
     );
   }
