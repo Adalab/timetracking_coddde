@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
-import './App.css';
 
 class App extends Component {
 	constructor (props) {
@@ -34,10 +33,9 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
 				<form className="login__form">
-					<input className="login__input" type="text" placeholder="E-mail" ref="email" onChange={email => this.state ({email})}>{this.state.email}
-					</input >
-					<input className="login__input" type="password"  placeholder="Password" ref="password" onChange={password => this.state ({password})}>{this.state.password}
-					</input>
+					<input className="login__input" type="text" placeholder="E-mail" ref="email" onChange={email => this.state ({email})} />{this.state.email}
+
+					<input className="login__input" type="password"  placeholder="Password" ref="password" onChange={password => this.state ({password})} />{this.state.password}
 					<button className="login__button" onClick={this.handleAuthEmail}>Log-in</button>
 					<button className="login__button" onClick={this.handleAuthGoogle}>Log in con Google
 					</button>
