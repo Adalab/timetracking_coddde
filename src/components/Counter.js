@@ -1,67 +1,77 @@
 import React from 'react';
 
+const ButtonGroup = (props) => (
+  <div className="button-group">
+    <span onClick={props.onStart}>{props.stopped ? 'Start' : 'Pause'}</span>
+    <span onClick={props.onReset}>Reset</span>
+  </div>
+)
+
 class Counter extends React.Component {
-  constructor (props) {
-      super(props)
-      this.state =
-          {
-              count: 0,
-              customNumber: 0,
-              lastInput: 0
-          }
+  constructor(props) {
+    super(props)
+    this.state = {
+      seconds: 0,
+      stopped: true
+    }
   }
-				handleChange (e) {
-                    const value = e.target.value;
-                    this.setState({	customNumber: value, lastInput: value});
-                }
-                componentWillUnmount () {
-                    clearInterval(this.timer)
-                }
-                tick () {
-                    if (this.state.customNumber) {
-											this.setState({
-							count: (this.state.customNumber--)
-						})
-						if (this.state.customNumber <= 0) {
-							this.setState({	count: 0})
-							clearInterval(this.timer)
-							this.setState({ disabled: false })
-						}
-                    } else {
-                        this.setState({count: (this.state.count + 1)})
-                    }
-                }
 
-				display () {
-                    return ('0' + this.state.count % 100).slice(-2)
-                }
+  componentWillUnmount() {
+    clearInterval(this.timerID)
+  }
 
-                startTimer () {
+  tick() {
+    this.setState({
+      seconds: this.state.seconds + 1
+    })
+  }
 
-                        clearInterval(this.timer)
-                        this.timer = setInterval(this.tick.bind(this), 1000)
-                        this.setState({ disabled: true })
+  handleStart() {
+    if (this.state.stopped) {
+      this.timerID = setInterval(() => this.tick(), 1000)
+      this.setState({ stopped: false })
+    } else {
+      clearInterval(this.timerID)
+      this.setState({ stopped: true })
+    }
+  }
 
-                }
-                stopTimer () {
-                    clearInterval(this.timer)
-                }
-                resetTimer () {
-                    clearInterval(this.timer)
-                    this.setState({count: 0, customNumber: this.state.lastInput})
-                    this.setState({ disabled: false })
-                }
-                render () {
-                    return (
-                    <div className='timer'>
-                        <h1 >{this.display()}</h1>
-						<div  className="buttons">
-						 <button  type="button" name="start_btn" id="start_btn" onClick={this.startTimer.bind(this)}>Start</button>
-						 <button  type="button" name="stop_btn" id="stop_btn" onClick={this.stopTimer.bind(this)}>Pause</button>
-						 <button  type="button" name="reset_btn" id="reset_btn" onClick={this.resetTimer.bind(this)}>Stop</button>
-											 </div>
-									 </div>
-									 )
-							 }
-					 }
+  handleReset() {
+    clearInterval(this.timerID)
+    this.setState({ seconds: 0, stopped: true })
+  }
+
+  correctValueFormat(value) {
+    return value < 10 ? '0' + value : value
+  }
+
+  transformTime() {
+    const current = this.state.seconds;
+    const hours = Math.floor((current % (60 * 60 * 24)) / (60 * 60))
+    const minutes = Math.floor((current % (60 * 60)) / 60)
+    const seconds = Math.floor((current % 60))
+
+    return {
+      hours: this.correctValueFormat(hours),
+      minutes: this.correctValueFormat(minutes),
+      seconds: this.correctValueFormat(seconds)
+    }
+  }
+
+  render() {
+    const { hours, minutes, seconds } = this.transformTime()
+    return (
+      <div className="wrapper">
+        <ButtonGroup
+          onStart={() => this.handleStart()}
+          onReset={() => this.handleReset()}
+          stopped={this.state.stopped}
+        />
+        <div className="timer">
+          {hours} : {minutes} : {seconds}
+        </div>
+      </div>
+    )
+  }
+}
 					 export default Counter;

@@ -11,7 +11,7 @@ class Timer extends React.Component{
 		this.state = {
 			 hours: new Date().getHours(),
 			 minutes: new Date().getMinutes(),
-			 seconds: new Date().getSeconds()
+			//  seconds: new Date().getSeconds()
 		 }
  }
 
@@ -19,7 +19,7 @@ class Timer extends React.Component{
 	 this.setState ({
  		 hours: new Date().getHours(),
  		 minutes: new Date().getMinutes(),
- 		 seconds: new Date().getSeconds()
+ 	// 	 seconds: new Date().getSeconds()
  	 })
  }
 
@@ -28,8 +28,8 @@ class Timer extends React.Component{
 
 			<div>
 			{this.state.hours}:
-			{this.state.minutes}:
-			{this.state.seconds}
+			{this.state.minutes}h{/*:*/}
+			{/* {this.state.seconds} */}
 			</div>
 		);
 	}
