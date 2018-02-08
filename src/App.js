@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Loading from './components/Loading';
 import Timer from './components/Timer';
+import Counter from './components/Counter';
 
 class App extends Component {
   render() {
@@ -9,6 +10,7 @@ class App extends Component {
       <div className="App">
       	<Loading />
 				<Timer />
+				<Counter />
       </div>
     );
   }
