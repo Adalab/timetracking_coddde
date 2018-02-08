@@ -5,7 +5,7 @@ import './index.css';
 import App from './App';
 
 firebase.initializeApp({
-	apiKey: "AIzaSyAbzw_iuCC7wya88lxix0BoZ1kKR9vU3Ic",
+		apiKey: "AIzaSyAbzw_iuCC7wya88lxix0BoZ1kKR9vU3Ic",
     authDomain: "timetracking-coddde.firebaseapp.com",
     databaseURL: "https://timetracking-coddde.firebaseio.com",
     projectId: "timetracking-coddde",

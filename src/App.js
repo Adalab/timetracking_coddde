@@ -1,18 +1,47 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import firebase from 'firebase';
 import './App.css';
 
 class App extends Component {
+	constructor (props) {
+		super (props);
+		this.state = {
+			email: '',
+			password: ''
+		}
+	}
+	handleAuthGoogle () {
+		const provider = new firebase.auth.GoogleAuthProvider();
+		firebase.auth().signInWithPopup(provider)
+			.then(result => console.log(`${result.user.email} ha iniciado sesión`))
+			.catch(error => console.log(`Error ${error.code}:${error.message}`));
+	}
+	handleAuthEmail () {
+
+			const email = this.state.email;
+			const password = this.state.password;
+
+			firebase.auth().signInWithEmailAndPassword(email, password)
+	//		.then(result => console.log(`${result.user.email} ha iniciado sesión`))
+		  .catch(error => console.log(`Error ${error.code}:${error.message}`));
+	}
+
+
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to React</h1>
         </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+				<form className="login__form">
+					<input className="login__input" type="text" placeholder="E-mail" ref="email" onChange={email => this.state ({email})}>{this.state.email}
+					</input >
+					<input className="login__input" type="password"  placeholder="Password" ref="password" onChange={password => this.state ({password})}>{this.state.password}
+					</input>
+					<button className="login__button" onClick={this.handleAuthEmail}>Log-in</button>
+					<button className="login__button" onClick={this.handleAuthGoogle}>Log in con Google
+					</button>
+				</form>
       </div>
     );
   }
