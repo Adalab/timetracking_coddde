@@ -36,17 +36,20 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div className="Form">
-        <header className="Form-header">
-          <h1 className="Form-title">Time tracker</h1>
+      <div className="form">
+        <header className="form-header">
+          <h1 className="form-title">Time tracker</h1>
         </header>
 				<form className="login__form">
-					<input name="onLoginSuccess" value={this.state.email} className="login__input" type="text" placeholder="E-mail" ref="email" onChange={e => this.handleInputChange('email', e.target.value)}/>
-					<input value={this.state.password} className="login__input" type="password"  placeholder="Password" ref="password" onChange={e => this.handleInputChange('password', e.target.value)}/>
-					<button className="login__button" type="button" onClick={this.handleAuthEmail}>Log-in</button>
-
-					<button className="login__button" type="button" onClick={this.handleAuthGoogle}>Log in con Google
-					</button>
+					<div className="login__inputs">
+						<input name="onLoginSuccess" value={this.state.email} className="login__input" type="text" placeholder="E-mail" ref="email" onChange={e => this.handleInputChange('email', e.target.value)}/>
+						<input value={this.state.password} className="login__input" type="password"  placeholder="Password" ref="password" onChange={e => this.handleInputChange('password', e.target.value)}/>
+					</div>
+					<div className="login__buttons">
+						<button className="login__button" type="button" onClick={this.handleAuthEmail}>Log-in</button>
+						<button className="login__button" type="button" onClick={this.handleAuthGoogle}>Log in con Google
+						</button>
+					</div>
 				</form>
       </div>
     );
