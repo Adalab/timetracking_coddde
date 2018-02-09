@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import './App.css';
 import Loading from './components/Loading';
 import Timer from './components/Timer';
 import Counter from './components/Counter';
+import Graphic from './components/Graphic';
 
 class App extends Component {
   render() {
@@ -11,7 +11,8 @@ class App extends Component {
       	<Loading />
 				<Timer />
 				<Counter />
-				<input type="date"></input>
+				<input className="calendar" type="date" value="today"></input>
+				<Graphic />
       </div>
     );
   }
