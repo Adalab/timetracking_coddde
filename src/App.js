@@ -1,49 +1,29 @@
-import React, { Component } from 'react';
-import firebase from 'firebase';
+import React from 'react';
 import './App.css';
+import Login from './pages/Login.js';
 
-class App extends Component {
-	constructor (props) {
-		super (props);
+class App extends React.Component {
+	constructor(props) {
+		super(props)
 		this.state = {
-			email: '',
-			password: ''
+			logged: false,
+			user: {}
 		}
 	}
-	handleAuthGoogle () {
-		const provider = new firebase.auth.GoogleAuthProvider();
-		firebase.auth().signInWithPopup(provider)
-			.then(result => console.log(`${result.user.email} ha iniciado sesión`))
-			.catch(error => console.log(`Error ${error.code}:${error.message}`));
+	setUser(user) {
+		this.setState({
+			user: '',
+			logged: true
+		});
 	}
-	handleAuthEmail () {
-
-			const email = this.state.email;
-			const password = this.state.password;
-
-			firebase.auth().signInWithEmailAndPassword(email, password)
-	//		.then(result => console.log(`${result.user.email} ha iniciado sesión`))
-		  .catch(error => console.log(`Error ${error.code}:${error.message}`));
-	}
-
-
   render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-				<form className="login__form">
-					<input className="login__input" type="text" placeholder="E-mail" ref="email" onChange={email => this.state ({email})}>{this.state.email}
-					</input >
-					<input className="login__input" type="password"  placeholder="Password" ref="password" onChange={password => this.state ({password})}>{this.state.password}
-					</input>
-					<button className="login__button" onClick={this.handleAuthEmail}>Log-in</button>
-					<button className="login__button" onClick={this.handleAuthGoogle}>Log in con Google
-					</button>
-				</form>
-      </div>
-    );
+		console.log('render')
+		if (!this.state.logged)
+			{
+				console.log('Vamos a log in')
+				return <Login onLoginSuccess = {this.setUser} />;
+			}
+		return <h1>Hola user</h1>
   }
 }
 

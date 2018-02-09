@@ -11,7 +11,6 @@ firebase.initializeApp({
     projectId: "timetracking-coddde",
     storageBucket: "timetracking-coddde.appspot.com",
     messagingSenderId: "377778818961"
-
 });
 
 ReactDOM.render(<App />, document.getElementById('root'));
