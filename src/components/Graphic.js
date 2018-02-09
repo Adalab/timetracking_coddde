@@ -6,7 +6,7 @@ import {Chart} from '../primeReact/components/chart/Chart';
 class Graphic extends React.Component {
 	render() {
         var data = {
-            labels: ['A','B','C'],
+            labels: ['Tarea 1','Tarea 2','Tarea 3'],
             datasets: [
                 {
                     data: [300, 50, 100],
@@ -27,8 +27,8 @@ class Graphic extends React.Component {
             <div>
                 <div className="content-section introduction">
                     <div className="feature-intro">
-                        <h1>DoughnutChart</h1>
-                        <p>A doughnut chart is a variant of the pie chart, with a blank center allowing for additional information about the data as a whole to be included.</p>
+                        <h1>Proyecto 1</h1>
+                        <p>Tiempo invertido de tareas en el proyecto</p>
                     </div>
                 </div>
 
