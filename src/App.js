@@ -1,6 +1,7 @@
 import React from 'react';
-import './App.css';
 import Login from './pages/Login.js';
+import firebase from 'firebase';
+
 
 class App extends React.Component {
 	constructor(props) {
@@ -17,6 +18,7 @@ class App extends React.Component {
 		});
 	}
   render() {
+
 		console.log('render')
 		if (!this.state.logged)
 			{
