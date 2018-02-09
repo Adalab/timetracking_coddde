@@ -76,10 +76,11 @@ class Counter extends React.Component {
 	paintTasks() {
     let tasksToShow = this.state.tasks; //esto es como el ejemplo de los perros de Isra
 		return (
-			<ul>
+			<ul className="task__list">
 				{tasksToShow.map(
-					task => <li>
-						{task.taskName}, {this.formatTime(task.counter)}
+					task => <li className="task__item">
+						<span>{task.taskName}</span>
+						<span>{this.formatTime(task.counter)}</span>
 					</li>
 				)}
 			</ul>);
@@ -91,14 +92,19 @@ class Counter extends React.Component {
 	render () {
 
 		return (
-			<div className='timer'>
-				<counter >{this.display()}</counter>
-				<div  className="buttons">
-					<button  type="button" name="start_btn" id="start_btn" onClick={this.startTimer}>Start</button>
-					<button  type="button" name="stop_btn" id="stop_btn" onClick={this.pauseTimer}>Pause</button>
-					<button  type="button" name="reset_btn" id="reset_btn" onClick={this.stopTimer}>Stop</button>
+			<div>
+				<div className="timer">
+					<counter className="timer__counter" >{this.display()}</counter>
+					<div className="timer__buttons">
+						<button className="timer__btn timer__btn--play" type="button" name="start_btn" id="start_btn" onClick={this.startTimer}>Start</button>
+						<button className="timer__btn timer__btn--pause" type="button" name="stop_btn" id="stop_btn" onClick={this.pauseTimer}>Pause</button>
+						<button className="timer__btn timer__btn--stop" type="button" name="reset_btn" id="reset_btn" onClick={this.stopTimer}>Stop</button>
+					</div>
+
 				</div>
-				{this.paintTasks()}
+				<div className="task__container">
+					{this.paintTasks()}
+				</div>
 			</div>
 		)
 	}

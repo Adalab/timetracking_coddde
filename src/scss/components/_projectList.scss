@@ -1,0 +1,10 @@
+.task__list{
+	list-style: none;
+  padding: 20px 40px;
+}
+.task__item{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin: 20px;
+}
