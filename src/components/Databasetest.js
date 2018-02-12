@@ -6,44 +6,23 @@ class Database extends React.Component {
 	constructor (props) {
 		super (props)
 		this.state = {
-			name: '',
-			surname: '',
-			email: '',
-			password: ''
+		usuario: '',
 		}
 	}
 
 	componentWillMount () {
-		const nameRef = firebase.database().ref().child('usuario').child('name')
-		const surnameRef = firebase.database().ref().child('usuario').child('surname')
-		const emailRef = firebase.database().ref().child('usuario').child('email')
-		const passwordRef = firebase.database().ref().child('usuario').child('password')
+		const userRef = firebase.database().ref().child('usuario')
 
-		nameRef.on('value',(snapshot) => {
+		userRef.on('value',(snapshot) => {
 			this.setState({
-				name: snapshot.val()
-			})
-		})
-		surnameRef.on('value',(snapshot) => {
-			this.setState({
-				surname: snapshot.val()
-			})
-		})
-		emailRef.on('value',(snapshot) => {
-			this.setState({
-				email: snapshot.val()
-			})
-		})
-		passwordRef.on('value',(snapshot) => {
-			this.setState({
-				password: snapshot.val()
+				usuario: snapshot.val()
 			})
 		})
 	}
 	render() {
 		return (
 			<div>
-				<h1>Hola {this.state.name}{this.state.surname} con email {this.state.email} y contraseña {this.state.password}</h1>
+				<h1>Hola {this.state.usuario.name}</h1>
 			</div>)
 	}
 }
