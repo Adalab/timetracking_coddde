@@ -13,6 +13,14 @@ class App extends React.Component {
 			user: {}
 		}
 	}
+	componentWillMount () {
+		const userRef = firebase.database().ref().child('users').child('user')
+		userRef.on('value',(snapshot) => {
+			this.setState({
+				user: snapshot.val()
+			})
+		})
+	}
 	setUser(user) {
 		this.setState({
 			user: '',
@@ -20,16 +28,14 @@ class App extends React.Component {
 		});
 	}
   render() {
-
-		console.log('render')
-
+		if(!this.state.setUser) {
+			console.log('vamos a log in')
+			return (<Login onLoginSuccess = {this.setUser} />);
+		}
 		return (
-			<Switch>
-				<Route exact path='/' render={() => <Login onLoginSuccess = {this.setUser} />}/>
-				<Route path='/Timer' component={Timer}/>
-			</Switch>
+			<h1>Hola user</h1>
 		);
-  }
+	}
 }
 
 export default App;
