@@ -9,23 +9,22 @@ class Timer extends React.Component{
 		setInterval (this.updateClock,1000);
 
 		this.state = {
-			 hours: '',
-			 minutes: '',
-			 seconds: ''
-		 }
- }
+			hours: '',
+			minutes: '',
+			seconds: ''
+		}
+	}
 
- updateClock () {
-	 this.setState ({
- 		 hours: new Date().getHours(),
- 		 minutes: new Date().getMinutes(),
- 		 seconds: new Date().getSeconds()
- 	 })
- }
+	updateClock () {
+		this.setState ({
+		hours: new Date().getHours(),
+		minutes: new Date().getMinutes(),
+		seconds: new Date().getSeconds()
+		});
+	}
 
 	render(){
 		return(
-
 			<div className="timer__clock">
 			{this.state.hours}:
 			{this.state.minutes}
