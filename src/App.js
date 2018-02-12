@@ -1,6 +1,8 @@
 import React from 'react';
-import Login from './pages/Login.js';
+import Login from './pages/Login';
 import firebase from 'firebase';
+import Timer from './components/Timer';
+import { Link,Route, Switch } from 'react-router-dom';
 
 
 class App extends React.Component {
@@ -20,12 +22,13 @@ class App extends React.Component {
   render() {
 
 		console.log('render')
-		if (!this.state.logged)
-			{
-				console.log('Vamos a log in')
-				return <Login onLoginSuccess = {this.setUser} />;
-			}
-		return <h1>Hola user</h1>
+
+		return (
+			<Switch>
+				<Route exact path='/' render={() => <Login onLoginSuccess = {this.setUser} />}/>
+				<Route path='/Timer' component={Timer}/>
+			</Switch>
+		);
   }
 }
 

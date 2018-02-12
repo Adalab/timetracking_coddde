@@ -1,5 +1,6 @@
 import React from 'react';
 import firebase from 'firebase';
+import { Link,Route, Switch } from 'react-router-dom';
 
 class Login extends React.Component {
 	constructor (props) {

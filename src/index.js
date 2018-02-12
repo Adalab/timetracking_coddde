@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import firebase from 'firebase';
+import { HashRouter } from 'react-router-dom';
 import './scss/main.css';
 import App from './App';
 
@@ -13,4 +14,4 @@ firebase.initializeApp({
     messagingSenderId: "377778818961"
 });
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<HashRouter><App /></HashRouter>, document.getElementById('root'));
