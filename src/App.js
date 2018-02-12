@@ -13,14 +13,7 @@ class App extends React.Component {
 			user: {}
 		}
 	}
-	componentWillMount () {
-		const userRef = firebase.database().ref().child('users').child('user')
-		userRef.on('value',(snapshot) => {
-			this.setState({
-				user: snapshot.val()
-			})
-		})
-	}
+
 	setUser(user) {
 		this.setState({
 			user: '',

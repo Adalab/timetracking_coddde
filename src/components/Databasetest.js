@@ -12,13 +12,13 @@ class Database extends React.Component {
 
 	componentWillMount () {
 		const userRef = firebase.database().ref().child('users').child('user')
-
 		userRef.on('value',(snapshot) => {
 			this.setState({
 				user: snapshot.val()
 			})
 		})
 	}
+
 	render() {
 		return (
 			<div>
