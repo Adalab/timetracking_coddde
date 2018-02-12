@@ -8,15 +8,7 @@ class Login extends React.Component {
 			email: '',
 			password: ''
 		}
-		this.handleAuthGoogle = this.handleAuthGoogle.bind(this);
 		this.handleAuthEmail = this.handleAuthEmail.bind(this);
-	}
-
-	handleAuthGoogle () {
-		const provider = new firebase.auth.GoogleAuthProvider();
-		firebase.auth().signInWithPopup(provider)
-			.then(result => console.log(result, 'ha iniciado sesión'))
-			.catch(error => console.log(`Error ${error.code}:${error.message}`));
 	}
 
 	handleAuthEmail () {
@@ -24,7 +16,7 @@ class Login extends React.Component {
 		const password = this.state.password;
 		firebase.auth().signInWithEmailAndPassword(email, password)
 			.then(result => console.log(result, 'ha iniciado sesión'))
-		  .catch(error => console.log(`Error ${error.code}:${error.message}`));
+			.catch(error => console.log(`Error ${error.code}:${error.message}`));
 			console.log(email, password)
 	}
 
@@ -34,12 +26,18 @@ class Login extends React.Component {
 		});
 	}
 
+	handleLogout () {
+		firebase.auth().signOut()
+		.then(result => console.log(`${result.user.email} ha salido`))
+		.catch(error => console.log(`Error ${error.code}:${error.message}`));
+	}
+
   render() {
     return (
-      <div className="form">
-        <header className="form-header">
-          <h1 className="form-title">Time tracker</h1>
-        </header>
+			<div className="form">
+				<header className="form-header">
+					<h1 className="form-title">Time tracker</h1>
+				</header>
 				<form className="login__form">
 					<div className="login__inputs">
 						<input name="onLoginSuccess" value={this.state.email} className="login__input" type="text" placeholder="E-mail" ref="email" onChange={e => this.handleInputChange('email', e.target.value)}/>
@@ -47,8 +45,9 @@ class Login extends React.Component {
 					</div>
 					<div className="login__buttons">
 						<button className="login__button" type="button" onClick={this.handleAuthEmail}>Log-in</button>
-						<button className="login__button" type="button" onClick={this.handleAuthGoogle}>Log in con Google
-						</button>
+						{/* <button className="login__button" type="button" onClick={this.handleAuthGoogle}>Log in con Google
+						</button> */}
+						{ this.props.renderLoginButton }
 					</div>
 				</form>
       </div>

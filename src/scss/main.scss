@@ -1,7 +1,11 @@
+//core
+@import 'core/variables';
+
 //layout
 @import 'layout/mainPage';
 @import 'layout/app';
 
 //components
+@import 'components/login';
 @import 'components/counter';
 @import 'components/projectList';
