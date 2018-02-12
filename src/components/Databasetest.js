@@ -6,23 +6,23 @@ class Database extends React.Component {
 	constructor (props) {
 		super (props)
 		this.state = {
-		usuario: '',
+		user: '',
 		}
 	}
 
 	componentWillMount () {
-		const userRef = firebase.database().ref().child('usuario')
+		const userRef = firebase.database().ref().child('user')
 
 		userRef.on('value',(snapshot) => {
 			this.setState({
-				usuario: snapshot.val()
+				user: snapshot.val()
 			})
 		})
 	}
 	render() {
 		return (
 			<div>
-				<h1>Hola {this.state.usuario.name}</h1>
+				<h1>Hola {this.state.user.name}</h1>
 			</div>)
 	}
 }
