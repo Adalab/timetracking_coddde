@@ -26,8 +26,8 @@ class Timer extends React.Component{
 	render(){
 		return(
 			<div className="timer__clock">
-			{this.state.hours}:
-			{this.state.minutes}
+				{this.state.hours}:
+				{this.state.minutes}
 			</div>
 		);
 	}
