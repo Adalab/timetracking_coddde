@@ -36,10 +36,17 @@ class Login extends React.Component {
 
   render() {
     return (
+<<<<<<< HEAD
       <div className="form">
         <header className="form-header">
           <h1 className="form-title">Time tracker</h1>
         </header>
+=======
+			<div className="form">
+				<header className="form-header">
+					<h1 className="form-title">Time tracker</h1>
+				</header>
+>>>>>>> develop
 				<form className="login__form">
 					<div className="login__inputs">
 						<input name="onLoginSuccess" value={this.state.email} className="login__input" type="text" placeholder="E-mail" ref="email" onChange={e => this.handleInputChange('email', e.target.value)}/>
@@ -51,7 +58,11 @@ class Login extends React.Component {
 						</button>
 					</div>
 				</form>
+<<<<<<< HEAD
       </div>
+=======
+			</div>
+>>>>>>> develop
     );
   }
 }

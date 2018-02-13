@@ -65,3 +65,55 @@ body {
   flex-direction: row;
   justify-content: space-between;
   margin: 20px; }
+
+.form {
+  justify-content: center;
+  align-items: center; }
+
+.login__form {
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  text-align: center;
+  margin-right: 30px;
+  margin-left: 40%;
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 0 1px #c4cdd5;
+  border: 0;
+  border-radius: 5px; }
+
+.login__inputs {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  margin: 30px; }
+
+.login__input {
+  margin: 3px;
+  box-shadow: 0 0 0 1px #c4cdd5;
+  border: 0;
+  border-radius: 5px;
+  height: 30px;
+  weight: 100%; }
+
+.login__buttons {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  margin: auto; }
+
+.login__button {
+  justify-content: space-between;
+  margin: 3px;
+  width: 100px;
+  background-color: #30373b;
+  border-radius: 10px;
+  box-shadow: 0 0 0 1px #c4cdd5;
+  border: 0;
+  border-radius: 5px;
+  background-color: #00cdd8;
+  color: white;
+  font-weight: bold; }
