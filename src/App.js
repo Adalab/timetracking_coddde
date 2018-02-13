@@ -1,10 +1,11 @@
 import React from 'react';
 import firebase from 'firebase';
 import Databasetest from './components/Databasetest';
-// import Loading from './components/Loading';
+import Loading from './components/Loading';
 import Timer from './components/Timer';
 import Counter from './components/Counter';
 import Login from './pages/Login';
+import Graphic from './components/Graphic';
 
 class App extends React.Component {
 	constructor (props) {
@@ -63,22 +64,18 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-				<header className="App-header">
-					<h1 className="App-title">Welcome to React</h1>
-				</header>
 				<Login
 					renderLoginButton={this.renderLoginButton()}
 				/>
-      	{/* <Loading /> */}
+      	<Loading />
 				<Timer />
 				<Counter
 					user={this.state.user}
 				/>
 				{/* <input type="date"></input> */}
-
-        <div className="App-intro">
-          <Databasetest />
-        </div>
+        <Databasetest />
+				<input className="calendar" type="date" value="today"></input>
+				<Graphic />
       </div>
     );
   }
