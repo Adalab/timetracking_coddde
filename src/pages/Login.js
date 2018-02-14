@@ -26,11 +26,11 @@ class Login extends React.Component {
 		});
 	}
 
-	handleLogout () {
-		firebase.auth().signOut()
-		.then(result => console.log(`${result.user.email} ha salido`))
-		.catch(error => console.log(`Error ${error.code}:${error.message}`));
-	}
+	// handleLogout () {
+	// 	firebase.auth().signOut()
+	// 	.then(result => console.log(`${result.user.email} ha salido`))
+	// 	.catch(error => console.log(`Error ${error.code}:${error.message}`));
+	// }
 
   render() {
     return (
@@ -45,9 +45,9 @@ class Login extends React.Component {
 					</div>
 					<div className="login__buttons">
 						<button className="login__button" type="button" onClick={this.handleAuthEmail}>Log-in</button>
-						{/* <button className="login__button" type="button" onClick={this.handleAuthGoogle}>Log in con Google
-						</button> */}
-						{ this.props.renderLoginButton }
+						<button className="login__button" type="button" onClick={this.props.handleAuthGoogle}>Log in con Google
+						</button>
+						{/* { this.props.renderLoginButton } */}
 					</div>
 				</form>
 
