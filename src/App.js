@@ -10,14 +10,14 @@ import Graphic from './components/Graphic';
 class App extends React.Component {
 	constructor (props) {
 		super (props)
+
+		this.handleLogout = this.handleLogout.bind(this);
+
 		this.state = {
 			user: null,
 			logged: false
 
 		}
-		this.handleAuthGoogle = this.handleAuthGoogle.bind(this);
-		this.handleLogout = this.handleLogout.bind(this);
-		// this.renderLoginButton = this.renderLoginButton.bind(this);
 	}
 
 	componentWillMount() {
@@ -25,49 +25,20 @@ class App extends React.Component {
 			this.setState({
 				user: user
 			});
-			console.log(`El user de google es ${this.state.user}`);
+			console.log(`El user es ${this.state.user}`);
 		});
 
 	}
-
-	handleAuthGoogle () {
-		const provider = new firebase.auth.GoogleAuthProvider();
-		firebase.auth().signInWithPopup(provider)
-			// .then(result => console.log(result, 'ha iniciado sesión'))
-			.then(result => console.log(`${result.user.email} ha iniciado sesión`))
-			.catch(error => console.log(`Error ${error.code}:${error.message}`));
-		}
-
-	//Función para salir del logueado
-	handleLogout () {
-		firebase.auth().signOut()
-		.then(result => console.log(`${result.user.email} ha salido`))
-		.catch(error => console.log(`Error ${error.code}:${error.message}`));
-	}
-
-	// renderLoginButton () {
-	// 	//Si el usuario está logeado
-	// 	if(this.state.user){
-	// 		return(
-	// 			<div>
-	// 				<p>Bienvenido/a {this.state.user.displayName}</p>
-	// 				<img className="image--user" src={this.state.user.photoURL} alt={this.state.user.displayName} />
-	// 				<button onClick={this.handleLogout}>Salir</button>
-	// 			</div>
-	// 		);
-	// 	} else {
-	// 		//Si no lo está
-	// 		return(
-	// 		<button className="login__button" type="button" onClick={this.handleAuthGoogle}>Log in con Google
-	// 		</button>
-	// 		);
-	// 	}
-	// }
 
 	setUser() {
 		this.setState({
 			logged:true
 		});
+	}
+	handleLogout () {
+		firebase.auth().signOut()
+		.then(result => console.log(`${result.user.email} ha salido`))
+		.catch(error => console.log(`Error ${error.code}:${error.message}`));
 	}
 
   render() {
@@ -76,8 +47,9 @@ class App extends React.Component {
 			return (
       <div className="App">
 				<p>Bienvenido/a {this.state.user.displayName}</p>
+				<img className="image--user" src={this.state.user.photoURL} alt={this.state.user.displayName} />
 				<button onClick={this.handleLogout}>Salir</button>
-      	<Loading />
+      	{/* <Loading /> */}
 				{/* <Login
 					// renderLoginButton={this.renderLoginButton()}
 					handleAuthGoogle = {this.handleAuthGoogle}

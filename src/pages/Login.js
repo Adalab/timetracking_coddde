@@ -4,11 +4,14 @@ import firebase from 'firebase';
 class Login extends React.Component {
 	constructor (props) {
 		super (props)
+
+		this.handleAuthEmail = this.handleAuthEmail.bind(this);
+		this.handleAuthGoogle = this.handleAuthGoogle.bind(this);
+
 		this.state = {
 			email: '',
 			password: ''
 		}
-		this.handleAuthEmail = this.handleAuthEmail.bind(this);
 	}
 
 	handleAuthEmail () {
@@ -25,12 +28,13 @@ class Login extends React.Component {
 			[input]: value
 		});
 	}
-
-	// handleLogout () {
-	// 	firebase.auth().signOut()
-	// 	.then(result => console.log(`${result.user.email} ha salido`))
-	// 	.catch(error => console.log(`Error ${error.code}:${error.message}`));
-	// }
+	handleAuthGoogle () {
+		const provider = new firebase.auth.GoogleAuthProvider();
+		firebase.auth().signInWithPopup(provider)
+			// .then(result => console.log(result, 'ha iniciado sesión'))
+			.then(result => console.log(`${result.user.email} ha iniciado sesión`))
+			.catch(error => console.log(`Error ${error.code}:${error.message}`));
+		}
 
   render() {
     return (
@@ -45,7 +49,7 @@ class Login extends React.Component {
 					</div>
 					<div className="login__buttons">
 						<button className="login__button" type="button" onClick={this.handleAuthEmail}>Log-in</button>
-						<button className="login__button" type="button" onClick={this.props.handleAuthGoogle}>Log in con Google
+						<button className="login__button" type="button" onClick={this.handleAuthGoogle}>Log in con Google
 						</button>
 						{/* { this.props.renderLoginButton } */}
 					</div>
