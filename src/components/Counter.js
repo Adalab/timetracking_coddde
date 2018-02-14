@@ -85,6 +85,7 @@ class Counter extends React.Component {
 		clearInterval(this.timer)
 		//Objeto que irá dentro de la base de datos
 		const objectTask = {
+			createdBy: this.props.user.uid,
 			taskName: this.state.inputTask,
 			counter: this.state.count
 		};
