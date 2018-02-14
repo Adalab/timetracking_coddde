@@ -30,6 +30,7 @@ class Counter extends React.Component {
 			});
 			console.log(this.state.tasks);
 		});
+		console.log(`El id de usuario ${this.props.user.uid}`);
 	}
 
 	tick () {
@@ -82,9 +83,11 @@ class Counter extends React.Component {
 	}
 
 	stopTimer () {
+
 		clearInterval(this.timer)
 		//Objeto que irá dentro de la base de datos
 		const objectTask = {
+			createdBy: this.props.user.uid,
 			taskName: this.state.inputTask,
 			counter: this.state.count
 		};
@@ -98,6 +101,11 @@ class Counter extends React.Component {
 		const dbRef =firebase.database().ref('tasks');
 		//Insertamos la nueva tarea
 		dbRef.push(objectTask);
+
+		//Si quisiéramos que la tarea dependiera del usuario:
+		// const dbRef =firebase.database().ref(this.props.user.uid);
+		// //Insertamos la nueva tarea
+		// dbRef.push(objectTask);
 	}
 
 	paintTasks() {
