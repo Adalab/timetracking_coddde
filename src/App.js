@@ -6,6 +6,12 @@ import Timer from './components/Timer';
 import Counter from './components/Counter';
 import Login from './pages/Login';
 import Graphic from './components/Graphic';
+import {reactLocalStorage} from 'reactjs-localstorage';
+
+reactLocalStorage.set('var', true);
+reactLocalStorage.get('var', true);
+reactLocalStorage.setObject('var', {'test': 'test'});
+reactLocalStorage.getObject('var');
 
 class App extends React.Component {
 	constructor (props) {
