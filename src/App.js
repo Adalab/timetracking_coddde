@@ -18,9 +18,7 @@ class App extends React.Component {
 
 		this.state = {
 			user: null,
-			logged: false,
-			projects: []
-
+			logged: false
 		}
 	}
 
