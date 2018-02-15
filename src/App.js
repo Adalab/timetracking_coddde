@@ -22,9 +22,7 @@ class App extends React.Component {
 
 		this.state = {
 			user: null,
-			logged: false,
-			projects: []
-
+			logged: false
 		}
 	}
 
@@ -35,12 +33,6 @@ class App extends React.Component {
 			});
 			console.log(`El user es ${this.state.user}`);
 		});
-		firebase.database().ref('projects').on('child_added', snapshot => {
-			this.setState ({
-				projects: this.state.projects.concat(snapshot.val())
-			});
-			console.log('this.state.projects');
-		})
 	}
 
 	setUser() {
