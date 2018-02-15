@@ -10,7 +10,6 @@ class User extends React.Component {
 			inputProject: '',
 			projects: [],
 			idProject: '',
-			idAllProjects: []
 		}
 	}
 
@@ -25,19 +24,9 @@ class User extends React.Component {
 		firebase.database().ref('projects').on('child_added', snapshot => {
 			this.setState ({
 				projects: this.state.projects.concat(snapshot.val()),
-	//			idProject: snapshot.key
 			});
-			console.log('this.props.projects');
-			console.log(`Este willmount? ${snapshot.key}`);
-		})
-	}
-	componentDidMount () {
-		firebase.database().ref('projects').on('child_added', snapshot => {
-			this.setState ({
-				idProject: snapshot.key
-			});
-			console.log(`Este Didmount? ${snapshot.key}`);
-
+			// console.log(this.state.projects);
+			// console.log(`Este es el listado de los keys de los proyectos ${snapshot.key}`);
 		})
 	}
 
@@ -49,7 +38,24 @@ class User extends React.Component {
 		const dbRefProject = firebase.database().ref('projects');
 		dbRefProject.push(objectProject);
 
+		//Nos trae el valor del último nodo introducido en projects
+		firebase.database().ref('projects').limitToLast(1).on('child_added', 	childSnapshot=> {
 
+				//Para recuperar el ultimo key
+				const lastKey = childSnapshot.key
+				console.log(`Éste sería el key que acabas de introducir ${lastKey}`);
+
+				//Para recuperar el último nodo
+     		const snap = childSnapshot.val();
+
+		 		//Recupero el valor de la clave projectName del ultimo nodo introducido
+		 		console.log(`Objeto snap ${snap.projectName}`);
+
+				//Lo meto en el estado para poder usarlo luego
+				this.setState({
+					idProject: lastKey
+				})
+	 		});
 	}
 
 	paintProject() {
@@ -63,6 +69,8 @@ class User extends React.Component {
 	}
 
 	render() {
+		//No borrar de momento para tenerlo como referencia
+		// console.log(`Id de ultimo proyecto llamado desde render ${this.state.idProject}`);
 		return(
 			<div>
 				<input type="text" placeholder="introduce el projecto" onChange={this.handleInputProject}/>

@@ -27,7 +27,8 @@ class App extends React.Component {
 			this.setState({
 				user: user
 			});
-			console.log(`El user es ${this.state.user}`);
+			console.log('El user es:');
+			console.log(this.state.user);
 		});
 		reactLocalStorage.set('var', true);
 		reactLocalStorage.get('var', true);
