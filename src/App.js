@@ -6,6 +6,7 @@ import Timer from './components/Timer';
 import Counter from './components/Counter';
 import Login from './pages/Login';
 import Graphic from './components/Graphic';
+import User from './pages/User';
 import {reactLocalStorage} from 'reactjs-localstorage';
 
 reactLocalStorage.set('var', true);
@@ -21,7 +22,8 @@ class App extends React.Component {
 
 		this.state = {
 			user: null,
-			logged: false
+			logged: false,
+			projects: []
 
 		}
 	}
@@ -33,7 +35,12 @@ class App extends React.Component {
 			});
 			console.log(`El user es ${this.state.user}`);
 		});
-
+		firebase.database().ref('projects').on('child_added', snapshot => {
+			this.setState ({
+				projects: this.state.projects.concat(snapshot.val())
+			});
+			console.log('this.state.projects');
+		})
 	}
 
 	setUser() {
@@ -61,6 +68,8 @@ class App extends React.Component {
 					handleAuthGoogle = {this.handleAuthGoogle}
 				/> */}
 				<Timer />
+				<User projects={this.state.projects}
+						  user={this.state.user}/>
 				<Counter
 					user={this.state.user}
 				/>
