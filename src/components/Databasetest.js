@@ -15,7 +15,7 @@ class Database extends React.Component {
 
 		userRef.on('value',(snapshot) => {
 			this.setState({
-				user: snapshot.val()
+				userLog: snapshot.val()
 			})
 		})
 	}

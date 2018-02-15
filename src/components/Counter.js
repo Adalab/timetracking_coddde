@@ -18,7 +18,8 @@ class Counter extends React.Component {
 			lastInput: 0,
 			tasks: [],
 			stopClick: false,
-			inputTask: ''
+			inputTask: '',
+			userId: this.props.user
 		}
 	}
 
@@ -86,7 +87,8 @@ class Counter extends React.Component {
 		//Objeto que irá dentro de la base de datos
 		const objectTask = {
 			taskName: this.state.inputTask,
-			counter: this.state.count
+			counter: this.state.count,
+			userId: this.state.userId.getUid()
 		};
 		//reseteamos el contador
 		this.setState({
@@ -94,7 +96,7 @@ class Counter extends React.Component {
 			stopClick: true,
 		});
 
-		//Recogemos la referencia al array de tareas de la base de datos
+		//Recogemos la referencia al array de tareas de la ba.getUid()se de datos
 		const dbRef =firebase.database().ref('tasks');
 		//Insertamos la nueva tarea
 		dbRef.push(objectTask);
