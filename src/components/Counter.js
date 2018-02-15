@@ -88,8 +88,7 @@ class Counter extends React.Component {
 		const objectTask = {
 			createdBy: this.props.user.uid,
 			taskName: this.state.inputTask,
-			counter: this.state.count,
-			userId: this.state.userId.getUid()
+			counter: this.state.count
 		};
 		//reseteamos el contador
 		this.setState({
