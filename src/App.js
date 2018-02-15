@@ -59,12 +59,10 @@ class App extends React.Component {
 					// renderLoginButton={this.renderLoginButton()}
 					handleAuthGoogle = {this.handleAuthGoogle}
 				/> */}
-				<Timer />
 				<User projects={this.state.projects}
-						  user={this.state.user}/>
-				<Counter
-					user={this.state.user}
-				/>
+							user={this.state.user} />
+				<Timer />
+				<Counter user={this.state.user} />
 				{/* <input type="date"></input> */}
         <Databasetest />
 				<input className="calendar" type="date" value="today"></input>
