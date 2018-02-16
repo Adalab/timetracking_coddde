@@ -66,7 +66,7 @@ class App extends React.Component {
 				<Counter user={this.state.user} />
 				{/* <input type="date"></input> */}
         <Databasetest />
-				<input className="calendar" type="date" value="today"></input>
+				<input className="calendar" type="date"></input>
 				<Graphic />
       </div>
 			);

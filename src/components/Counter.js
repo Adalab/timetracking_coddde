@@ -10,8 +10,9 @@ class Counter extends React.Component {
 		this.stopTimer = this.stopTimer.bind(this);
 		this.paintTasks = this.paintTasks.bind(this);
 		this.formatTime = this.formatTime.bind(this);
+		this.calculateFinalTime = this.calculateFinalTime.bind(this);
 		this.handleInputTask = this.handleInputTask.bind(this);
-		this.updateClock=this.updateClock.bind(this);
+		this.formatTimeWithoutSeconds = this.formatTimeWithoutSeconds.bind(this);
 
 		setInterval (this.updateClock,1000);
 
@@ -20,9 +21,7 @@ class Counter extends React.Component {
 			customNumber: 0,
 			tasks: [],
 			stopClick: false,
-			inputTask: '',
-			hours: '',
-			minutes: ''
+			inputTask: ''
 		}
 	}
 
@@ -32,14 +31,6 @@ class Counter extends React.Component {
 			this.setState({
 				tasks: this.state.tasks.concat(snapshot.val())
 			});
-			console.log(this.state.tasks);
-		});
-	}
-
-	updateClock () {
-		this.setState ({
-		hours: new Date().getHours(),
-		minutes: new Date().getMinutes()
 		});
 	}
 
@@ -49,19 +40,23 @@ class Counter extends React.Component {
 				secondsCount: (this.state.customNumber--)
 			});
 			if (this.state.customNumber <= 0) {
-				this.setState({	count: 0})
+				this.setState({
+					count: 0
+				})
 				clearInterval(this.timer)
 			}
 		}
 		else {
-			this.setState({count: (this.state.count + 1)})
+			this.setState({
+				count: (this.state.count + 1)
+			})
 		}
 	}
 
 	formatTime (number) {
 		let hours = Math.floor(number / 3600);
-		let minutes = Math.floor((number - (hours * 60)) / 60);
-		let seconds = Math.floor((number - (minutes * 60)));
+		let minutes = Math.floor((number / 60) - (hours * 60));
+		let seconds = Math.floor((number - (minutes * 60) - (hours * 3600)));
 
 		//pasamos los valores a un string para poder pintarlos después en el return
 		let hoursStr = (hours < 10) ? ('0' + hours) : '' + hours;
@@ -71,17 +66,46 @@ class Counter extends React.Component {
 		return `${hoursStr}:${minutesStr}:${secondsStr}`;
 	}
 
+	formatTimeWithoutSeconds (number) {
+		let hours = Math.floor(number / 3600);
+		let minutes = Math.floor((number / 60) - (hours * 60));
+
+		//pasamos los valores a un string para poder pintarlos después en el return
+		let hoursStr = (hours < 10) ? ('0' + hours) : '' + hours;
+		let minutesStr = (minutes < 10) ? ('0' + minutes) : '' + minutes;
+
+		return `${hoursStr}:${minutesStr}`;
+	}
+
+	calculateFinalTime(initTime, count){
+		if (initTime != null && typeof(initTime !== 'undefined')) {
+
+			let hours = parseInt(initTime.split(':')[0]);
+			let minutes = parseInt(initTime.split(':')[1]);
+
+			let finalCount = (hours * 3600) + (minutes * 60) + count;
+
+			let endHour = this.formatTimeWithoutSeconds(finalCount);
+
+		return endHour;
+	}
+	else return "";
+	}
+
 	display () {
 		return this.formatTime(this.state.count);//usamos la función formatTime para iniciar el contador
 	}
 
 	startTimer () {
 		let startHour = new Date()
-		console.log(startHour.getHours() + ":" + startHour.getMinutes())
 
+		// Ponemos en marcha el contador
 		clearInterval(this.timer)
 		this.timer = setInterval(this.tick.bind(this), 1000)
-		this.setState({ disabled: true })
+
+		this.setState({
+			lastStartTime: startHour
+		})
 	}
 
 	pauseTimer () {
@@ -96,16 +120,15 @@ class Counter extends React.Component {
 	}
 
 	stopTimer () {
-		let endHour = new Date()
-		console.log(endHour.getHours() + ":" + endHour.getMinutes())
-
 		clearInterval(this.timer)
 		//Objeto que irá dentro de la base de datos
 		const objectTask = {
 			createdBy: this.props.user.uid,
 			taskName: this.state.inputTask,
-			counter: this.state.count
+			counter: this.state.count,
+			initTime: this.state.lastStartTime.getHours() + ':' + this.state.lastStartTime.getMinutes()
 		};
+
 		//reseteamos el contador
 		this.setState({
 			count: 0,
@@ -124,9 +147,10 @@ class Counter extends React.Component {
 			<ul className="task__list">
 				{tasksToShow.map(
 					task => <li className="task__item">
-
-						<span>{task.taskName}</span>
-						<span>{this.formatTime(task.counter)}</span>
+						<span>{ task.taskName }</span>
+						<span>{ task.initTime }</span>
+						<span>{ this.calculateFinalTime(task.initTime, task.counter) }</span>
+						<span>{ this.formatTime(task.counter) }</span>
 					</li>).reverse()
 				}
 			</ul>);
@@ -141,7 +165,7 @@ class Counter extends React.Component {
 					<counter className="timer__counter" >{this.display()}</counter>
 					<div className="timer__buttons">
 						<button className="timer__btn timer__btn--play" type="button" name="start_btn" id="start_btn" onClick={this.startTimer}>Start</button>
-						{/* <button className="timer__btn timer__btn--pause" type="button" name="stop_btn" id="stop_btn" onClick={this.pauseTimer}>Pause</button> */}
+						<button className="timer__btn timer__btn--pause" type="button" name="stop_btn" id="stop_btn" onClick={this.pauseTimer}>Pause</button>
 						<button className="timer__btn timer__btn--stop" type="button" name="reset_btn" id="reset_btn" onClick={this.stopTimer}>Stop</button>
 					</div>
 				</div>
