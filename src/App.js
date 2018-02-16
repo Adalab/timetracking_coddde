@@ -1,6 +1,8 @@
 import React from 'react';
 import Loading from './components/Loading';
 import firebase from 'firebase';
+import Projects from './components/Projects';
+import Task from './components/Task';
 import Databasetest from './components/Databasetest';
 import Timer from './components/Timer';
 import Counter from './components/Counter';
@@ -13,13 +15,20 @@ import {reactLocalStorage} from 'reactjs-localstorage';
 
 class App extends React.Component {
 	constructor (props) {
-		super (props)
+		super (props);
 
 		this.handleLogout = this.handleLogout.bind(this);
-
+		this.handleInputProject = this.handleInputProject.bind(this)
+		this.handleInputTask = this.handleInputTask.bind(this);
 		this.state = {
 			user: null,
-			logged: false
+			logged: false,
+			inputProject: '',
+			projects: [],
+			idProject: '',
+			tasks: [],
+			inputTask: ''
+
 		}
 	}
 
@@ -30,6 +39,19 @@ class App extends React.Component {
 			});
 			console.log('El user es:');
 			console.log(this.state.user);
+		});
+		firebase.database().ref('projects').on('child_added', snapshot => {
+			this.setState ({
+				projects: this.state.projects.concat(snapshot.val()),
+			});
+			// console.log(this.state.projects);
+			// console.log(`Este es el listado de los keys de los proyectos ${snapshot.key}`);
+		})
+		firebase.database().ref('tasks').on('child_added', snapshot => {
+			this.setState({
+				tasks: this.state.tasks.concat(snapshot.val())
+			});
+			console.log(this.state.tasks);
 		});
 		reactLocalStorage.set('var', true);
 		reactLocalStorage.get('var', true);
@@ -47,6 +69,18 @@ class App extends React.Component {
 		.then(result => console.log(`${result.user.email} ha salido`))
 		.catch(error => console.log(`Error ${error.code}:${error.message}`));
 	}
+		handleInputProject (event) {
+			this.setState ({
+				inputProject: event.target.value
+			})
+			console.log(this.state.inputProject);
+		}
+	//transformamos el valor añadido en el input en el estado que se va a usar luego (inputTask)
+	handleInputTask(e) {
+		this.setState({
+			inputTask: e.target.value
+		});
+	}
 
   render() {
 		if(this.state.user) {
@@ -61,10 +95,13 @@ class App extends React.Component {
 					// renderLoginButton={this.renderLoginButton()}
 					handleAuthGoogle = {this.handleAuthGoogle}
 				/> */}
-				<User projects={this.state.projects}
-							user={this.state.user} />
 				<Timer />
 				<Counter user={this.state.user} />
+				<Projects inputProject={this.state.inputProject} handleInputProject={this.handleInputProject}
+				projects={this.state.projects} />
+				<Task
+					inputTask={this.state.inputTask} handleInputTask={this.handleInputTask}
+					tasks={this.state.tasks} />
 				{/* <input type="date"></input> */}
         <Databasetest />
 				<input className="calendar" type="date"></input>

@@ -3,7 +3,7 @@ import firebase from 'firebase';
 
 class Counter extends React.Component {
 	constructor (props) {
-		super(props)
+		super(props);
 
 		this.startTimer = this.startTimer.bind(this);
 		this.pauseTimer = this.pauseTimer.bind(this);
@@ -105,16 +105,17 @@ class Counter extends React.Component {
 	paintTasks() {
 		let tasksToShow = this.state.tasks; //esto es como el ejemplo de los perros de Isra
 		return (
-			<ul className="task__list">
-				{tasksToShow.map(
-					task => <li className="task__item">
-						<span>{task.taskName}</span>
-						<span>{this.formatTime(task.counter)}</span>
-					</li>).reverse()
-				}
-			</ul>);
+			<div className="project__container">
+				<ul className="task__list">
+					{tasksToShow.map(
+						task => <li className="task__item">
+							<span>{task.taskName}</span>
+							<span>{this.formatTime(task.counter)}</span>
+						</li>).reverse()
+					}
+				</ul>
+			</div>);
 	}
-
 	render () {
 
 		return (
@@ -132,7 +133,7 @@ class Counter extends React.Component {
 					{this.paintTasks()}
 				</div>
 			</div>
-		)
+		);
 	}
 }
 
