@@ -2,7 +2,6 @@ import React from 'react';
 import Loading from './components/Loading';
 import firebase from 'firebase';
 import Databasetest from './components/Databasetest';
-import Timer from './components/Timer';
 import Counter from './components/Counter';
 import Login from './pages/Login';
 import Graphic from './components/Graphic';
@@ -62,11 +61,11 @@ class App extends React.Component {
 				/> */}
 				<User projects={this.state.projects}
 							user={this.state.user} />
-				{/* <Timer /> */}
+				<Timer />
 				<Counter user={this.state.user} />
 				{/* <input type="date"></input> */}
         <Databasetest />
-				<input className="calendar" type="date"></input>
+				<input className="calendar" type="date" value="today"></input>
 				<Graphic />
       </div>
 			);

@@ -25,8 +25,9 @@ class User extends React.Component {
 			this.setState ({
 				projects: this.state.projects.concat(snapshot.val()),
 			});
-			// console.log(this.state.projects);
-			// console.log(`Este es el listado de los keys de los proyectos ${snapshot.key}`);
+			// console.log(snapshot.val());
+			console.log(this.state.projects);
+			console.log(`Este es el listado de los keys de los proyectos ${snapshot.key}`);
 		})
 	}
 

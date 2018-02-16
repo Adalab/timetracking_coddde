@@ -3,7 +3,7 @@ import firebase from 'firebase';
 
 class Counter extends React.Component {
 	constructor (props) {
-		super(props)
+		super(props);
 
 		this.startTimer = this.startTimer.bind(this);
 		this.pauseTimer = this.pauseTimer.bind(this);
@@ -155,7 +155,6 @@ class Counter extends React.Component {
 				}
 			</ul>);
 	}
-
 	render () {
 
 		return (
@@ -179,7 +178,7 @@ class Counter extends React.Component {
 					{this.paintTasks()}
 				</div>
 			</div>
-		)
+		);
 	}
 }
 
