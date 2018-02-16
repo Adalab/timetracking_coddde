@@ -123,6 +123,12 @@ body {
   justify-content: space-between;
   margin: 20px; }
 
-.chartjs-render-monitor {
-  width: 700px !important;
-  height: 300px !important; }
+#barras {
+  width: 600px !important;
+  height: 100px !important;
+  margin-left: 350px !important; }
+
+#quesito {
+  width: 500px !important;
+  height: 250px !important;
+  margin-left: 400px !important; }

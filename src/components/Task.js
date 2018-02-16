@@ -17,7 +17,7 @@ class Task extends React.Component {
 			// tasks: [],
 			stopClick: false,
 			// inputTask: '',
-			userId: this.props.user
+			// userId: this.props.user
 		}
 	}
 

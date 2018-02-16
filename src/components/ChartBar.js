@@ -53,7 +53,7 @@ class ChartBar extends React.Component {
 							{ this.selectProject() }
 
 							<div className="content-section implementation">
-                  <Chart type="bar" data={data} className="chartBar"/>
+                  <Chart  id="barras" type="bar" data={data} className="chartBar"/>
               </div>
           </div>
 				)
