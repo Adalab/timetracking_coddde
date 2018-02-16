@@ -95,9 +95,12 @@ class App extends React.Component {
 				/> */}
 				<Timer />
 				<Counter user={this.state.user} />
-				<Projects inputProject={this.state.inputProject} handleInputProject={this.handleInputProject}
-				projects={this.state.projects} />
+				<Projects
+					user={this.state.user}
+					inputProject={this.state.inputProject} handleInputProject={this.handleInputProject}
+					projects={this.state.projects} />
 				<Task
+					user={this.state.user}
 					inputTask={this.state.inputTask} handleInputTask={this.handleInputTask}
 					tasks={this.state.tasks} />
 				{/* <input type="date"></input> */}
