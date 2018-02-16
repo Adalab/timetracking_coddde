@@ -66,6 +66,9 @@ class Counter extends React.Component {
 	}
 
 	startTimer () {
+		let startHour = new Date()
+		console.log(startHour.getHours() + ":" + startHour.getMinutes())
+
 		clearInterval(this.timer)
 		this.timer = setInterval(this.tick.bind(this), 1000)
 		this.setState({ disabled: true })
@@ -83,6 +86,9 @@ class Counter extends React.Component {
 	}
 
 	stopTimer () {
+		let endHour = new Date()
+		console.log(endHour.getHours() + ":" + endHour.getMinutes())
+
 		clearInterval(this.timer)
 		//Objeto que irá dentro de la base de datos
 		const objectTask = {
@@ -108,6 +114,7 @@ class Counter extends React.Component {
 			<ul className="task__list">
 				{tasksToShow.map(
 					task => <li className="task__item">
+
 						<span>{task.taskName}</span>
 						<span>{this.formatTime(task.counter)}</span>
 					</li>).reverse()
@@ -129,6 +136,12 @@ class Counter extends React.Component {
 					</div>
 				</div>
 				<div className="task__container">
+					<div className="task__item">
+						<span>¿En qué estoy trabajando?</span>
+						<span>Hora de inicio</span>
+						<span>Hora de fin</span>
+						<span>Tiempo invertido</span>
+					</div>
 					{this.paintTasks()}
 				</div>
 			</div>
