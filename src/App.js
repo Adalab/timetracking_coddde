@@ -106,7 +106,7 @@ class App extends React.Component {
         <Databasetest />
 				<input className="calendar" type="date"></input>
 				<Graphic />
-				<ChartBar />
+				<ChartBar selectProjects={this.state.projects} />
       </div>
 			);
 			}
