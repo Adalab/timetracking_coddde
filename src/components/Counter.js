@@ -11,15 +11,18 @@ class Counter extends React.Component {
 		this.paintTasks = this.paintTasks.bind(this);
 		this.formatTime = this.formatTime.bind(this);
 		this.handleInputTask = this.handleInputTask.bind(this);
+		this.updateClock=this.updateClock.bind(this);
+
+		setInterval (this.updateClock,1000);
 
 		this.state = {
 			count: 0,
 			customNumber: 0,
-			lastInput: 0,
 			tasks: [],
 			stopClick: false,
 			inputTask: '',
-			userId: this.props.user
+			hours: '',
+			minutes: ''
 		}
 	}
 
@@ -30,6 +33,13 @@ class Counter extends React.Component {
 				tasks: this.state.tasks.concat(snapshot.val())
 			});
 			console.log(this.state.tasks);
+		});
+	}
+
+	updateClock () {
+		this.setState ({
+		hours: new Date().getHours(),
+		minutes: new Date().getMinutes()
 		});
 	}
 

@@ -62,7 +62,7 @@ class App extends React.Component {
 				/> */}
 				<User projects={this.state.projects}
 							user={this.state.user} />
-				<Timer />
+				{/* <Timer /> */}
 				<Counter user={this.state.user} />
 				{/* <input type="date"></input> */}
         <Databasetest />
