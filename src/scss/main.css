@@ -122,3 +122,7 @@ body {
   flex-direction: row;
   justify-content: space-between;
   margin: 20px; }
+
+.chartjs-render-monitor {
+  width: 700px !important;
+  height: 300px !important; }

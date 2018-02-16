@@ -6,6 +6,7 @@ import Timer from './components/Timer';
 import Counter from './components/Counter';
 import Login from './pages/Login';
 import Graphic from './components/Graphic';
+import ChartBar from './components/ChartBar';
 import User from './pages/User';
 import {reactLocalStorage} from 'reactjs-localstorage';
 
@@ -66,8 +67,9 @@ class App extends React.Component {
 				<Counter user={this.state.user} />
 				{/* <input type="date"></input> */}
         <Databasetest />
-				<input className="calendar" type="date" value="today"></input>
+				<input className="calendar" type="date"></input>
 				<Graphic />
+				<ChartBar />
       </div>
 			);
 			}
