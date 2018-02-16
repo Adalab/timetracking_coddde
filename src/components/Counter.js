@@ -97,9 +97,9 @@ class Counter extends React.Component {
 		});
 
 		//Recogemos la referencia al array de tareas de la ba.getUid()se de datos
-		const dbRef =firebase.database().ref('tasks');
+	//	const dbRef =firebase.database().ref('tasks');
 		//Insertamos la nueva tarea
-		dbRef.push(objectTask);
+		//dbRef.push(objectTask);
 	}
 
 	paintTasks() {

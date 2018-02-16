@@ -36,9 +36,10 @@ class Projects extends React.Component {
 		return (
 			<div className="projects-container">
 				{projectToShow.map(
-					project => <p>{project.projectName}</p>
-				).reverse()}</div>
-		)
+					project => <div><p>{project.projectName}</p><p>{project.taskID}</p></div>
+
+				).reverse()}
+			</div>);
 	}
 	render() {
 		//No borrar de momento para tenerlo como referencia

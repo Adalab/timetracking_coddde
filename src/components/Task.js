@@ -84,13 +84,13 @@ class Task extends React.Component {
 		});
 
 		//Recogemos la referencia al array de tareas de la ba.getUid()se de datos
-		const dbRef =firebase.database().ref('tasks');
+		const dbRef =firebase.database().ref('projects/tasks');
 		//Insertamos la nueva tarea
 		dbRef.push(objectTask);
 	}
-
 	paintTasks() {
 		let tasksToShow = this.props.tasks; //esto es como el ejemplo de los perros de Isra
+		let projects=this.props.projects;
 		return (
 			<div className="project__container">
 				<ul className="task__list">

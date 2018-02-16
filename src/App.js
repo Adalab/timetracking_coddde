@@ -99,7 +99,9 @@ class App extends React.Component {
 				projects={this.state.projects} />
 				<Task
 					inputTask={this.state.inputTask} handleInputTask={this.handleInputTask}
-					tasks={this.state.tasks} />
+					tasks={this.state.tasks}
+					user={this.state.user}
+					projects={this.state.projects}/>
 				{/* <input type="date"></input> */}
         <Databasetest />
 				<input className="calendar" type="date" value="today"></input>
