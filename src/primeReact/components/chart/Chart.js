@@ -89,7 +89,7 @@ export class Chart extends Component {
 
         return (
             <div id={this.props.id} style={this.props.style} className={className} width={this.props.width} height={this.props.height}>
-                <canvas ref={(el) => {this.canvas = el;}}></canvas>
+                <canvas id="quesito" ref={(el) => {this.canvas = el;}}></canvas>
             </div>
         );
     }
