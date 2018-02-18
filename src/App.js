@@ -20,12 +20,15 @@ class App extends React.Component {
 		this.handleLogout = this.handleLogout.bind(this);
 		this.handleInputProject = this.handleInputProject.bind(this)
 		this.handleInputTask = this.handleInputTask.bind(this);
+		this.selectProject = this.selectProject.bind(this);
+		// this.recoverLastProjectKey = this.recoverLastProjectKey.bind(this);
+
 		this.state = {
 			user: null,
 			logged: false,
 			inputProject: '',
 			projects: [],
-			idProject: '',
+			// idProject: '',
 			tasks: [],
 			inputTask: ''
 
@@ -64,17 +67,20 @@ class App extends React.Component {
 			logged:true
 		});
 	}
+
 	handleLogout () {
 		firebase.auth().signOut()
 		.then(result => console.log(`${result.user.email} ha salido`))
 		.catch(error => console.log(`Error ${error.code}:${error.message}`));
 	}
-		handleInputProject (event) {
-			this.setState ({
-				inputProject: event.target.value
-			})
-			console.log(this.state.inputProject);
-		}
+
+	handleInputProject (event) {
+		this.setState ({
+			inputProject: event.target.value
+		})
+		console.log(this.state.inputProject);
+	}
+
 	//transformamos el valor añadido en el input en el estado que se va a usar luego (inputTask)
 	handleInputTask(e) {
 		this.setState({
@@ -82,6 +88,37 @@ class App extends React.Component {
 		});
 	}
 
+	//El select lo vamos a reutilizar en el componente ChartBar y en la página principal
+	selectProject(){
+		let arrayProject = this.state.projects;
+
+		return(<select className="">
+			<option>Selecciona un proyecto</option>
+			{
+				arrayProject.map(
+					project =>
+						<option>{project.projectName}</option>
+				)
+			}
+		</select>);
+	}
+
+	// recoverLastProjectKey() {
+	// 	//Nos trae el valor del último nodo introducido en projects
+	// 	firebase.database().ref('projects').limitToLast(1).on('child_added', 	childSnapshot=> {
+	// 		//Para recuperar el ultimo key
+	// 		const lastProjectKey = childSnapshot.key
+	// 		console.log(`Éste sería el key que acabas de introducir ${lastProjectKey}`);
+	// 		//Para recuperar el último nodo
+	//  		const snap = childSnapshot.val();
+	//  		//Recupero el valor de la clave projectName del ultimo nodo introducido
+	//  		console.log(`Objeto snap ${snap.projectName}`);
+	// 		//Lo meto en el estado para poder usarlo luego
+	// 		this.setState({
+	// 			idProject: lastProjectKey
+	// 		})
+	//  	});
+	// }
   render() {
 		if(this.state.user) {
 
@@ -100,11 +137,19 @@ class App extends React.Component {
 				<Projects
 					user={this.state.user}
 					inputProject={this.state.inputProject} handleInputProject={this.handleInputProject}
-					projects={this.state.projects} />
+					projects={this.state.projects}
+				/>
 				<Task
 					user={this.state.user}
 					inputTask={this.state.inputTask} handleInputTask={this.handleInputTask}
-					tasks={this.state.tasks} />
+					tasks={this.state.tasks}
+					selectProject={this.selectProject()}
+					// recoverLastProjectKey={this.recoverLastProjectKey()}
+					// idProject={this.state.idProject}
+					handleInputProject={this.handleInputProject}
+					inputProject={this.state.inputProject}
+
+				/>
 				{/* <input type="date"></input> */}
         <Databasetest />
 				<input className="calendar" type="date"></input>

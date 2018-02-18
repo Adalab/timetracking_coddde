@@ -5,6 +5,8 @@ class Task extends React.Component {
 	constructor (props) {
 		super(props)
 
+		this.setLastProyectId = this.setLastProyectId.bind(this);
+		this.addProject = this.addProject.bind(this);
 		this.startTimer = this.startTimer.bind(this);
 		// this.pauseTimer = this.pauseTimer.bind(this);
 		this.stopTimer = this.stopTimer.bind(this);
@@ -14,22 +16,46 @@ class Task extends React.Component {
 		this.state = {
 			count: 0,
 			customNumber: 0,
-			// tasks: [],
 			stopClick: false,
-			// inputTask: '',
-			// userId: this.props.user
+			idProject: '',
 		}
 	}
 
-	// //Creamos un espacio(ref) en firebase, que se llamará "tasks", dentro del cual se van a ir añadiendo ("child_added") las tareas que se vayan capturando y usamos un método (concat) que los va a ir añadiendo uno detrás de otro
-	// componentWillMount () {
-	// 	firebase.database().ref('tasks').on('child_added', snapshot => {
-	// 		this.setState({
-	// 			tasks: this.state.tasks.concat(snapshot.val())
-	// 		});
-	// 		console.log(this.state.tasks);
-	// 	});
-	// }
+	setLastProyectId(){
+		//Nos trae el valor del último nodo introducido en projects
+		firebase.database().ref('projects').limitToLast(1).on('child_added', 	childSnapshot=> {
+			//Introducimos en el estado el id del último proyecto añadido
+			this.setState({
+				idProject: childSnapshot.key
+			})
+	 	}).bind(this);
+		console.log(this.state.idProject);
+	}
+
+	addProject(){
+		const objectProject = {
+			projectName: this.props.inputProject,
+			projectUser: this.props.user.uid
+		}
+		const dbRefProject = firebase.database().ref('projects');
+		dbRefProject.push(objectProject);
+
+		//Nos trae el valor del último nodo introducido en projects
+		firebase.database().ref('projects').limitToLast(1).on('child_added', 	childSnapshot=> {
+			//Para recuperar el ultimo key
+			// const idProject = childSnapshot.key;
+			// console.log(`Éste sería el key que acabas de introducir ${idProject}`);
+			// //Para recuperar el último nodo
+			// 	const snap = childSnapshot.val();
+			// 	//Recupero el valor de la clave projectName del ultimo nodo introducido
+			// 	console.log(`Objeto snap ${snap.projectName}`);
+			// // Lo meto en el estado para poder usarlo luego
+			this.setState({
+				idProject: childSnapshot.key
+			})
+		}).bind(this);
+	}
+
 	tick () {
 		if (this.state.customNumber) {
 			this.setState({
@@ -45,45 +71,49 @@ class Task extends React.Component {
 		}
 	}
 
-		formatTime (number) {
-			let hours = Math.floor(number / 3600);
-			let minutes = Math.floor((number - (hours * 60)) / 60);
-			let seconds = Math.floor((number - (minutes * 60)));
+	formatTime (number) {
+		let hours = Math.floor(number / 3600);
+		let minutes = Math.floor((number - (hours * 60)) / 60);
+		let seconds = Math.floor((number - (minutes * 60)));
 
-			//pasamos los valores a un string para poder pintarlos después en el return
-			let hoursStr = (hours < 10) ? ('0' + hours) : '' + hours;
-			let minutesStr = (minutes < 10) ? ('0' + minutes) : '' + minutes;
-			let secondsStr = (seconds < 10) ? ('0' + seconds) : '' + seconds;
+		//pasamos los valores a un string para poder pintarlos después en el return
+		let hoursStr = (hours < 10) ? ('0' + hours) : '' + hours;
+		let minutesStr = (minutes < 10) ? ('0' + minutes) : '' + minutes;
+		let secondsStr = (seconds < 10) ? ('0' + seconds) : '' + seconds;
 
-			return `${hoursStr}:${minutesStr}:${secondsStr}`;
-		}
+		return `${hoursStr}:${minutesStr}:${secondsStr}`;
+	}
 
-		display () {
-			return this.formatTime(this.state.count);//usamos la función formatTime para iniciar el contador
-		}
+	display () {
+		return this.formatTime(this.state.count);//usamos la función formatTime para iniciar el contador
+	}
 
-		startTimer () {
-			clearInterval(this.timer)
-			this.timer = setInterval(this.tick.bind(this), 1000)
-			this.setState({ disabled: true })
-		}
-
+	startTimer () {
+		// this.setLastProyectId();
+		clearInterval(this.timer)
+		this.timer = setInterval(this.tick.bind(this), 1000)
+		this.setState({ disabled: true })
+	}
 
 	stopTimer () {
+		this.setLastProyectId();
+		// this.props.recoverLastProjectKey();
 		clearInterval(this.timer)
 		//Objeto que irá dentro de la base de datos
 		const objectTask = {
 			createdBy: this.props.user.uid,
 			taskName: this.props.inputTask,
-			counter: this.state.count
+			counter: this.state.count,
+			projectId: this.state.idProject
 		};
+		console.log(`Éste sería el key del project en funcion stop ${this.state.projectId}`);
 		//reseteamos el contador
 		this.setState({
 			count: 0,
 			stopClick: true,
 		});
 
-		//Recogemos la referencia al array de tareas de la ba.getUid()se de datos
+		//Recogemos la referencia al array de tareas de la base de datos
 		const dbRef =firebase.database().ref('tasks');
 		//Insertamos la nueva tarea
 		dbRef.push(objectTask);
@@ -109,8 +139,16 @@ class Task extends React.Component {
 		return (
 			<div>
 				<div className="timer">
+					<div>
+						{this.props.selectProject}
+						<div>
+							<input type="text" placeholder="introduce el projecto" onChange={this.props.handleInputProject}/>
+							<button onClick={this.setLastProyectId}>Estado</button>
+							<button type="button" onClick={this.addProject}>Añadir proyecto</button>
+						</div>
+					</div>
 					<input type="text" className="task__input" placeholder="Define brevemente tu tarea" onChange={this.props.handleInputTask}/>
-					<counter className="timer__counter" >{this.display()}</counter>
+					<counter className="timer__counter">{this.display()}</counter>
 					<div className="timer__buttons">
 						<button className="timer__btn timer__btn--play" type="button" name="start_btn" id="start_btn" onClick={this.startTimer}>Start</button>
 						<button className="timer__btn timer__btn--stop" type="button" name="reset_btn" id="reset_btn" onClick={this.stopTimer}>Stop</button>
