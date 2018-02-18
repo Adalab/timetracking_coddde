@@ -7,6 +7,7 @@ class Task extends React.Component {
 
 		this.setLastProyectId = this.setLastProyectId.bind(this);
 		this.addProject = this.addProject.bind(this);
+		this.addTaskFirebase = this.addTaskFirebase.bind(this);
 		this.startTimer = this.startTimer.bind(this);
 		// this.pauseTimer = this.pauseTimer.bind(this);
 		this.stopTimer = this.stopTimer.bind(this);
@@ -56,6 +57,21 @@ class Task extends React.Component {
 		}).bind(this);
 	}
 
+	addTaskFirebase () {
+		this.setLastProyectId();
+		//Objeto que irá dentro de la base de datos
+		const objectTask = {
+			createdBy: this.props.user.uid,
+			taskName: this.props.inputTask,
+			counter: this.state.count,
+			projectId: this.state.idProject
+		};
+		//Recogemos la referencia al array de tareas de la base de datos
+		const dbRef =firebase.database().ref('tasks');
+		//Insertamos la nueva tarea
+		dbRef.push(objectTask);
+	}
+
 	tick () {
 		if (this.state.customNumber) {
 			this.setState({
@@ -89,34 +105,22 @@ class Task extends React.Component {
 	}
 
 	startTimer () {
-		// this.setLastProyectId();
+		this.setLastProyectId();
 		clearInterval(this.timer)
 		this.timer = setInterval(this.tick.bind(this), 1000)
 		this.setState({ disabled: true })
 	}
 
 	stopTimer () {
-		this.setLastProyectId();
-		// this.props.recoverLastProjectKey();
-		clearInterval(this.timer)
-		//Objeto que irá dentro de la base de datos
-		const objectTask = {
-			createdBy: this.props.user.uid,
-			taskName: this.props.inputTask,
-			counter: this.state.count,
-			projectId: this.state.idProject
-		};
-		console.log(`Éste sería el key del project en funcion stop ${this.state.projectId}`);
+		clearInterval(this.timer);
+		this.addTaskFirebase();
 		//reseteamos el contador
 		this.setState({
 			count: 0,
 			stopClick: true,
 		});
 
-		//Recogemos la referencia al array de tareas de la base de datos
-		const dbRef =firebase.database().ref('tasks');
-		//Insertamos la nueva tarea
-		dbRef.push(objectTask);
+
 	}
 
 	paintTasks() {

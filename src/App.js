@@ -20,8 +20,9 @@ class App extends React.Component {
 		this.handleLogout = this.handleLogout.bind(this);
 		this.handleInputProject = this.handleInputProject.bind(this)
 		this.handleInputTask = this.handleInputTask.bind(this);
+				this.recoverSelectedProyect = this.recoverSelectedProyect.bind(this);
 		this.selectProject = this.selectProject.bind(this);
-		// this.recoverLastProjectKey = this.recoverLastProjectKey.bind(this);
+
 
 		this.state = {
 			user: null,
@@ -30,8 +31,8 @@ class App extends React.Component {
 			projects: [],
 			// idProject: '',
 			tasks: [],
-			inputTask: ''
-
+			inputTask: '',
+			projectSelected: ''
 		}
 	}
 
@@ -87,12 +88,20 @@ class App extends React.Component {
 			inputTask: e.target.value
 		});
 	}
+	recoverSelectedProyect (e){
+		this.setState({
+			projectSelected: e.target.value
+		})
+
+		console.log(this.state.projectSelected);
+	}
+
 
 	//El select lo vamos a reutilizar en el componente ChartBar y en la página principal
 	selectProject(){
 		let arrayProject = this.state.projects;
 
-		return(<select className="">
+		return(<select className="" onClick={this.recoverSelectedProyect}>
 			<option>Selecciona un proyecto</option>
 			{
 				arrayProject.map(
@@ -103,22 +112,6 @@ class App extends React.Component {
 		</select>);
 	}
 
-	// recoverLastProjectKey() {
-	// 	//Nos trae el valor del último nodo introducido en projects
-	// 	firebase.database().ref('projects').limitToLast(1).on('child_added', 	childSnapshot=> {
-	// 		//Para recuperar el ultimo key
-	// 		const lastProjectKey = childSnapshot.key
-	// 		console.log(`Éste sería el key que acabas de introducir ${lastProjectKey}`);
-	// 		//Para recuperar el último nodo
-	//  		const snap = childSnapshot.val();
-	//  		//Recupero el valor de la clave projectName del ultimo nodo introducido
-	//  		console.log(`Objeto snap ${snap.projectName}`);
-	// 		//Lo meto en el estado para poder usarlo luego
-	// 		this.setState({
-	// 			idProject: lastProjectKey
-	// 		})
-	//  	});
-	// }
   render() {
 		if(this.state.user) {
 
@@ -144,6 +137,7 @@ class App extends React.Component {
 					inputTask={this.state.inputTask} handleInputTask={this.handleInputTask}
 					tasks={this.state.tasks}
 					selectProject={this.selectProject()}
+					projectSelected={this.state.projectSelected}
 					// recoverLastProjectKey={this.recoverLastProjectKey()}
 					// idProject={this.state.idProject}
 					handleInputProject={this.handleInputProject}
