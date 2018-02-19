@@ -9,7 +9,7 @@ class Graphic extends React.Component {
             labels: ['Tarea 1','Tarea 2','Tarea 3'],
             datasets: [
                 {
-                    data: [300, 50, 100],
+                    data: [100, 50, 100],
                     backgroundColor: [
                         "#FF6384",
                         "#36A2EB",

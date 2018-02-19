@@ -3,14 +3,12 @@ import Header from './components/Header';
 import Loading from './components/Loading';
 import firebase from 'firebase';
 import Projects from './components/Projects';
-import Task from './components/Task';
 import Databasetest from './components/Databasetest';
-import Timer from './components/Timer';
-import Counter from './components/Counter';
+import CountTask from './components/CountTask';
 import Login from './pages/Login';
 import Graphic from './components/Graphic';
+import ChartBar from './components/ChartBar';
 import {reactLocalStorage} from 'reactjs-localstorage';
-
 
 class App extends React.Component {
 	constructor (props) {
@@ -19,15 +17,15 @@ class App extends React.Component {
 		this.handleLogout = this.handleLogout.bind(this);
 		this.handleInputProject = this.handleInputProject.bind(this)
 		this.handleInputTask = this.handleInputTask.bind(this);
+
 		this.state = {
 			user: null,
 			logged: false,
 			inputProject: '',
 			projects: [],
-			idProject: '',
+			// idProject: '',
 			tasks: [],
-			inputTask: ''
-
+			inputTask: '',
 		}
 	}
 
@@ -63,17 +61,20 @@ class App extends React.Component {
 			logged:true
 		});
 	}
+
 	handleLogout () {
 		firebase.auth().signOut()
 		.then(result => console.log(`${result.user.email} ha salido`))
 		.catch(error => console.log(`Error ${error.code}:${error.message}`));
 	}
-		handleInputProject (event) {
-			this.setState ({
-				inputProject: event.target.value
-			})
-			console.log(this.state.inputProject);
-		}
+
+	handleInputProject (event) {
+		this.setState ({
+			inputProject: event.target.value
+		})
+		console.log(this.state.inputProject);
+	}
+
 	//transformamos el valor añadido en el input en el estado que se va a usar luego (inputTask)
 	handleInputTask(e) {
 		this.setState({
@@ -86,6 +87,7 @@ class App extends React.Component {
 
 			return (
       <div className="App">
+<<<<<<< HEAD
 				<Header displayName={this.state.user.displayName}
 				name={this.state.user.name}
 				url={this.state.user.photoURL}
@@ -104,10 +106,24 @@ class App extends React.Component {
 					tasks={this.state.tasks}
 					user={this.state.user}
 					projects={this.state.projects}/>
+				<CountTask
+					user={this.state.user}
+					inputTask={this.state.inputTask}
+					handleInputTask={this.handleInputTask}
+					tasks={this.state.tasks}
+					handleInputProject={this.handleInputProject}
+					inputProject={this.state.inputProject}
+				/>
+				<Projects
+					user={this.state.user}
+					inputProject={this.state.inputProject} handleInputProject={this.handleInputProject}
+					projects={this.state.projects} />
+>>>>>>> 3def0b512f0aa1163b7ae6407e5f1af910bc1b16
 				{/* <input type="date"></input> */}
         <Databasetest />
-				<input className="calendar" type="date" value="today"></input>
+				<input className="calendar" type="date"></input>
 				<Graphic />
+				<ChartBar selectProjects={this.state.projects} />
       </div>
 			);
 			}
