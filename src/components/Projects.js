@@ -1,5 +1,4 @@
 import React from 'react';
-import firebase from 'firebase';
 
 class Projects extends React.Component {
 	constructor(props) {

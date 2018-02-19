@@ -20,7 +20,7 @@ class Login extends React.Component {
 		firebase.auth().signInWithEmailAndPassword(email, password)
 			.then(result => console.log(result, 'ha iniciado sesión'))
 			.catch(error => console.log(`Error ${error.code}:${error.message}`));
-			console.log(email, password)
+			//console.log(email, password)
 	}
 
 	handleInputChange(input, value) {
@@ -38,9 +38,12 @@ class Login extends React.Component {
 
   render() {
     return (
-			<div className="form">
+			<div className="login-container">
 				<header className="form-header">
-					<h1 className="form-title">Time tracker</h1>
+					<div className="form-title">
+						<h1>FireTimer</h1>
+						<p>Control your time production</p>
+					</div>
 				</header>
 				<form className="login__form">
 					<div className="login__inputs">
