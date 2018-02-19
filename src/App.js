@@ -1,13 +1,11 @@
 import React from 'react';
 import firebase from 'firebase';
 import Projects from './components/Projects';
-//import Task from './components/Task';
 import Databasetest from './components/Databasetest';
 import CountTask from './components/CountTask';
 import Login from './pages/Login';
 import Graphic from './components/Graphic';
 import ChartBar from './components/ChartBar';
-import User from './pages/User';
 import {reactLocalStorage} from 'reactjs-localstorage';
 
 class App extends React.Component {
@@ -23,10 +21,9 @@ class App extends React.Component {
 			logged: false,
 			inputProject: '',
 			projects: [],
-			idProject: '',
+			// idProject: '',
 			tasks: [],
-			inputTask: ''
-
+			inputTask: '',
 		}
 	}
 
@@ -62,17 +59,20 @@ class App extends React.Component {
 			logged:true
 		});
 	}
+
 	handleLogout () {
 		firebase.auth().signOut()
 		.then(result => console.log(`${result.user.email} ha salido`))
 		.catch(error => console.log(`Error ${error.code}:${error.message}`));
 	}
-		handleInputProject (event) {
-			this.setState ({
-				inputProject: event.target.value
-			})
-			console.log(this.state.inputProject);
-		}
+
+	handleInputProject (event) {
+		this.setState ({
+			inputProject: event.target.value
+		})
+		console.log(this.state.inputProject);
+	}
+
 	//transformamos el valor añadido en el input en el estado que se va a usar luego (inputTask)
 	handleInputTask(e) {
 		this.setState({
@@ -97,13 +97,13 @@ class App extends React.Component {
 					inputTask={this.state.inputTask}
 					handleInputTask={this.handleInputTask}
 					tasks={this.state.tasks}
+					handleInputProject={this.handleInputProject}
+					inputProject={this.state.inputProject}
 				/>
 				<Projects
 					user={this.state.user}
 					inputProject={this.state.inputProject} handleInputProject={this.handleInputProject}
 					projects={this.state.projects} />
-				{/* <Task
-					user={this.state.user}/> */}
 				{/* <input type="date"></input> */}
         <Databasetest />
 				<input className="calendar" type="date"></input>

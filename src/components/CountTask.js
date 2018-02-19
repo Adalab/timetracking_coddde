@@ -5,8 +5,11 @@ class CountTask extends React.Component {
 	constructor (props) {
 		super(props);
 
+		this.setLastProyectId = this.setLastProyectId.bind(this);
+		this.addProject = this.addProject.bind(this);
 		this.startTimer = this.startTimer.bind(this);
 		this.stopTimer = this.stopTimer.bind(this);
+		this.addTaskFirebase = this.addTaskFirebase.bind(this);
 		this.paintTasks = this.paintTasks.bind(this);
 		this.formatTime = this.formatTime.bind(this);
 		this.calculateFinalTime = this.calculateFinalTime.bind(this);
@@ -21,13 +24,39 @@ class CountTask extends React.Component {
 		}
 	}
 
-	//Creamos un espacio(ref) en firebase, que se llamará "tasks", dentro del cual se van a ir añadiendo ("child_added") las tareas que se vayan capturando y usamos un método (concat) que los va a ir añadiendo uno detrás de otro
-	componentWillMount () {
-		firebase.database().ref('tasks').on('child_added', snapshot => {
+	setLastProyectId(){
+		//Nos trae el valor del último nodo introducido en projects
+		firebase.database().ref('projects').limitToLast(1).on('child_added', 	childSnapshot=> {
+			//Introducimos en el estado el id del último proyecto añadido
 			this.setState({
-				tasks: this.props.tasks.concat(snapshot.val())
-			});
-		});
+				idProject: childSnapshot.key
+			})
+		}).bind(this);
+		console.log(this.state.idProject);
+	}
+
+	addProject(){
+		const objectProject = {
+			projectName: this.props.inputProject,
+			projectUser: this.props.user.uid
+		}
+		const dbRefProject = firebase.database().ref('projects');
+		dbRefProject.push(objectProject);
+
+		//Nos trae el valor del último nodo introducido en projects
+		firebase.database().ref('projects').limitToLast(1).on('child_added', 	childSnapshot=> {
+			//Para recuperar el ultimo key
+			// const idProject = childSnapshot.key;
+			// console.log(`Éste sería el key que acabas de introducir ${idProject}`);
+			// //Para recuperar el último nodo
+			// 	const snap = childSnapshot.val();
+			// 	//Recupero el valor de la clave projectName del ultimo nodo introducido
+			// 	console.log(`Objeto snap ${snap.projectName}`);
+			// // Lo meto en el estado para poder usarlo luego
+			this.setState({
+				idProject: childSnapshot.key
+			})
+		}).bind(this);
 	}
 
 	tick () {
@@ -102,17 +131,34 @@ class CountTask extends React.Component {
 		this.setState({
 			lastStartTime: startHour
 		})
+		this.setLastProyectId();
 	}
 
-	stopTimer () {
-		clearInterval(this.timer)
+	addTaskFirebase () {
+		this.setLastProyectId();
 		//Objeto que irá dentro de la base de datos
 		const objectTask = {
 			createdBy: this.props.user.uid,
 			taskName: this.props.inputTask,
 			counter: this.state.count,
-			initTime: this.state.lastStartTime.getHours() + ':' + this.state.lastStartTime.getMinutes()
+			initTime: this.state.lastStartTime.getHours() + ':' + this.state.lastStartTime.getMinutes(),
+			projectId: this.state.idProject
 		};
+		//Recogemos la referencia al array de tareas de la base de datos
+		const dbRef =firebase.database().ref('tasks');
+		//Insertamos la nueva tarea
+		dbRef.push(objectTask);
+
+		//Si quisiéramos que la tarea dependiera del usuario:
+		// const dbRef =firebase.database().ref(this.props.user.uid);
+		// //Insertamos la nueva tarea
+		// dbRef.push(objectTask);
+	}
+
+	stopTimer () {
+
+		clearInterval(this.timer)
+		this.addTaskFirebase();
 
 		//reseteamos el contador
 		this.setState({
@@ -121,10 +167,6 @@ class CountTask extends React.Component {
 			inputTask: ''
 		});
 
-		//Recogemos la referencia al array de tareas de la ba.getUid()se de datos
-		const dbRef =firebase.database().ref('tasks');
-		//Insertamos la nueva tarea
-		dbRef.push(objectTask);
 	}
 
 	paintTasks() {
@@ -146,6 +188,12 @@ class CountTask extends React.Component {
 		return (
 			<div>
 				<div className="timer">
+					<div>
+						<div>
+							<input type="text" placeholder="introduce el projecto" onChange={this.props.handleInputProject}/>
+							<button type="button" onClick={this.addProject}>Añadir proyecto</button>
+						</div>
+					</div>
 					<input type="text" className="task__input" placeholder="Define brevemente tu tarea" onChange={this.props.handleInputTask}/>
 					<counter className="timer__counter" >{this.display()}</counter>
 					<div className="timer__buttons">
