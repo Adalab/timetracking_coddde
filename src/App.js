@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from './components/Header';
-import Loading from './components/Loading';
+//import Loading from './components/Loading';
 import firebase from 'firebase';
 import Projects from './components/Projects';
 import Databasetest from './components/Databasetest';
@@ -87,7 +87,6 @@ class App extends React.Component {
 
 			return (
       <div className="App">
-<<<<<<< HEAD
 				<Header displayName={this.state.user.displayName}
 				name={this.state.user.name}
 				url={this.state.user.photoURL}
@@ -97,15 +96,6 @@ class App extends React.Component {
 					// renderLoginButton={this.renderLoginButton()}
 					handleAuthGoogle = {this.handleAuthGoogle}
 				/> */}
-				<Timer />
-				<Counter user={this.state.user} />
-				<Projects inputProject={this.state.inputProject} handleInputProject={this.handleInputProject}
-				projects={this.state.projects} />
-				<Task
-					inputTask={this.state.inputTask} handleInputTask={this.handleInputTask}
-					tasks={this.state.tasks}
-					user={this.state.user}
-					projects={this.state.projects}/>
 				<CountTask
 					user={this.state.user}
 					inputTask={this.state.inputTask}
@@ -118,7 +108,6 @@ class App extends React.Component {
 					user={this.state.user}
 					inputProject={this.state.inputProject} handleInputProject={this.handleInputProject}
 					projects={this.state.projects} />
->>>>>>> 3def0b512f0aa1163b7ae6407e5f1af910bc1b16
 				{/* <input type="date"></input> */}
         <Databasetest />
 				<input className="calendar" type="date"></input>
