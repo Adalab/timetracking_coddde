@@ -20,9 +20,6 @@ class App extends React.Component {
 		this.handleLogout = this.handleLogout.bind(this);
 		this.handleInputProject = this.handleInputProject.bind(this)
 		this.handleInputTask = this.handleInputTask.bind(this);
-				this.recoverSelectedProyect = this.recoverSelectedProyect.bind(this);
-		this.selectProject = this.selectProject.bind(this);
-
 
 		this.state = {
 			user: null,
@@ -32,7 +29,6 @@ class App extends React.Component {
 			// idProject: '',
 			tasks: [],
 			inputTask: '',
-			projectSelected: ''
 		}
 	}
 
@@ -88,29 +84,9 @@ class App extends React.Component {
 			inputTask: e.target.value
 		});
 	}
-	recoverSelectedProyect (e){
-		this.setState({
-			projectSelected: e.target.value
-		})
-
-		console.log(this.state.projectSelected);
-	}
 
 
-	//El select lo vamos a reutilizar en el componente ChartBar y en la página principal
-	selectProject(){
-		let arrayProject = this.state.projects;
-
-		return(<select className="" onClick={this.recoverSelectedProyect}>
-			<option>Selecciona un proyecto</option>
-			{
-				arrayProject.map(
-					project =>
-						<option>{project.projectName}</option>
-				)
-			}
-		</select>);
-	}
+	
 
   render() {
 		if(this.state.user) {
@@ -136,8 +112,6 @@ class App extends React.Component {
 					user={this.state.user}
 					inputTask={this.state.inputTask} handleInputTask={this.handleInputTask}
 					tasks={this.state.tasks}
-					selectProject={this.selectProject()}
-					projectSelected={this.state.projectSelected}
 					// recoverLastProjectKey={this.recoverLastProjectKey()}
 					// idProject={this.state.idProject}
 					handleInputProject={this.handleInputProject}

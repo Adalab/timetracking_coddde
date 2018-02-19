@@ -119,8 +119,6 @@ class Task extends React.Component {
 			count: 0,
 			stopClick: true,
 		});
-
-
 	}
 
 	paintTasks() {
@@ -144,7 +142,7 @@ class Task extends React.Component {
 			<div>
 				<div className="timer">
 					<div>
-						{this.props.selectProject}
+						{/* {this.props.selectProject} */}
 						<div>
 							<input type="text" placeholder="introduce el projecto" onChange={this.props.handleInputProject}/>
 							<button onClick={this.setLastProyectId}>Estado</button>
