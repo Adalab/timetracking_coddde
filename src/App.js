@@ -25,6 +25,7 @@ class App extends React.Component {
 			inputProject: '',
 			projects: [],
 			idProject: '',
+			idProjects: [],
 			tasks: [],
 			inputTask: '',
 		}
@@ -52,6 +53,15 @@ class App extends React.Component {
 			});
 			console.log(this.state.tasks);
 		});
+
+		//Almaceno en el array idProjects todos los id de los proyectos
+		firebase.database().ref('projects').limitToLast(9000).on('child_added', 	childSnapshot=> {
+			this.setState({
+				idProjects: childSnapshot.key
+			})
+			console.log(this.state.idProjects);
+		}).bind(this);
+
 		reactLocalStorage.set('var', true);
 		reactLocalStorage.get('var', true);
 		reactLocalStorage.setObject('var', {'test': 'test'});
