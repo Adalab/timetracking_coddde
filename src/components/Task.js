@@ -145,7 +145,7 @@ class Task extends React.Component {
 						{/* {this.props.selectProject} */}
 						<div>
 							<input type="text" placeholder="introduce el projecto" onChange={this.props.handleInputProject}/>
-							<button onClick={this.setLastProyectId}>Estado</button>
+							{/* <button onClick={this.setLastProyectId}>Estado</button> */}
 							<button type="button" onClick={this.addProject}>Añadir proyecto</button>
 						</div>
 					</div>
