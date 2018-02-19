@@ -1,5 +1,6 @@
 import React from 'react';
 import firebase from 'firebase';
+import Header from './components/Header';
 import Projects from './components/Projects';
 import Databasetest from './components/Databasetest';
 import CountTask from './components/CountTask';
@@ -36,6 +37,7 @@ class App extends React.Component {
 			});
 			console.log('El user es:');
 			console.log(this.state.user);
+			console.log(this.state.user.email);
 		});
 		firebase.database().ref('projects').on('child_added', snapshot => {
 			this.setState ({
@@ -123,9 +125,11 @@ class App extends React.Component {
 
 			return (
       <div className="App">
-				<p>Bienvenido/a {this.state.user.displayName}</p>
-				<img className="image--user" src={this.state.user.photoURL} alt={this.state.user.displayName} />
-				<button onClick={this.handleLogout}>Salir</button>
+				<Header displayName={this.state.user.displayName}
+				email={this.state.user.email}
+	 			url={this.state.user.photoURL}
+				handleLogout={this.handleLogout} />
+
 				{/* <Login
 					// renderLoginButton={this.renderLoginButton()}
 					handleAuthGoogle = {this.handleAuthGoogle}
@@ -156,7 +160,8 @@ class App extends React.Component {
 		console.log('Loguéate');
 		return (<Login
 			onLoginSuccess = {this.setUser}
-			handleAuthGoogle = {this.handleAuthGoogle}/>)
+			handleAuthGoogle = {this.handleAuthGoogle}
+			handleAuthEmai = {this.handleAuthEmai}/>)
   }
 }
 
