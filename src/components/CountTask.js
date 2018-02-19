@@ -1,17 +1,15 @@
 import React from 'react';
 import firebase from 'firebase';
 
-class Counter extends React.Component {
+class CountTask extends React.Component {
 	constructor (props) {
 		super(props);
 
 		this.startTimer = this.startTimer.bind(this);
-		this.pauseTimer = this.pauseTimer.bind(this);
 		this.stopTimer = this.stopTimer.bind(this);
 		this.paintTasks = this.paintTasks.bind(this);
 		this.formatTime = this.formatTime.bind(this);
 		this.calculateFinalTime = this.calculateFinalTime.bind(this);
-		this.handleInputTask = this.handleInputTask.bind(this);
 		this.formatTimeWithoutSeconds = this.formatTimeWithoutSeconds.bind(this);
 
 		setInterval (this.updateClock,1000);
@@ -19,9 +17,7 @@ class Counter extends React.Component {
 		this.state = {
 			count: 0,
 			customNumber: 0,
-			tasks: [],
 			stopClick: false,
-			inputTask: ''
 		}
 	}
 
@@ -29,7 +25,7 @@ class Counter extends React.Component {
 	componentWillMount () {
 		firebase.database().ref('tasks').on('child_added', snapshot => {
 			this.setState({
-				tasks: this.state.tasks.concat(snapshot.val())
+				tasks: this.props.tasks.concat(snapshot.val())
 			});
 		});
 	}
@@ -108,23 +104,12 @@ class Counter extends React.Component {
 		})
 	}
 
-	pauseTimer () {
-		clearInterval(this.timer)
-	}
-
-	//transformamos el valor añadido en el input en el estado que se va a usar luego (inputTask)
-	handleInputTask(e) {
-		this.setState({
-			inputTask: e.target.value
-		});
-	}
-
 	stopTimer () {
 		clearInterval(this.timer)
 		//Objeto que irá dentro de la base de datos
 		const objectTask = {
 			createdBy: this.props.user.uid,
-			taskName: this.state.inputTask,
+			taskName: this.props.inputTask,
 			counter: this.state.count,
 			initTime: this.state.lastStartTime.getHours() + ':' + this.state.lastStartTime.getMinutes()
 		};
@@ -133,6 +118,7 @@ class Counter extends React.Component {
 		this.setState({
 			count: 0,
 			stopClick: true,
+			inputTask: ''
 		});
 
 		//Recogemos la referencia al array de tareas de la ba.getUid()se de datos
@@ -142,7 +128,7 @@ class Counter extends React.Component {
 	}
 
 	paintTasks() {
-		let tasksToShow = this.state.tasks; //esto es como el ejemplo de los perros de Isra
+		let tasksToShow = this.props.tasks; //esto es como el ejemplo de los perros de Isra
 		return (
 			<ul className="task__list">
 				{tasksToShow.map(
@@ -160,11 +146,10 @@ class Counter extends React.Component {
 		return (
 			<div>
 				<div className="timer">
-					<input type="text" className="task__input" placeholder="Define brevemente tu tarea" onChange={this.handleInputTask}/>
+					<input type="text" className="task__input" placeholder="Define brevemente tu tarea" onChange={this.props.handleInputTask}/>
 					<counter className="timer__counter" >{this.display()}</counter>
 					<div className="timer__buttons">
 						<button className="timer__btn timer__btn--play" type="button" name="start_btn" id="start_btn" onClick={this.startTimer}>Start</button>
-						<button className="timer__btn timer__btn--pause" type="button" name="stop_btn" id="stop_btn" onClick={this.pauseTimer}>Pause</button>
 						<button className="timer__btn timer__btn--stop" type="button" name="reset_btn" id="reset_btn" onClick={this.stopTimer}>Stop</button>
 					</div>
 				</div>
@@ -182,4 +167,4 @@ class Counter extends React.Component {
 	}
 }
 
-export default Counter;
+export default CountTask;

@@ -1,23 +1,32 @@
 import React from 'react';
-import Loading from './components/Loading';
 import firebase from 'firebase';
+import Projects from './components/Projects';
+//import Task from './components/Task';
 import Databasetest from './components/Databasetest';
-import Counter from './components/Counter';
+import CountTask from './components/CountTask';
 import Login from './pages/Login';
 import Graphic from './components/Graphic';
+import ChartBar from './components/ChartBar';
 import User from './pages/User';
 import {reactLocalStorage} from 'reactjs-localstorage';
 
-
 class App extends React.Component {
 	constructor (props) {
-		super (props)
+		super (props);
 
 		this.handleLogout = this.handleLogout.bind(this);
+		this.handleInputProject = this.handleInputProject.bind(this)
+		this.handleInputTask = this.handleInputTask.bind(this);
 
 		this.state = {
 			user: null,
-			logged: false
+			logged: false,
+			inputProject: '',
+			projects: [],
+			idProject: '',
+			tasks: [],
+			inputTask: ''
+
 		}
 	}
 
@@ -28,6 +37,19 @@ class App extends React.Component {
 			});
 			console.log('El user es:');
 			console.log(this.state.user);
+		});
+		firebase.database().ref('projects').on('child_added', snapshot => {
+			this.setState ({
+				projects: this.state.projects.concat(snapshot.val()),
+			});
+			// console.log(this.state.projects);
+			// console.log(`Este es el listado de los keys de los proyectos ${snapshot.key}`);
+		})
+		firebase.database().ref('tasks').on('child_added', snapshot => {
+			this.setState({
+				tasks: this.state.tasks.concat(snapshot.val())
+			});
+			console.log(this.state.tasks);
 		});
 		reactLocalStorage.set('var', true);
 		reactLocalStorage.get('var', true);
@@ -45,6 +67,18 @@ class App extends React.Component {
 		.then(result => console.log(`${result.user.email} ha salido`))
 		.catch(error => console.log(`Error ${error.code}:${error.message}`));
 	}
+		handleInputProject (event) {
+			this.setState ({
+				inputProject: event.target.value
+			})
+			console.log(this.state.inputProject);
+		}
+	//transformamos el valor añadido en el input en el estado que se va a usar luego (inputTask)
+	handleInputTask(e) {
+		this.setState({
+			inputTask: e.target.value
+		});
+	}
 
   render() {
 		if(this.state.user) {
@@ -54,19 +88,27 @@ class App extends React.Component {
 				<p>Bienvenido/a {this.state.user.displayName}</p>
 				<img className="image--user" src={this.state.user.photoURL} alt={this.state.user.displayName} />
 				<button onClick={this.handleLogout}>Salir</button>
-      	{/* <Loading /> */}
 				{/* <Login
 					// renderLoginButton={this.renderLoginButton()}
 					handleAuthGoogle = {this.handleAuthGoogle}
 				/> */}
-				<User projects={this.state.projects}
-							user={this.state.user} />
-				<Timer />
-				<Counter user={this.state.user} />
+				<CountTask
+					user={this.state.user}
+					inputTask={this.state.inputTask}
+					handleInputTask={this.handleInputTask}
+					tasks={this.state.tasks}
+				/>
+				<Projects
+					user={this.state.user}
+					inputProject={this.state.inputProject} handleInputProject={this.handleInputProject}
+					projects={this.state.projects} />
+				{/* <Task
+					user={this.state.user}/> */}
 				{/* <input type="date"></input> */}
         <Databasetest />
-				<input className="calendar" type="date" value="today"></input>
+				<input className="calendar" type="date"></input>
 				<Graphic />
+				<ChartBar selectProjects={this.state.projects} />
       </div>
 			);
 			}
