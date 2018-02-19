@@ -18,7 +18,6 @@ class App extends React.Component {
 		this.addProject = this.addProject.bind(this);
 		this.setLastProyectId = this.setLastProyectId.bind(this);
 		this.handleInputTask = this.handleInputTask.bind(this);
-		this.idTask = this.idTask.bind(this);
 
 		this.state = {
 			user: null,
@@ -29,13 +28,12 @@ class App extends React.Component {
 			idProjects: [],
 			tasks: [],
 			inputTask: '',
-			idTask: ''
 		}
 	}
 
 	componentWillMount() {
 		firebase.auth().onAuthStateChanged(user => {
-			this.setState({
+			this.setState({//se esta llamando aquí cuando se resetea la página por eso no se actualizan bien los estados al cambiar de un usuario a otro.
 				user: user
 			});
 			// console.log('El user es:');
@@ -50,9 +48,12 @@ class App extends React.Component {
 			// console.log(`Este es el listado de los keys de los proyectos ${snapshot.key}`);
 		})
 		firebase.database().ref('tasks').on('child_added', snapshot => {
-			this.setState({
-				tasks: this.state.tasks.concat(snapshot.val())
-			});
+			//solo añadimos la tarea si es del usuario actual.
+			if(snapshot.val().createdBy === this.state.user.uid){
+				this.setState({
+					tasks: this.state.tasks.concat(snapshot.val())
+				});
+			}
 			//console.log(this.state.tasks);
 		});
 
@@ -125,12 +126,6 @@ class App extends React.Component {
 		//console.log(this.state.idProject);
 	}
 
-	idTask(){
-		let idusuario = firebase.auth().currentUser.uid;
-		let valoridtarea = firebase.database().ref('user-tasks/' + idusuario).orderByChild('createdBy');
-		console.log(valoridtarea)
-	}
-
 	//transformamos el valor añadido en el input en el estado que se va a usar luego (inputTask)
 	handleInputTask(e) {
 		this.setState({
@@ -140,10 +135,6 @@ class App extends React.Component {
 
 	render() {
 		if(this.state.user) {
-
-			// console.log('usuario: ' + firebase.auth().currentUser.uid);
-			// console.log('tarea: ' + firebase.database().ref().key);
-
 			return (
 				<div className="App">
 					<Header displayName={this.state.user.displayName}

@@ -90,7 +90,8 @@ body {
   border: 0;
   background-color: #00cdd8;
   color: white;
-  font-weight: bold; }
+  font-weight: bold;
+  cursor: pointer; }
   @media all and (min-width: 810px) {
     .login__button {
       width: 110px;
