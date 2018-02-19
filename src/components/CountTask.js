@@ -5,8 +5,6 @@ class CountTask extends React.Component {
 	constructor (props) {
 		super(props);
 
-		this.setLastProyectId = this.setLastProyectId.bind(this);
-		this.addProject = this.addProject.bind(this);
 		this.startTimer = this.startTimer.bind(this);
 		this.stopTimer = this.stopTimer.bind(this);
 		this.addTaskFirebase = this.addTaskFirebase.bind(this);
@@ -22,41 +20,6 @@ class CountTask extends React.Component {
 			customNumber: 0,
 			stopClick: false,
 		}
-	}
-
-	setLastProyectId(){
-		//Nos trae el valor del último nodo introducido en projects
-		firebase.database().ref('projects').limitToLast(1).on('child_added', 	childSnapshot=> {
-			//Introducimos en el estado el id del último proyecto añadido
-			this.setState({
-				idProject: childSnapshot.key
-			})
-		}).bind(this);
-		console.log(this.state.idProject);
-	}
-
-	addProject(){
-		const objectProject = {
-			projectName: this.props.inputProject,
-			projectUser: this.props.user.uid
-		}
-		const dbRefProject = firebase.database().ref('projects');
-		dbRefProject.push(objectProject);
-
-		//Nos trae el valor del último nodo introducido en projects
-		firebase.database().ref('projects').limitToLast(1).on('child_added', 	childSnapshot=> {
-			//Para recuperar el ultimo key
-			// const idProject = childSnapshot.key;
-			// console.log(`Éste sería el key que acabas de introducir ${idProject}`);
-			// //Para recuperar el último nodo
-			// 	const snap = childSnapshot.val();
-			// 	//Recupero el valor de la clave projectName del ultimo nodo introducido
-			// 	console.log(`Objeto snap ${snap.projectName}`);
-			// // Lo meto en el estado para poder usarlo luego
-			this.setState({
-				idProject: childSnapshot.key
-			})
-		}).bind(this);
 	}
 
 	tick () {
@@ -131,18 +94,18 @@ class CountTask extends React.Component {
 		this.setState({
 			lastStartTime: startHour
 		})
-		this.setLastProyectId();
+		this.props.setLastProyectId();
 	}
 
 	addTaskFirebase () {
-		this.setLastProyectId();
+		this.props.setLastProyectId();
 		//Objeto que irá dentro de la base de datos
 		const objectTask = {
 			createdBy: this.props.user.uid,
 			taskName: this.props.inputTask,
 			counter: this.state.count,
 			initTime: this.state.lastStartTime.getHours() + ':' + this.state.lastStartTime.getMinutes(),
-			projectId: this.state.idProject
+			projectId: this.props.idProject
 		};
 		//Recogemos la referencia al array de tareas de la base de datos
 		const dbRef =firebase.database().ref('tasks');
@@ -191,7 +154,7 @@ class CountTask extends React.Component {
 					<div>
 						<div>
 							<input type="text" placeholder="introduce el projecto" onChange={this.props.handleInputProject}/>
-							<button type="button" onClick={this.addProject}>Añadir proyecto</button>
+							<button type="button" onClick={this.props.addProject}>Añadir proyecto</button>
 						</div>
 					</div>
 					<input type="text" className="task__input" placeholder="Define brevemente tu tarea" onChange={this.props.handleInputTask}/>
