@@ -1,4 +1,5 @@
 import React from 'react';
+import Header from './components/Header';
 import Loading from './components/Loading';
 import firebase from 'firebase';
 import Projects from './components/Projects';
@@ -85,9 +86,10 @@ class App extends React.Component {
 
 			return (
       <div className="App">
-				<p>Bienvenido/a {this.state.user.displayName}</p>
-				<img className="image--user" src={this.state.user.photoURL} alt={this.state.user.displayName} />
-				<button onClick={this.handleLogout}>Salir</button>
+				<Header displayName={this.state.user.displayName}
+				name={this.state.user.name}
+				url={this.state.user.photoURL}
+				onClick={this.handleLogout} />
       	{/* <Loading /> */}
 				{/* <Login
 					// renderLoginButton={this.renderLoginButton()}
