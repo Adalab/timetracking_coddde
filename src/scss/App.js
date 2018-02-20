@@ -162,7 +162,7 @@ class App extends React.Component {
 				</div>
 			);
 		}
-
+		
 		return (<Login
 			onLoginSuccess = {this.setUser}
 			handleAuthGoogle = {this.handleAuthGoogle}
