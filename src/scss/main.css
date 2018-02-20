@@ -1,3 +1,22 @@
+.header {
+  height: 150px;
+  width: 100%;
+  background-color: red;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center; }
+
+.image--user {
+  border-radius: 50%;
+  height: 65px;
+  width: initial; }
+
+.login {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around; }
+
 body {
   margin: 0;
   padding: 0;
@@ -25,7 +44,10 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20px; }
+  padding: 20px;
+  padding-top: 53px; }
+  .form-title p {
+    font-size: 20px; }
   .form-title h1, .form-title p {
     margin: 10px; }
   @media all and (min-width: 500px) {
@@ -51,16 +73,28 @@ body {
   text-align: center;
   width: 200px;
   margin: auto;
-  padding: 15px; }
+  padding: 15px;
+  padding-top: 40px; }
   @media all and (min-width: 810px) {
     .login__form {
-      width: 350px; } }
+      width: 350px;
+      padding-top: 0; } }
 
 .login__inputs {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  margin: 20px; }
+  margin: 20px;
+  width: 247px;
+  margin-left: -22px; }
+  @media all and (min-width: 810px) {
+    .login__inputs {
+      width: 314px;
+      margin-left: 18px; } }
+  @media all and (min-width: 1024px) {
+    .login__inputs {
+      width: 400px;
+      margin-left: -35px; } }
 
 .login__input {
   margin: 3px;
@@ -76,8 +110,11 @@ body {
 .login__input::placeholder {
   color: white;
   text-align: right;
-  font-size: 18px;
+  font-size: 16px;
   padding-right: 12px; }
+  @media all and (min-width: 810px) {
+    .login__input::placeholder {
+      padding-right: 20px; } }
 
 .login__buttons {
   display: flex;
@@ -88,7 +125,7 @@ body {
 .login__button {
   justify-content: space-between;
   margin: 5px;
-  height: 25px;
+  height: 35px;
   width: 100px;
   border-radius: 5px;
   border: 0;
@@ -101,11 +138,6 @@ body {
     .login__button {
       width: 200px;
       height: 35px; } }
-
-.image--user {
-  width: 250px;
-  height: 250px;
-  border-radius: 50%; }
 
 .timer {
   display: flex;
@@ -156,11 +188,9 @@ body {
   margin: 20px; }
 
 #barras {
-  width: 600px !important;
-  height: 100px !important;
-  margin-left: 350px !important; }
+  width: 300px !important;
+  height: 100px !important; }
 
 #quesito {
-  width: 500px !important;
-  height: 250px !important;
-  margin-left: 400px !important; }
+  width: 300px !important;
+  height: 250px !important; }

@@ -6,13 +6,17 @@
 	align-items: center;
 	justify-content: center;
 	padding: 20px;
+	padding-top: 53px;
+	p{
+		font-size: 20px;
+	}
 	h1, p{
 		margin: 10px;
 	}
-	@media all and(min-width: 500px){
+@media all and(min-width: 500px){
 		font-size: 25px;
 	}
-	@media all and(min-width: 810px){
+@media all and(min-width: 810px){
 		font-size: 35px;
 		p{
 			margin-bottom: 45px;
@@ -34,8 +38,11 @@
 	width: 200px;
 	margin: auto;
 	padding: 15px;
+	padding-top: 40px;
+
 	@media all and(min-width: 810px){
 		width: 350px;
+		padding-top: 0;
 	}
 }
 .login__inputs {
@@ -43,6 +50,16 @@
 	justify-content: space-between;
 	flex-direction: column;
 	margin: 20px;
+	width: 247px;
+	margin-left: -22px;
+	@media all and(min-width: 810px){
+	width: 314px;
+	margin-left: 18px;
+	}
+	@media all and(min-width: 1024px){
+		width: 400px;
+		margin-left: -35px;
+	}
 }
 .login__input {
 	margin: 3px;
@@ -58,8 +75,11 @@
 .login__input::placeholder{
 	color:white;
 	text-align: right;
-	font-size: 18px;
+	font-size: 16px;
 	padding-right: 12px;
+	@media all and(min-width: 810px){
+		padding-right: 20px;
+	}
 }
 .login__buttons {
 	display: flex;
@@ -70,7 +90,7 @@
 .login__button {
 	justify-content: space-between;
 	margin: 5px;
-	height: 25px;
+	height: 35px;
 	width: 100px;
 	border-radius: 5px;
 	border: 0;
@@ -83,9 +103,4 @@
 		width: 200px;
 		height: 35px;
 	}
-}
-.image--user{
-	width: 250px;
-	height: 250px;
-	border-radius: 50%;
 }

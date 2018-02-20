@@ -53,7 +53,7 @@ class Login extends React.Component {
 					</div>
 					<div className="login__buttons">
 						<button className="login__button" type="button" onClick={this.handleAuthEmail}>Log in</button>
-						<button className="login__button" type="button" onClick={this.handleAuthGoogle}>Log in con Google
+						<button className="login__button" type="button" onClick={this.handleAuthGoogle}>Log in with Google
 						</button>
 						{/* { this.props.renderLoginButton } */}
 					</div>
