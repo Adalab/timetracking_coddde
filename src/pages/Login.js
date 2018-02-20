@@ -37,8 +37,8 @@ class Login extends React.Component {
 			.catch(error => console.log(`Error ${error.code}:${error.message}`));
 		}
 
-  render() {
-    return (
+	render() {
+		return (
 			<div className="login-container">
 				<header className="form-header">
 					<div className="form-title">
@@ -58,11 +58,9 @@ class Login extends React.Component {
 						{/* { this.props.renderLoginButton } */}
 					</div>
 				</form>
-
-      </div>
-
-    );
-  }
+			</div>
+		);
+	}
 }
 
 export default Login;
