@@ -28,6 +28,7 @@ class Login extends React.Component {
 			[input]: value
 		});
 	}
+
 	handleAuthGoogle () {
 		const provider = new firebase.auth.GoogleAuthProvider();
 		firebase.auth().signInWithPopup(provider)
