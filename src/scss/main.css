@@ -7,6 +7,9 @@
   justify-content: space-around;
   align-items: center; }
 
+.logo {
+  background-image: url("../images/logoFire.png"); }
+
 .image--user {
   border-radius: 50%;
   height: 65px;
@@ -15,7 +18,14 @@
 .login {
   display: flex;
   flex-direction: row;
-  justify-content: space-around; }
+  justify-content: space-around;
+  margin-left: 550px; }
+
+.btn_exit--user {
+  height: 30px;
+  text-align: center;
+  margin-top: 80px;
+  margin-left: 30px; }
 
 body {
   margin: 0;

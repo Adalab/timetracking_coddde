@@ -4,7 +4,7 @@ class Header extends React.Component {
 	render() {
 		return (
 			<div className="header">
-				<img alt="logo" src=""/>
+				<img className="logo" alt="logo" src=""/>
 				<div className="app_title">
 					<span className="app_name"></span>
 					<button className="reports_button"></button>
