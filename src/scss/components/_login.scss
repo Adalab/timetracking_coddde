@@ -1,6 +1,6 @@
 .form-title{
 	margin: 0;
-	color: #ffff;
+	color: #ffffff;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -33,11 +33,7 @@
 	text-align: center;
 	width: 200px;
 	margin: auto;
-	background-color: #ffffff;
 	padding: 15px;
-	border-radius: 10px;
-	box-shadow: 0 0 0 1px #c4cdd5;
-	border: 0;
 	@media all and(min-width: 810px){
 		width: 350px;
 	}
@@ -50,12 +46,20 @@
 }
 .login__input {
 	margin: 3px;
-	padding-left: 10px;
-	box-shadow: 0 0 0 1px #c4cdd5;
-	border: 0;
-	border-radius: 5px;
 	height: 30px;
 	weight: 100%;
+	border-style: none;
+	border-bottom: 2px solid white;
+	background-color: inherit;
+	color: white;
+	font-weight: bolder;
+	font-size: 14px;
+}
+.login__input::placeholder{
+	color:white;
+	text-align: right;
+	font-size: 18px;
+	padding-right: 12px;
 }
 .login__buttons {
 	display: flex;
@@ -66,16 +70,17 @@
 .login__button {
 	justify-content: space-between;
 	margin: 5px;
+	height: 25px;
 	width: 100px;
-	background-color: #30373b;
-	border-radius: 15px;
+	border-radius: 5px;
 	border: 0;
-	background-color: #00cdd8;
-	color: white;
+	background-color: #ffffff;
+	color: black;
+	opacity: 0.7;
 	font-weight: bold;
 	cursor: pointer;
 	@media all and(min-width: 810px){
-		width: 110px;
+		width: 200px;
 		height: 35px;
 	}
 }
