@@ -1,30 +1,37 @@
 .header {
   height: 150px;
-  width: 100%;
-  background-color: red;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center; }
 
 .logo {
-  background-image: url("../images/logoFire.png"); }
+  background: url("../images/logoFire.png");
+  background-repeat: no-repeat;
+  width: 120px;
+  height: 120px;
+  margin-left: -100px;
+  margin-top: 15px; }
 
 .image--user {
   border-radius: 50%;
-  height: 65px;
+  height: 40px;
   width: initial; }
 
 .login {
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  margin-left: 550px; }
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
 
 .btn_exit--user {
-  height: 30px;
+  background-image: url("../images/off.png");
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border: none;
+  height: 35px;
+  width: 35px;
   text-align: center;
-  margin-top: 80px;
   margin-left: 30px; }
 
 body {
@@ -74,7 +81,8 @@ body {
   background-size: cover;
   height: 100vh;
   justify-content: center;
-  align-items: center; }
+  align-items: center;
+  opacity: .9; }
 
 .login__form {
   display: flex;

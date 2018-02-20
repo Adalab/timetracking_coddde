@@ -4,7 +4,7 @@ class Header extends React.Component {
 	render() {
 		return (
 			<div className="header">
-				<img className="logo" alt="logo" src=""/>
+				<img className="logo" alt="" src=""/>
 				<div className="app_title">
 					<span className="app_name"></span>
 					<button className="reports_button"></button>
@@ -16,7 +16,7 @@ class Header extends React.Component {
 						{/*{this.props.email}*/}
 						</p>
 					</div>
-					<button className="btn_exit--user" onClick={this.props.handleLogout}>Salir</button>
+					<button className="btn_exit--user" onClick={this.props.handleLogout}></button>
 				</div>
 
 			</div>
