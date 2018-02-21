@@ -7,14 +7,21 @@
 	flex-direction: row;
 	justify-content: space-around;
 	align-items: center;
+	background-color: black;
 }
 .logo{
-	background: url('../images/logoFire.png');
+	background: url('../images/logoLeter.png');
 	background-repeat: no-repeat;
-	width: 120px;
+	width: 180px;
 	height: 120px;
-	margin-left: -100px;
-	margin-top: 15px;
+	margin-top: 40px;
+}
+.header_title{
+	background: -webkit-linear-gradient(white, #F5BF2E 75%, white);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	opacity: 0.8;
+	font-size: 50px;
 }
 .image--user{
 	border-radius: 50%;

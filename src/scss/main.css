@@ -3,15 +3,22 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  align-items: center; }
+  align-items: center;
+  background-color: black; }
 
 .logo {
-  background: url("../images/logoFire.png");
+  background: url("../images/logoLeter.png");
   background-repeat: no-repeat;
-  width: 120px;
+  width: 180px;
   height: 120px;
-  margin-left: -100px;
-  margin-top: 15px; }
+  margin-top: 40px; }
+
+.header_title {
+  background: -webkit-linear-gradient(white, #F5BF2E 75%, white);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  opacity: 0.8;
+  font-size: 50px; }
 
 .image--user {
   border-radius: 50%;
@@ -40,7 +47,14 @@ body {
   font-family: sans-serif; }
 
 .App {
-  text-align: center; }
+  text-align: center;
+  background: linear-gradient(to bottom right, #f6f7f8 30%, rgba(255, 0, 0, 0)), url("../images/login.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100vw;
+  margin-bottom: -23px;
+  height: 40%;
+  padding-bottom: 20px; }
 
 .App-header {
   background-color: #222;
@@ -72,7 +86,17 @@ body {
     background: -webkit-linear-gradient(white, #F5BF2E 75%, white);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    opacity: 0.8; }
+    opacity: 0.8;
+    font-size: 50px; }
+    @media all and (min-width: 500px) {
+      .form-title h1 {
+        font-size: 65px; } }
+    @media all and (min-width: 810px) {
+      .form-title h1 {
+        font-size: 70px; } }
+    @media all and (min-width: 1024px) {
+      .form-title h1 {
+        font-size: 80px; } }
   @media all and (min-width: 500px) {
     .form-title {
       font-size: 25px; } }
@@ -118,7 +142,7 @@ body {
   @media all and (min-width: 1024px) {
     .login__inputs {
       width: 400px;
-      margin-left: -35px; } }
+      margin-left: -30px; } }
 
 .login__input {
   margin: 3px;

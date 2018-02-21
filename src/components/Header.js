@@ -5,10 +5,11 @@ class Header extends React.Component {
 		return (
 			<div className="header">
 				<img className="logo" alt="" src=""/>
-				<div className="app_title">
+				<h1 className="header_title">FireTimer</h1>
+				{/* <div className="app_title">
 					<span className="app_name"></span>
 					<button className="reports_button"></button>
-				</div>
+				</div> */}
 				<div className="login">
 					<div className="info--user">
 						<img className="image--user" src={this.props.url} alt={this.props.email} />
