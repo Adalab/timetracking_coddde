@@ -5,19 +5,20 @@ class CountTask extends React.Component {
 	constructor (props) {
 		super(props);
 
-		this.formatTime = this.formatTime.bind(this);
-		this.formatTimeWithoutSeconds = this.formatTimeWithoutSeconds.bind(this);
-		this.calculateFinalTime = this.calculateFinalTime.bind(this);
 		this.startTimer = this.startTimer.bind(this);
 		this.stopTimer = this.stopTimer.bind(this);
 		this.addTaskFirebase = this.addTaskFirebase.bind(this);
 		this.paintTasks = this.paintTasks.bind(this);
+		this.formatTime = this.formatTime.bind(this);
+		this.calculateFinalTime = this.calculateFinalTime.bind(this);
+		this.formatTimeWithoutSeconds = this.formatTimeWithoutSeconds.bind(this);
 
 		setInterval (this.updateClock,1000);
 
 		this.state = {
 			count: 0,
 			customNumber: 0,
+			stopClick: false,
 		}
 	}
 
@@ -65,14 +66,18 @@ class CountTask extends React.Component {
 	}
 
 	calculateFinalTime(initTime, count){
-		let hours = parseInt(initTime.split(':')[0]);
-		let minutes = parseInt(initTime.split(':')[1]);
+		if (initTime != null && typeof(initTime !== 'undefined')) {
 
-		let finalCount = (hours * 3600) + (minutes * 60) + count;
+			let hours = parseInt(initTime.split(':')[0]);
+			let minutes = parseInt(initTime.split(':')[1]);
 
-		let endHour = this.formatTimeWithoutSeconds(finalCount);
+			let finalCount = (hours * 3600) + (minutes * 60) + count;
 
-	return endHour;
+			let endHour = this.formatTimeWithoutSeconds(finalCount);
+
+		return endHour;
+	}
+	else return "";
 	}
 
 	display () {
@@ -93,6 +98,7 @@ class CountTask extends React.Component {
 	}
 
 	addTaskFirebase () {
+		this.props.setLastProyectId();
 		//Objeto que irá dentro de la base de datos
 		const objectTask = {
 			createdBy: this.props.user.uid,
@@ -113,14 +119,17 @@ class CountTask extends React.Component {
 	}
 
 	stopTimer () {
-		clearInterval(this.timer)
 
+		clearInterval(this.timer)
 		this.addTaskFirebase();
 
 		//reseteamos el contador
 		this.setState({
 			count: 0,
+			stopClick: true,
+			inputTask: ''
 		});
+
 	}
 
 	paintTasks() {
@@ -139,6 +148,7 @@ class CountTask extends React.Component {
 	}
 
 	render () {
+
 		return (
 			<div>
 				<div className="timer">
