@@ -36,11 +36,25 @@ class App extends React.Component {
 			this.setState({//se esta llamando aquí cuando se resetea la página por eso no se actualizan bien los estados al cambiar de un usuario a otro.
 				user: user
 			});
+			//aqui se carga despues de autenticarte
+
+			//NO BORRAR. NO FUNCIONA, SIGUE CARGANDO EL ESTADO ANTERIOR
+			// firebase.database().ref('tasks').on('child_added', snapshot => {
+			// 	if(typeof(this.state.user) !== 'undefined' && this.state.user !== null && snapshot.val().createdBy === this.state.user.uid){
+			// 		this.setState({
+			// 			tasks: this.state.tasks.concat(snapshot.val())
+			// 		});
+			// 	}
+			// });
 		});
 
+
 		firebase.database().ref('projects').on('child_added', snapshot => {
+			const project = snapshot.val();
+			project.projectId = snapshot.key;
+			console.log(project);
 			this.setState ({
-				projects: this.state.projects.concat(snapshot.val()),//devuelve un array nuevo basado en el anterior con los nuevos datos
+				projects: this.state.projects.concat(project),//devuelve un array nuevo basado en el anterior con los nuevos datos
 			});
 		})
 
@@ -54,9 +68,9 @@ class App extends React.Component {
 		});
 
 		//Almaceno en el array idProjects todos los id de los proyectos
-		firebase.database().ref('projects').limitToLast(9000).on('child_added', 	childSnapshot=> {
+		firebase.database().ref('projects').limitToLast(1).on('child_added', 	childSnapshot=> {
 			this.setState({
-				idProjects: childSnapshot.key
+				idProject: childSnapshot.key
 			})
 		}).bind(this);
 
@@ -98,13 +112,6 @@ class App extends React.Component {
 		}
 		const dbRefProject = firebase.database().ref('projects');
 		dbRefProject.push(objectProject);
-
-		//Al añadir el proyecto vamos a recuperar en ese momento la clave o id de esa instancia para poder usarla luego
-		firebase.database().ref('projects').limitToLast(100000).on('child_added', 	childSnapshot=> {
-			this.setState({
-				idProject: childSnapshot.key
-			})
-		}).bind(this);
 
 			//Para recuperar el ultimo key
 			// const idProject = childSnapshot.key;
@@ -162,7 +169,6 @@ class App extends React.Component {
 				</div>
 			);
 		}
-
 		return (<Login
 			onLoginSuccess = {this.setUser}
 			handleAuthGoogle = {this.handleAuthGoogle}
