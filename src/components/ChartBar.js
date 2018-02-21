@@ -12,8 +12,11 @@ class ChartBar extends React.Component {
 	}
 	handleFilteredProject (event) {
 		let projectsFiltered = event.currentTarget.value;
-		this.setState ({ projectsFiltered : projectsFiltered})
-		console.log(this.state.projectsFiltered)
+		let filteredTasks = this.props.tasks.filter(filterTask =>
+		filterTask.projectId.includes(projectsFiltered));
+		console.log(this.props.tasks);
+		console.log(projectsFiltered);
+		console.log(filteredTasks)
 	}
 
 	selectProject(){
@@ -30,8 +33,12 @@ class ChartBar extends React.Component {
 		}
 	</select>);
 	}
-
+	// paintFilteredTasks () {
+	//
+	// }
   render() {
+		// console.log(this.state.projectsFiltered);
+		// console.log(this.filteredTasks)
       var data = {
           labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
           datasets: [

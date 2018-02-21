@@ -1,3 +1,39 @@
+.header {
+  height: 150px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center; }
+
+.logo {
+  background: url("../images/logoFire.png");
+  background-repeat: no-repeat;
+  width: 120px;
+  height: 120px;
+  margin-left: -100px;
+  margin-top: 15px; }
+
+.image--user {
+  border-radius: 50%;
+  height: 40px;
+  width: initial; }
+
+.login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+
+.btn_exit--user {
+  background-image: url("../images/off.png");
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border: none;
+  height: 35px;
+  width: 35px;
+  text-align: center;
+  margin-left: 30px; }
+
 body {
   margin: 0;
   padding: 0;
@@ -20,12 +56,15 @@ body {
 
 .form-title {
   margin: 0;
-  color: #ffff;
+  color: #ffffff;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20px; }
+  padding: 20px;
+  padding-top: 53px; }
+  .form-title p {
+    font-size: 20px; }
   .form-title h1, .form-title p {
     margin: 10px; }
   @media all and (min-width: 500px) {
@@ -42,7 +81,8 @@ body {
   background-size: cover;
   height: 100vh;
   justify-content: center;
-  align-items: center; }
+  align-items: center;
+  opacity: .9; }
 
 .login__form {
   display: flex;
@@ -51,29 +91,48 @@ body {
   text-align: center;
   width: 200px;
   margin: auto;
-  background-color: #ffffff;
   padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 0 0 1px #c4cdd5;
-  border: 0; }
+  padding-top: 40px; }
   @media all and (min-width: 810px) {
     .login__form {
-      width: 350px; } }
+      width: 350px;
+      padding-top: 0; } }
 
 .login__inputs {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  margin: 20px; }
+  margin: 20px;
+  width: 247px;
+  margin-left: -22px; }
+  @media all and (min-width: 810px) {
+    .login__inputs {
+      width: 314px;
+      margin-left: 18px; } }
+  @media all and (min-width: 1024px) {
+    .login__inputs {
+      width: 400px;
+      margin-left: -35px; } }
 
 .login__input {
   margin: 3px;
-  padding-left: 10px;
-  box-shadow: 0 0 0 1px #c4cdd5;
-  border: 0;
-  border-radius: 5px;
   height: 30px;
-  weight: 100%; }
+  weight: 100%;
+  border-style: none;
+  border-bottom: 2px solid white;
+  background-color: inherit;
+  color: white;
+  font-weight: bolder;
+  font-size: 14px; }
+
+.login__input::placeholder {
+  color: white;
+  text-align: right;
+  font-size: 16px;
+  padding-right: 12px; }
+  @media all and (min-width: 810px) {
+    .login__input::placeholder {
+      padding-right: 20px; } }
 
 .login__buttons {
   display: flex;
@@ -84,23 +143,19 @@ body {
 .login__button {
   justify-content: space-between;
   margin: 5px;
+  height: 35px;
   width: 100px;
-  background-color: #30373b;
-  border-radius: 15px;
+  border-radius: 5px;
   border: 0;
-  background-color: #00cdd8;
-  color: white;
+  background-color: #ffffff;
+  color: black;
+  opacity: 0.7;
   font-weight: bold;
   cursor: pointer; }
   @media all and (min-width: 810px) {
     .login__button {
-      width: 110px;
+      width: 200px;
       height: 35px; } }
-
-.image--user {
-  width: 250px;
-  height: 250px;
-  border-radius: 50%; }
 
 .timer {
   display: flex;
@@ -151,11 +206,9 @@ body {
   margin: 20px; }
 
 #barras {
-  width: 600px !important;
-  height: 100px !important;
-  margin-left: 350px !important; }
+  width: 300px !important;
+  height: 100px !important; }
 
 #quesito {
-  width: 500px !important;
-  height: 250px !important;
-  margin-left: 400px !important; }
+  width: 300px !important;
+  height: 250px !important; }

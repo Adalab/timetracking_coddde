@@ -37,46 +37,31 @@ class App extends React.Component {
 			this.setState({//se esta llamando aquí cuando se resetea la página por eso no se actualizan bien los estados al cambiar de un usuario a otro.
 				user: user
 			});
-			//aqui se carga despues de autenticarte
 
-			//NO BORRAR. NO FUNCIONA, SIGUE CARGANDO EL ESTADO ANTERIOR
-			// firebase.database().ref('tasks').on('child_added', snapshot => {
-			// 	if(typeof(this.state.user) !== 'undefined' && this.state.user !== null && snapshot.val().createdBy === this.state.user.uid){
-			// 		this.setState({
-			// 			tasks: this.state.tasks.concat(snapshot.val())
-			// 		});
-			// 	}
-			// });
-		});
-
-
-		firebase.database().ref('projects').on('child_added', snapshot => {
-			const project = snapshot.val();
-			project.projectId = snapshot.key;
-			console.log(project);
-			this.setState ({
-				projects: this.state.projects.concat(project),//devuelve un array nuevo basado en el anterior con los nuevos datos
+			firebase.database().ref('tasks').on('child_added', snapshot => {
+				if(typeof(this.state.user) !== 'undefined' && this.state.user !== null && snapshot.val().createdBy === this.state.user.uid){
+					this.setState({
+						tasks: this.state.tasks.concat(snapshot.val())
+					});
+				}
 			});
-		})
 
-		firebase.database().ref('tasks').on('child_added', snapshot => {
-			//solo añadimos la tarea si es del usuario actual.
-			if(snapshot.val().projectsdBy === this.state.user.uid){
-				this.setState({
-					tasks: this.state.tasks.concat(snapshot.val())
+			firebase.database().ref('projects').on('child_added', snapshot => {
+				const project = snapshot.val();
+				project.projectId = snapshot.key;
+				console.log(project);
+				this.setState ({
+					projects: this.state.projects.concat(project),//devuelve un array nuevo basado en el anterior con los nuevos datos
 				});
-			}
-		});
-
-		//Almaceno en el array idProjects todos los id de los proyectos
-		firebase.database().ref('projects').limitToLast(1).on('child_added', 	childSnapshot=> {
-			this.setState({
-				idProject: childSnapshot.key
-
 			})
-			
-		}).bind(this);
 
+			//Almaceno en el array idProjects todos los id de los proyectos
+			firebase.database().ref('projects').limitToLast(1).on('child_added', 	childSnapshot=> {
+				this.setState({
+					idProject: childSnapshot.key
+				})
+			}).bind(this);
+		});
 
 		//podemos almacenar cada idProject.key en un array?? y luego mandarlo a chartBar?
 
@@ -85,6 +70,7 @@ class App extends React.Component {
 		reactLocalStorage.setObject('var', {'test': 'test'});
 		reactLocalStorage.getObject('var');
 	}
+	//aqui cierra el componentWillMount
 
 	setUser() {
 		this.setState({
@@ -96,6 +82,17 @@ class App extends React.Component {
 		firebase.auth().signOut()
 			.then(result => console.log(`${result.user.email} ha salido`))
 			.catch(error => console.log(`Error ${error.code}:${error.message}`));
+
+			this.setState({
+				user: null,
+				logged: false,
+				inputProject: '',
+				projects: [],
+				idProject: '',
+				idProjects: [],
+				tasks: [],
+				inputTask: '',
+			})
 	}
 
 	//recogemos el valor del input de proyectos
@@ -172,7 +169,8 @@ class App extends React.Component {
 					<input className="calendar" type="date"></input>
 					<Graphic />
 					<ChartBar selectProjects={this.state.projects}
-					selectIDs={this.state.arrayIdProject}/>
+					selectIDs={this.state.arrayIdProject}
+					tasks={this.state.tasks}/>
 				</div>
 			);
 		}
