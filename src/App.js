@@ -129,9 +129,9 @@ class App extends React.Component {
 			return (
 				<div className="App">
 					<Header displayName={this.state.user.displayName}
-					email={this.state.user.email}
-		 			url={this.state.user.photoURL}
-					handleLogout={this.handleLogout} />
+						email={this.state.user.email}
+						url={this.state.user.photoURL}
+						handleLogout={this.handleLogout} />
 					{/* <Login
 						// renderLoginButton={this.renderLoginButton()}
 						handleAuthGoogle = {this.handleAuthGoogle}
@@ -155,7 +155,9 @@ class App extends React.Component {
 					<Databasetest />
 					<input className="calendar" type="date"></input>
 					<Graphic />
-					<ChartBar selectProjects={this.state.projects} />
+					<ChartBar
+						tasks={this.state.tasks}
+						selectProjects={this.state.projects} />
 				</div>
 			);
 		}
