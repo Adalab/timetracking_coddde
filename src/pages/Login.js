@@ -80,9 +80,9 @@ class Login extends React.Component {
 						<button className="login__button" type="button" onClick={this.handleAuthEmail}>Log in</button>
 						<button className="login__button" type="button" onClick={this.handleAuthGoogle}>Log in with Google
 						</button>
-						<button className="login__button" type="button" onClick={this.handleNewUser}>New User
+						<button className="login__button new__user button_login_white" type="button" onClick={this.handleNewUser}>New User
 						</button>
-						<button className="login__button" type="button" onClick={this.recoverPass}>Forgot Password
+						<button className="login__button forgot__password button_login_white" type="button" onClick={this.recoverPass}>Forgot Password
 						</button>
 						{/* { this.props.renderLoginButton } */}
 					</div>

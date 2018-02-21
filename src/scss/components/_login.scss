@@ -9,10 +9,17 @@
 	padding-top: 53px;
 	p{
 		font-size: 20px;
+		color: white;
 	}
 	h1, p{
 		margin: 10px;
 	}
+	h1{
+		background: -webkit-linear-gradient(white, #F5BF2E 75%, white);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		opacity: 0.8;
+		}
 @media all and(min-width: 500px){
 		font-size: 25px;
 	}
@@ -92,16 +99,26 @@
 	justify-content: space-between;
 	margin: 5px;
 	height: 35px;
-	width: 100px;
+	width: 150px;
 	border-radius: 5px;
 	border: 0;
-	background-color: #ffffff;
+	background-color: #F5BF2E;
 	color: black;
-	opacity: 0.7;
+	opacity: 0.8;
 	font-weight: bold;
 	cursor: pointer;
+	background: -webkit-linear-gradient(white, #F5BF2E 60%);
+	&:hover{
+		opacity: 1;
+	}
 	@media all and(min-width: 810px){
 		width: 200px;
 		height: 35px;
 	}
+}
+.new__user{
+	background-image: url('../images/newUserBlack32.png'), -webkit-linear-gradient(white, #F5BF2E 80%);
+	background-repeat: no-repeat;
+	background-position: right;
+	color: black;
 }
