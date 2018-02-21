@@ -28,6 +28,7 @@ class App extends React.Component {
 			idProjects: [],
 			tasks: [],
 			inputTask: '',
+			arrayIdProject: []
 		}
 	}
 
@@ -165,7 +166,9 @@ class App extends React.Component {
 					<Databasetest />
 					<input className="calendar" type="date"></input>
 					<Graphic />
-					<ChartBar selectProjects={this.state.projects} />
+					<ChartBar selectProjects={this.state.projects}
+					selectIDs={this.state.arrayIdProject}
+					tasks={this.state.tasks}/>
 				</div>
 			);
 		}
