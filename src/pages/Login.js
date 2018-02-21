@@ -8,6 +8,7 @@ class Login extends React.Component {
 		this.handleAuthEmail = this.handleAuthEmail.bind(this);
 		this.handleAuthGoogle = this.handleAuthGoogle.bind(this);
 		this.handleNewUser = this.handleNewUser.bind(this);
+		this.recoverPass = this.recoverPass.bind(this);
 
 		this.state = {
 			email: '',
@@ -25,6 +26,19 @@ class Login extends React.Component {
 		console.log(errorMessage);
 	  // ...
 	});
+	}
+
+	recoverPass(){
+		let auth = firebase.auth();
+		let emailAdress = this.state.email;
+
+		auth.sendPasswordResetEmail(emailAdress)
+			.then(function(){
+				//Email send
+			})
+			.catch(function(error){
+				//An error happened
+			});
 	}
 	handleAuthEmail () {
 		const email = this.state.email;
@@ -68,6 +82,8 @@ class Login extends React.Component {
 						<button className="login__button" type="button" onClick={this.handleAuthGoogle}>Log in with Google
 						</button>
 						<button className="login__button" type="button" onClick={this.handleNewUser}>New User
+						</button>
+						<button className="login__button" type="button" onClick={this.recoverPass}>Forgot Password
 						</button>
 						{/* { this.props.renderLoginButton } */}
 					</div>
