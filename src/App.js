@@ -28,6 +28,7 @@ class App extends React.Component {
 			idProjects: [],
 			tasks: [],
 			inputTask: '',
+			arrayIdProject: []
 		}
 	}
 
@@ -60,7 +61,7 @@ class App extends React.Component {
 
 		firebase.database().ref('tasks').on('child_added', snapshot => {
 			//solo añadimos la tarea si es del usuario actual.
-			if(snapshot.val().createdBy === this.state.user.uid){
+			if(snapshot.val().projectsdBy === this.state.user.uid){
 				this.setState({
 					tasks: this.state.tasks.concat(snapshot.val())
 				});
@@ -71,8 +72,13 @@ class App extends React.Component {
 		firebase.database().ref('projects').limitToLast(1).on('child_added', 	childSnapshot=> {
 			this.setState({
 				idProject: childSnapshot.key
+
 			})
+			
 		}).bind(this);
+
+
+		//podemos almacenar cada idProject.key en un array?? y luego mandarlo a chartBar?
 
 		reactLocalStorage.set('var', true);
 		reactLocalStorage.get('var', true);
@@ -165,7 +171,8 @@ class App extends React.Component {
 					<Databasetest />
 					<input className="calendar" type="date"></input>
 					<Graphic />
-					<ChartBar selectProjects={this.state.projects} />
+					<ChartBar selectProjects={this.state.projects}
+					selectIDs={this.state.arrayIdProject}/>
 				</div>
 			);
 		}

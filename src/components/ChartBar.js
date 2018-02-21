@@ -5,18 +5,27 @@ class ChartBar extends React.Component {
 	constructor(props) {
 		super(props)
 		this.selectProject = this.selectProject.bind(this);
+		this.handleFilteredProject = this.handleFilteredProject.bind(this);
+		this.state = {
+			projectsFiltered: ''
+		}
 	}
-
+	handleFilteredProject (event) {
+		let projectsFiltered = event.currentTarget.value;
+		this.setState ({ projectsFiltered : projectsFiltered})
+		console.log(this.state.projectsFiltered)
+	}
 
 	selectProject(){
 		let arrayProject = this.props.selectProjects;
+		console.log(arrayProject)
 
-		return(<select className="">
+		return(<select className="" onChange={this.handleFilteredProject}>
 						<option>selecciona un proyecto</option>
 			{
 				arrayProject.map(
 					project =>
-						<option>{project.projectName}</option>
+						<option value={project.projectId}>{project.projectName}</option>
 				)
 		}
 	</select>);
