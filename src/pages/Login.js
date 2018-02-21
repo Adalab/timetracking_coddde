@@ -7,13 +7,39 @@ class Login extends React.Component {
 
 		this.handleAuthEmail = this.handleAuthEmail.bind(this);
 		this.handleAuthGoogle = this.handleAuthGoogle.bind(this);
+		this.handleNewUser = this.handleNewUser.bind(this);
+		this.recoverPass = this.recoverPass.bind(this);
 
 		this.state = {
 			email: '',
 			password: ''
 		}
 	}
+	handleNewUser(){
+		//console.log('dite un cli');
+		const email = this.state.email;
+		const password = this.state.password;
+		firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+	  // Handle Errors here.
+	  var errorCode = error.code;
+	  var errorMessage = error.message;
+		console.log(errorMessage);
+	  // ...
+	});
+	}
 
+	recoverPass(){
+		let auth = firebase.auth();
+		let emailAdress = this.state.email;
+
+		auth.sendPasswordResetEmail(emailAdress)
+			.then(function(){
+				//Email send
+			})
+			.catch(function(error){
+				//An error happened
+			});
+	}
 	handleAuthEmail () {
 		const email = this.state.email;
 		const password = this.state.password;
@@ -54,6 +80,10 @@ class Login extends React.Component {
 					<div className="login__buttons">
 						<button className="login__button" type="button" onClick={this.handleAuthEmail}>Log in</button>
 						<button className="login__button" type="button" onClick={this.handleAuthGoogle}>Log in with Google
+						</button>
+						<button className="login__button" type="button" onClick={this.handleNewUser}>New User
+						</button>
+						<button className="login__button" type="button" onClick={this.recoverPass}>Forgot Password
 						</button>
 						{/* { this.props.renderLoginButton } */}
 					</div>
