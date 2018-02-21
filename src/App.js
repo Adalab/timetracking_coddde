@@ -60,7 +60,7 @@ class App extends React.Component {
 					idProject: childSnapshot.key
 				})
 			}).bind(this);
-		});	
+		});
 
 		reactLocalStorage.set('var', true);
 		reactLocalStorage.get('var', true);
