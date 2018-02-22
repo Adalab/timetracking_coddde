@@ -109,15 +109,6 @@ class App extends React.Component {
 		}
 		const dbRefProject = firebase.database().ref('projects');
 		dbRefProject.push(objectProject);
-
-			//Para recuperar el ultimo key
-			// const idProject = childSnapshot.key;
-			// console.log(`Éste sería el key que acabas de introducir ${idProject}`);
-			// //Para recuperar el último nodo
-			// 	const snap = childSnapshot.val();
-			// 	//Recupero el valor de la clave projectName del ultimo nodo introducido
-			// 	console.log(`Objeto snap ${snap.projectName}`);
-			// // Lo meto en el estado para poder usarlo luego
 	}
 
 	setLastProyectId(){

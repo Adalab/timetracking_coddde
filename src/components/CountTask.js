@@ -155,7 +155,7 @@ class CountTask extends React.Component {
 					</div>
 				</div>
 				<div className="task__container">
-					<div className="task__item">
+					<div className="task__title">
 						<span>¿En qué estoy trabajando?</span>
 						<span>Proyecto</span>
 						<span>Hora de inicio</span>
