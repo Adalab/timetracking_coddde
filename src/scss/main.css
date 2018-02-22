@@ -244,7 +244,6 @@ body {
   justify-content: space-between;
   margin: 20px; }
 
-#barras {
-  width: 800px !important;
-  height: 250px !important;
-  margin-left: 350px !important; }
+#quesito {
+  width: 900px !important;
+  height: 450px !important; }
