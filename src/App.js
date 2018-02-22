@@ -55,8 +55,6 @@ class App extends React.Component {
 			});
 		})
 
-
-
 		//Almaceno en el array idProjects todos los id de los proyectos
 		firebase.database().ref('projects').limitToLast(1).on('child_added', 	childSnapshot=> {
 			this.setState({
@@ -80,6 +78,16 @@ class App extends React.Component {
 		firebase.auth().signOut()
 			.then(result => console.log(`${result.user.email} ha salido`))
 			.catch(error => console.log(`Error ${error.code}:${error.message}`));
+		this.setState({
+			user: null,
+				logged: false,
+				inputProject: '',
+				projects: [],
+				idProject: '',
+				idProjects: [],
+				tasks: [],
+				inputTask: '',
+		})
 	}
 
 	//recogemos el valor del input de proyectos
@@ -151,7 +159,6 @@ class App extends React.Component {
 						user={this.state.user}
 						inputProject={this.state.inputProject} handleInputProject={this.handleInputProject}
 						projects={this.state.projects} />
-					{/* <input type="date"></input> */}
 					<Databasetest />
 					<input className="calendar" type="date"></input>
 					<Graphic />
@@ -162,9 +169,7 @@ class App extends React.Component {
 			);
 		}
 		return (<Login
-			onLoginSuccess = {this.setUser}
-			handleAuthGoogle = {this.handleAuthGoogle}
-			handleAuthEmai = {this.handleAuthEmai}/>
+			onLoginSuccess = {this.setUser}/>
 		);
 	}
 }
