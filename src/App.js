@@ -144,24 +144,24 @@ class App extends React.Component {
 						</li>
 					</ul>
 					<Switch>
-						<Route exact path='/' component={CountTask} />
+						<Route exact path='/' component={Databasetest} />
 						<Route path='/Graphics' render={() => <ChartBar
 							selectProjects={this.state.projects}
 						 	filterTaskSelect={this.state.tasks}
 							/> } />
 
 					</Switch>
-					// <CountTask
-					// 	user={this.state.user}
-					// 	inputTask={this.state.inputTask}
-					// 	handleInputTask={this.handleInputTask}
-					// 	tasks={this.state.tasks}
-					// 	handleInputProject={this.handleInputProject}
-					// 	addProject={this.addProject}
-					// 	setLastProyectId={this.setLastProyectId}
-					// 	inputProject={this.state.inputProject}
-					// 	idProject={this.state.idProject}
-					// />
+					<CountTask
+						user={this.state.user}
+						inputTask={this.state.inputTask}
+						handleInputTask={this.handleInputTask}
+						tasks={this.state.tasks}
+						handleInputProject={this.handleInputProject}
+						addProject={this.addProject}
+						setLastProyectId={this.setLastProyectId}
+						inputProject={this.state.inputProject}
+						idProject={this.state.idProject}
+					/>
 					<Projects
 						user={this.state.user}
 						inputProject={this.state.inputProject} handleInputProject={this.handleInputProject}

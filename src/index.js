@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import firebase from 'firebase';
 import './scss/main.css';
 import App from './App';
+import { HashRouter } from 'react-router-dom';
 
 firebase.initializeApp({
 	apiKey: "AIzaSyAbzw_iuCC7wya88lxix0BoZ1kKR9vU3Ic",
@@ -14,4 +15,6 @@ firebase.initializeApp({
 
 });
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<HashRouter>
+		<App	/>
+</HashRouter>, document.getElementById('root'));
