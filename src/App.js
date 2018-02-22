@@ -9,6 +9,9 @@ import Graphic from './components/Graphic';
 import ChartBar from './components/ChartBar';
 import {reactLocalStorage} from 'reactjs-localstorage';
 
+import 'primereact/resources/primereact.min.css';
+import 'primereact/resources/themes/omega/theme.css';
+
 class App extends React.Component {
 	constructor (props) {
 		super (props);

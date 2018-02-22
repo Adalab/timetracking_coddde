@@ -159,6 +159,9 @@ body {
       width: 200px;
       height: 35px; } }
 
+.ui-widget-overlay {
+  display: none; }
+
 .timer {
   display: flex;
   flex-direction: row;

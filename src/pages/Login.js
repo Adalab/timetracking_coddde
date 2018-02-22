@@ -1,6 +1,8 @@
 import React from 'react';
 import firebase from 'firebase';
 import {Dialog} from 'primereact/components/dialog/Dialog';
+import 'primereact/resources/primereact.min.css';
+import 'primereact/resources/themes/omega/theme.css';
 
 
 class Login extends React.Component {
