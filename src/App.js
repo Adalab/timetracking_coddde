@@ -138,39 +138,30 @@ class App extends React.Component {
 						handleAuthGoogle = {this.handleAuthGoogle}
 					/> */}
 					<ul className="window">
-						<li><Link to='/'>Página principal</Link>
+						<li className="list_menu"><Link className="nav_menu" to='/'>Home</Link>
 						</li>
-						<li><Link to='/Graphics'>Informes</Link>
+						<li className="list_menu"><Link className="nav_menu" to='/Graphics'>Informes</Link>
 						</li>
 					</ul>
 					<Switch>
-						<Route exact path='/' component={Databasetest} />
-						<Route path='/Graphics' render={() => <ChartBar
+						<Route exact path='/' render={() =>
+							<CountTask
+								user={this.state.user}
+								inputTask={this.state.inputTask}
+								handleInputTask={this.handleInputTask}
+								tasks={this.state.tasks}
+								handleInputProject={this.handleInputProject}
+								addProject={this.addProject}
+								setLastProyectId={this.setLastProyectId}
+								inputProject={this.state.inputProject}
+								idProject={this.state.idProject}/> }
+						/>
+						<Route path='/Graphics' render={() => <Graphic
 							selectProjects={this.state.projects}
 						 	filterTaskSelect={this.state.tasks}
-							/> } />
-
+							/> }
+						/>
 					</Switch>
-					<CountTask
-						user={this.state.user}
-						inputTask={this.state.inputTask}
-						handleInputTask={this.handleInputTask}
-						tasks={this.state.tasks}
-						handleInputProject={this.handleInputProject}
-						addProject={this.addProject}
-						setLastProyectId={this.setLastProyectId}
-						inputProject={this.state.inputProject}
-						idProject={this.state.idProject}
-					/>
-					<Projects
-						user={this.state.user}
-						inputProject={this.state.inputProject} handleInputProject={this.handleInputProject}
-						projects={this.state.projects} />
-					{/* <input type="date"></input> */}
-					<Databasetest />
-					<input className="calendar" type="date"></input>
-					<Graphic />
-
 				</div>
 			);
 		}

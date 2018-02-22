@@ -41,6 +41,28 @@
   text-align: center;
   margin-left: 30px; }
 
+.window {
+  list-style: none;
+  background-color: black;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: row; }
+
+.nav_menu {
+  justify-content: space-between;
+  align-items: baseline;
+  color: #F5BF2E;
+  font-weight: bold;
+  text-decoration: none; }
+
+.list_menu {
+  background-color: #f4f6f7;
+  justify-content: space-between;
+  border-radius: 25% 25% 0 0;
+  padding: 0 5px 0 5px;
+  height: 25px; }
+
 body {
   margin: 0;
   padding: 0;
