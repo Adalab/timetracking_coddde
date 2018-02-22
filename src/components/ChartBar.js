@@ -8,55 +8,47 @@ class ChartBar extends React.Component {
 		this.handleFilteredProject = this.handleFilteredProject.bind(this);
 		this.state = {
 			projectsFiltered: '',
-			taskData: ''
+			data: ''
 		}
 	}
 	handleFilteredProject (event) {
 		let projectsFiltered = event.currentTarget.value;
-		let filteredTasks = this.props.filterTaskSelect.filter(filterTask =>
+		let filteredTasks = this.props.tasks.filter(filterTask =>
 		filterTask.projectId.includes(projectsFiltered));
-		console.log(filteredTasks);
 
-		let TaskFor = '';
+		let filteredTaskName = [];
+		let filteredTaskCounter = [];
 		for (let i = 0; i < filteredTasks.length; i++) {
-			TaskFor = filteredTasks[i];
-		}
-		let namestasles = filteredTasks.map(element => element.taskName);
-		let counters = filteredTasks.map(element => element.counter);
+			filteredTaskName += filteredTasks[i].taskName;
+			filteredTaskCounter += filteredTasks[i].counter
 
-		var data = {
-				labels: namestasles,
+		}
+
+		let data = {
+				labels: [`${filteredTaskName}`],
 				datasets: [
 						{
 								label: 'My First dataset',
 								backgroundColor: '#42A5F5',
 								borderColor: '#1E88E5',
-								data: counters
+								data: [`${filteredTaskCounter}`]
 						},
 						// {
-						//     label: 'My Second dataset',
-						//     backgroundColor: '#9CCC65',
-						//     borderColor: '#7CB342',
-						//     data: [28, 48, 40, 19, 86, 27, 90]
+						// 		label: 'My Second dataset',
+						// 		backgroundColor: '#9CCC65',
+						// 		borderColor: '#7CB342',
+						// 		data: [28, 48, 40, 19, 86, 27, 90]
 						// }
 				]
 		};
-
-		//console.log(this.state.tareas);
-
 		this.setState({
-			taskData: data
+			data: data
 		})
-/*
-		this.setState({
-			tareas: TaskFor
-		})
-*/	}
+	}
 
 	selectProject(){
 		let arrayProject = this.props.selectProjects;
-		//console.log(arrayProject)
-
+		// console.log(arrayProject)
 
 		return(<select className="" onChange={this.handleFilteredProject}>
 						<option>selecciona un proyecto</option>
@@ -67,25 +59,42 @@ class ChartBar extends React.Component {
 				)
 		}
 	</select>);
-
 	}
 
   render() {
-
+		// console.log(this.filteredTaskName);
+		// console.log(this.filteredTaskCounter);
+      // var data = {
+      //     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+      //     datasets: [
+      //         {
+      //             label: 'My First dataset',
+      //             backgroundColor: '#42A5F5',
+      //             borderColor: '#1E88E5',
+      //             data: [65, 59, 80, 81, 56, 55, 40]
+      //         },
+      //         {
+      //             label: 'My Second dataset',
+      //             backgroundColor: '#9CCC65',
+      //             borderColor: '#7CB342',
+      //             data: [28, 48, 40, 19, 86, 27, 90]
+      //         }
+      //     ]
+      // };
 
       return (
           <div>
-              <div className="content-section introduction">
-                  <div className="feature-intro">
-                      <h1>Tiempo invertido</h1>
-                      <p>Tiempo invertido en proyectos y tareas.</p>
-                  </div>
-              </div>
+						<div className="content-section introduction">
+							<div className="feature-intro">
+								<h1>Tiempo invertido</h1>
+								<p>Tiempo invertido en proyectos y tareas.</p>
+							</div>
+						</div>
 
-							{ this.selectProject() }
+						{ this.selectProject() }
 
-							<div className="content-section implementation">
-                  <Chart  id="barras" type="bar" data={this.state.taskData} className="chartBar"/>
+						<div className="content-section implementation">
+							<Chart  id="barras" type="bar" data={this.state.data} className="chartBar"/>
               </div>
           </div>
 				)
