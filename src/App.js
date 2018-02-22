@@ -1,5 +1,6 @@
 import React from 'react';
 import firebase from 'firebase';
+import { Link, Route, Switch } from 'react-router-dom';
 import Header from './components/Header';
 import Projects from './components/Projects';
 import Databasetest from './components/Databasetest';
@@ -136,17 +137,31 @@ class App extends React.Component {
 						// renderLoginButton={this.renderLoginButton()}
 						handleAuthGoogle = {this.handleAuthGoogle}
 					/> */}
-					<CountTask
-						user={this.state.user}
-						inputTask={this.state.inputTask}
-						handleInputTask={this.handleInputTask}
-						tasks={this.state.tasks}
-						handleInputProject={this.handleInputProject}
-						addProject={this.addProject}
-						setLastProyectId={this.setLastProyectId}
-						inputProject={this.state.inputProject}
-						idProject={this.state.idProject}
-					/>
+					<ul className="window">
+						<li><Link to='/'>Página principal</Link>
+						</li>
+						<li><Link to='/Graphics'>Informes</Link>
+						</li>
+					</ul>
+					<Switch>
+						<Route exact path='/' component={CountTask} />
+						<Route path='/Graphics' render={() => <ChartBar
+							selectProjects={this.state.projects}
+						 	filterTaskSelect={this.state.tasks}
+							/> } />
+
+					</Switch>
+					// <CountTask
+					// 	user={this.state.user}
+					// 	inputTask={this.state.inputTask}
+					// 	handleInputTask={this.handleInputTask}
+					// 	tasks={this.state.tasks}
+					// 	handleInputProject={this.handleInputProject}
+					// 	addProject={this.addProject}
+					// 	setLastProyectId={this.setLastProyectId}
+					// 	inputProject={this.state.inputProject}
+					// 	idProject={this.state.idProject}
+					// />
 					<Projects
 						user={this.state.user}
 						inputProject={this.state.inputProject} handleInputProject={this.handleInputProject}
@@ -155,9 +170,7 @@ class App extends React.Component {
 					<Databasetest />
 					<input className="calendar" type="date"></input>
 					<Graphic />
-					<ChartBar
-						selectProjects={this.state.projects}
-					 	filterTaskSelect={this.state.tasks}/>
+
 				</div>
 			);
 		}
