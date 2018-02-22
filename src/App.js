@@ -6,7 +6,6 @@ import Databasetest from './components/Databasetest';
 import CountTask from './components/CountTask';
 import Login from './pages/Login';
 import Graphic from './components/Graphic';
-import ChartBar from './components/ChartBar';
 import {reactLocalStorage} from 'reactjs-localstorage';
 
 class App extends React.Component {
@@ -157,9 +156,6 @@ class App extends React.Component {
 					<Graphic
 						selectProjects={this.state.projects}
 						filterTaskSelect={this.state.tasks}/>
-					<ChartBar
-						selectProjects={this.state.projects}
-					 	filterTaskSelect={this.state.tasks}/>
 				</div>
 			);
 		}
