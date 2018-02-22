@@ -139,7 +139,7 @@ class CountTask extends React.Component {
 	render () {
 
 		return (
-			<div>
+			<div className="component_container">
 				<div className="timer">
 					<div>
 						<div>
@@ -154,6 +154,7 @@ class CountTask extends React.Component {
 						<button className="timer__btn timer__btn--stop" type="button" name="reset_btn" id="reset_btn" onClick={this.stopTimer}>Stop</button>
 					</div>
 				</div>
+				<input className="calendar" type="date"></input>
 				<div className="task__container">
 					<div className="task__title">
 						<span>¿En qué estoy trabajando?</span>
