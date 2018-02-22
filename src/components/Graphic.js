@@ -73,7 +73,7 @@ class Graphic extends React.Component {
 	render() {
 
         return (
-            <div>
+            <div className="component_container">
                 <div className="content-section introduction">
                     <div className="feature-intro">
                         <h1>Proyecto 1</h1>
