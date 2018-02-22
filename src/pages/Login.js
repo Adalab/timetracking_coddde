@@ -7,20 +7,46 @@ class Login extends React.Component {
 
 		this.handleAuthEmail = this.handleAuthEmail.bind(this);
 		this.handleAuthGoogle = this.handleAuthGoogle.bind(this);
+		this.handleNewUser = this.handleNewUser.bind(this);
+		this.recoverPass = this.recoverPass.bind(this);
 
 		this.state = {
 			email: '',
 			password: ''
 		}
 	}
+	handleNewUser(){
+		//console.log('dite un cli');
+		const email = this.state.email;
+		const password = this.state.password;
+		firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+	  // Handle Errors here.
+	  var errorCode = error.code;
+	  var errorMessage = error.message;
+		console.log(errorMessage);
+	  // ...
+	});
+	}
 
+	recoverPass(){
+		let auth = firebase.auth();
+		let emailAdress = this.state.email;
+
+		auth.sendPasswordResetEmail(emailAdress)
+			.then(function(){
+				//Email send
+			})
+			.catch(function(error){
+				//An error happened
+			});
+	}
 	handleAuthEmail () {
 		const email = this.state.email;
 		const password = this.state.password;
 		firebase.auth().signInWithEmailAndPassword(email, password)
 			.then(result => console.log(result, 'ha iniciado sesión'))
 			.catch(error => console.log(`Error ${error.code}:${error.message}`));
-			console.log(email, password)
+			//console.log(email, password)
 	}
 
 	handleInputChange(input, value) {
@@ -28,6 +54,7 @@ class Login extends React.Component {
 			[input]: value
 		});
 	}
+
 	handleAuthGoogle () {
 		const provider = new firebase.auth.GoogleAuthProvider();
 		firebase.auth().signInWithPopup(provider)
@@ -36,11 +63,14 @@ class Login extends React.Component {
 			.catch(error => console.log(`Error ${error.code}:${error.message}`));
 		}
 
-  render() {
-    return (
-			<div className="form">
+	render() {
+		return (
+			<div className="login-container">
 				<header className="form-header">
-					<h1 className="form-title">Time tracker</h1>
+					<div className="form-title">
+						<h1>FireTimer</h1>
+						<p>Control your time production</p>
+					</div>
 				</header>
 				<form className="login__form">
 					<div className="login__inputs">
@@ -48,17 +78,19 @@ class Login extends React.Component {
 						<input value={this.state.password} className="login__input" type="password"  placeholder="Password" ref="password" onChange={e => this.handleInputChange('password', e.target.value)}/>
 					</div>
 					<div className="login__buttons">
-						<button className="login__button" type="button" onClick={this.handleAuthEmail}>Log-in</button>
-						<button className="login__button" type="button" onClick={this.handleAuthGoogle}>Log in con Google
+						<button className="login__button" type="button" onClick={this.handleAuthEmail}>Log in</button>
+						<button className="login__button" type="button" onClick={this.handleAuthGoogle}>Log in with Google
+						</button>
+						<button className="login__button" type="button" onClick={this.handleNewUser}>New User
+						</button>
+						<button className="login__button" type="button" onClick={this.recoverPass}>Forgot Password
 						</button>
 						{/* { this.props.renderLoginButton } */}
 					</div>
 				</form>
-
-      </div>
-
-    );
-  }
+			</div>
+		);
+	}
 }
 
 export default Login;

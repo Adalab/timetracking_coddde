@@ -135,17 +135,18 @@ class CountTask extends React.Component {
 	paintTasks() {
 		let tasksToShow = this.props.tasks; //esto es como el ejemplo de los perros de Isra
 		return (
-			<ul className="task__list">
+			<div className="task__list">
 				{tasksToShow.map(
-					task => <li className="task__item">
-						<span>{ task.taskName }</span>
-						<span>{ task.initTime }</span>
-						<span>{ this.calculateFinalTime(task.initTime, task.counter) }</span>
-						<span>{ this.formatTime(task.counter) }</span>
-					</li>).reverse()
+					(task) => <ul className="task__item">
+						<li>{ task.taskName }</li>
+						<li>{ task.initTime }</li>
+						<li>{ this.calculateFinalTime(task.initTime, task.counter) }</li>
+						<li>{ this.formatTime(task.counter) }</li>
+					</ul>).reverse()
 				}
-			</ul>);
+			</div>);
 	}
+
 	render () {
 
 		return (

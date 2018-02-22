@@ -1,35 +1,86 @@
-.form {
+.form-title{
+	margin: 0;
+	color: #ffffff;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 20px;
+	padding-top: 53px;
+	p{
+		font-size: 20px;
+	}
+	h1, p{
+		margin: 10px;
+	}
+@media all and(min-width: 500px){
+		font-size: 25px;
+	}
+@media all and(min-width: 810px){
+		font-size: 35px;
+		p{
+			margin-bottom: 45px;
+		}
+	}
+}
+.login-container {
+	background: url('../images/login.jpg') no-repeat center;
+	background-size: cover;
+	height: 100vh;
 	justify-content: center;
 	align-items: center;
+	opacity: .9;
 }
 .login__form {
-  display: -ms-flexbox;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 	text-align: center;
-  margin-right: 30px;
-  margin-left: 40%;
-  background-color: #ffffff;
-  padding: 30px;
-	border-radius: 10px;
-	box-shadow: 0 0 0 1px #c4cdd5;
-	border: 0;
-	border-radius: 5px;
+	width: 200px;
+	margin: auto;
+	padding: 15px;
+	padding-top: 40px;
+
+	@media all and(min-width: 810px){
+		width: 350px;
+		padding-top: 0;
+	}
 }
 .login__inputs {
 	display: flex;
 	justify-content: space-between;
 	flex-direction: column;
-	margin: 30px;
+	margin: 20px;
+	width: 247px;
+	margin-left: -22px;
+	@media all and(min-width: 810px){
+	width: 314px;
+	margin-left: 18px;
+	}
+	@media all and(min-width: 1024px){
+		width: 400px;
+		margin-left: -35px;
+	}
 }
 .login__input {
 	margin: 3px;
-	box-shadow: 0 0 0 1px #c4cdd5;
-	border: 0;
-	border-radius: 5px;
 	height: 30px;
 	weight: 100%;
+	border-style: none;
+	border-bottom: 2px solid white;
+	background-color: inherit;
+	color: white;
+	font-weight: bolder;
+	font-size: 14px;
+}
+.login__input::placeholder{
+	color:white;
+	text-align: right;
+	font-size: 16px;
+	padding-right: 12px;
+	@media all and(min-width: 810px){
+		padding-right: 20px;
+	}
 }
 .login__buttons {
 	display: flex;
@@ -39,19 +90,18 @@
 }
 .login__button {
 	justify-content: space-between;
-	margin: 3px;
+	margin: 5px;
+	height: 35px;
 	width: 100px;
-	background-color: #30373b;
-	border-radius: 10px;
-	box-shadow: 0 0 0 1px #c4cdd5;
-	border: 0;
 	border-radius: 5px;
-	background-color: #00cdd8;
-	color: white;
+	border: 0;
+	background-color: #ffffff;
+	color: black;
+	opacity: 0.7;
 	font-weight: bold;
-}
-.image--user{
-	width: 250px;
-	height: 250px;
-	border-radius: 50%;
+	cursor: pointer;
+	@media all and(min-width: 810px){
+		width: 200px;
+		height: 35px;
+	}
 }

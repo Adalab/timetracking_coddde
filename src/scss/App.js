@@ -36,34 +36,30 @@ class App extends React.Component {
 			this.setState({//se esta llamando aquí cuando se resetea la página por eso no se actualizan bien los estados al cambiar de un usuario a otro.
 				user: user
 			});
-
-			firebase.database().ref('tasks').on('child_added', snapshot => {
-				//solo añadimos la tarea si es del usuario actual.
-				if(typeof(this.state.user) !== 'undefined' && this.state.user !== null && snapshot.val().createdBy === this.state.user.uid){
-					this.setState({
-						tasks: this.state.tasks.concat(snapshot.val())
-					});
-				}
-			});
+		});
 
 		firebase.database().ref('projects').on('child_added', snapshot => {
-			const project = snapshot.val();
-			project.projectId = snapshot.key;
-			console.log(project);
 			this.setState ({
-				projects: this.state.projects.concat(project),//devuelve un array nuevo basado en el anterior con los nuevos datos
+				projects: this.state.projects.concat(snapshot.val()),//devuelve un array nuevo basado en el anterior con los nuevos datos
 			});
 		})
 
-
+		firebase.database().ref('tasks').on('child_added', snapshot => {
+			//solo añadimos la tarea si es del usuario actual.
+			if(snapshot.val().createdBy === this.state.user.uid){
+				this.setState({
+					tasks: this.state.tasks.concat(snapshot.val())
+				});
+			}
+		});
 
 		//Almaceno en el array idProjects todos los id de los proyectos
-		firebase.database().ref('projects').limitToLast(1).on('child_added', 	childSnapshot=> {
+		firebase.database().ref('projects').limitToLast(9000).on('child_added', 	childSnapshot=> {
 			this.setState({
-				idProject: childSnapshot.key
+				idProjects: childSnapshot.key
 			})
 		}).bind(this);
-});
+
 		reactLocalStorage.set('var', true);
 		reactLocalStorage.get('var', true);
 		reactLocalStorage.setObject('var', {'test': 'test'});
@@ -103,6 +99,13 @@ class App extends React.Component {
 		const dbRefProject = firebase.database().ref('projects');
 		dbRefProject.push(objectProject);
 
+		//Al añadir el proyecto vamos a recuperar en ese momento la clave o id de esa instancia para poder usarla luego
+		firebase.database().ref('projects').limitToLast(100000).on('child_added', 	childSnapshot=> {
+			this.setState({
+				idProject: childSnapshot.key
+			})
+		}).bind(this);
+
 			//Para recuperar el ultimo key
 			// const idProject = childSnapshot.key;
 			// console.log(`Éste sería el key que acabas de introducir ${idProject}`);
@@ -127,16 +130,15 @@ class App extends React.Component {
 	render() {
 		if(this.state.user) {
 			return (
-
-      <div className="App">
-				<Header displayName={this.state.user.displayName}
-				name={this.state.user.name}
-				url={this.state.user.photoURL}
-				onClick={this.handleLogout} />
-				{/* <Login
-					// renderLoginButton={this.renderLoginButton()}
-					handleAuthGoogle = {this.handleAuthGoogle}
-				/> */}
+				<div className="App">
+					<Header displayName={this.state.user.displayName}
+					email={this.state.user.email}
+		 			url={this.state.user.photoURL}
+					handleLogout={this.handleLogout} />
+					{/* <Login
+						// renderLoginButton={this.renderLoginButton()}
+						handleAuthGoogle = {this.handleAuthGoogle}
+					/> */}
 					<CountTask
 						user={this.state.user}
 						inputTask={this.state.inputTask}
@@ -156,17 +158,15 @@ class App extends React.Component {
 					<Databasetest />
 					<input className="calendar" type="date"></input>
 					<Graphic />
-					<ChartBar
-						tasks={this.state.tasks}
-						selectProjects={this.state.projects} />
+					<ChartBar selectProjects={this.state.projects} />
 				</div>
-
 			);
 		}
+		
 		return (<Login
 			onLoginSuccess = {this.setUser}
 			handleAuthGoogle = {this.handleAuthGoogle}
-			/>
+			handleAuthEmai = {this.handleAuthEmai}/>
 		);
 	}
 }
