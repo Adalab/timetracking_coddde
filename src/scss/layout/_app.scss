@@ -1,14 +1,11 @@
 .App {
-  text-align: center;
-
-	background: linear-gradient(to bottom right,#f6f7f8 30%, rgba(255,0,0,0)),
-		 url('../images/login.jpg');
-		background-repeat: no-repeat;
-		background-size: cover;
-		width: 100vw;
-		margin-bottom: -23px;
-		height: 40%;
-		padding-bottom: 20px;
+	text-align: center;
+	background: linear-gradient(to bottom right,#f6f7f8 30%, rgba(255,0,0,0)), url('../images/login.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+	margin-bottom: -23px;
+	height: 40%;
+	padding-bottom: 20px;
 }
 
 .App-header {

@@ -41,6 +41,28 @@
   text-align: center;
   margin-left: 30px; }
 
+.window {
+  list-style: none;
+  background-color: black;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: row; }
+
+.nav_menu {
+  justify-content: space-between;
+  align-items: baseline;
+  color: #F5BF2E;
+  font-weight: bold;
+  text-decoration: none; }
+
+.list_menu {
+  background-color: #f4f6f7;
+  justify-content: space-between;
+  border-radius: 25% 25% 0 0;
+  padding: 0 5px 0 5px;
+  height: 25px; }
+
 body {
   margin: 0;
   padding: 0;
@@ -51,7 +73,6 @@ body {
   background: linear-gradient(to bottom right, #f6f7f8 30%, rgba(255, 0, 0, 0)), url("../images/login.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  width: 100vw;
   margin-bottom: -23px;
   height: 40%;
   padding-bottom: 20px; }
@@ -235,15 +256,20 @@ body {
   border-color: red; }
 
 .task__list {
-  list-style: none;
-  padding: 20px 40px; }
+  list-style: none; }
 
 .task__item {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin: 20px; }
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  list-style: none;
+  padding: 0; }
+
+.task__title {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  color: #282626;
+  font-weight: bold; }
 
 #quesito {
-  width: 900px !important;
+  width: 1000px !important;
   height: 450px !important; }

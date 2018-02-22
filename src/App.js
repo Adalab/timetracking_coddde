@@ -1,5 +1,6 @@
 import React from 'react';
 import firebase from 'firebase';
+import { Link, Route, Switch } from 'react-router-dom';
 import Header from './components/Header';
 import Projects from './components/Projects';
 import Databasetest from './components/Databasetest';
@@ -45,15 +46,15 @@ class App extends React.Component {
 				}
 			});
 
-		firebase.database().ref('projects').on('child_added', snapshot => {
-			const project = snapshot.val();
-			project.projectId = snapshot.key;
-			console.log(project);
-			this.setState ({
-				projects: this.state.projects.concat(project),//devuelve un array nuevo basado en el anterior con los nuevos datos
-			});
-		})
-});
+			firebase.database().ref('projects').on('child_added', snapshot => {
+				const project = snapshot.val();
+				project.projectId = snapshot.key;
+				if(typeof(this.state.user) !== 'undefined' && this.state.user !== null && snapshot.val().projectUser === this.state.user.uid)
+				this.setState ({
+					projects: this.state.projects.concat(project),//devuelve un array nuevo basado en el anterior con los nuevos datos
+				});
+			})
+		});
 		reactLocalStorage.set('var', true);
 		reactLocalStorage.get('var', true);
 		reactLocalStorage.setObject('var', {'test': 'test'});
@@ -72,12 +73,12 @@ class App extends React.Component {
 			.catch(error => console.log(`Error ${error.code}:${error.message}`));
 		this.setState({
 			user: null,
-				logged: false,
-				inputProject: '',
-				projects: [],
-				idProject: '',
-				tasks: [],
-				inputTask: '',
+			logged: false,
+			inputProject: '',
+			projects: [],
+			idProject: '',
+			tasks: [],
+			inputTask: '',
 		})
 	}
 
@@ -133,32 +134,34 @@ class App extends React.Component {
 						email={this.state.user.email}
 						url={this.state.user.photoURL}
 						handleLogout={this.handleLogout} />
-					{/* <Login
-						// renderLoginButton={this.renderLoginButton()}
-						handleAuthGoogle = {this.handleAuthGoogle}
-					/> */}
-					<CountTask
-						user={this.state.user}
-						inputTask={this.state.inputTask}
-						handleInputTask={this.handleInputTask}
-						tasks={this.state.tasks}
-						inputProject={this.state.inputProject}
-						handleInputProject={this.handleInputProject}
-						projects={this.state.projects}
-						handleCreatedProjects={this.handleCreatedProjects}
-						addProject={this.addProject}
-						setLastProyectId={this.setLastProyectId}
-						idProject={this.state.idProject}
-					/>
-					<Projects
-						user={this.state.user}
-						inputProject={this.state.inputProject} handleInputProject={this.handleInputProject}
-						projects={this.state.projects} />
-					<Databasetest />
-					<input className="calendar" type="date"></input>
-					<Graphic
-						selectProjects={this.state.projects}
-						filterTaskSelect={this.state.tasks}/>
+					<ul className="window">
+						<li className="list_menu"><Link className="nav_menu" to='/'>Home</Link>
+						</li>
+						<li className="list_menu"><Link className="nav_menu" to='/Graphics'>Informes</Link>
+						</li>
+					</ul>
+					<Switch>
+						<Route exact path='/' render={() =>
+							<CountTask
+								user={this.state.user}
+								inputTask={this.state.inputTask}
+								handleInputTask={this.handleInputTask}
+								tasks={this.state.tasks}
+								inputProject={this.state.inputProject}
+								handleInputProject={this.handleInputProject}
+								projects={this.state.projects}
+								handleCreatedProjects={this.handleCreatedProjects}
+								addProject={this.addProject}
+								setLastProyectId={this.setLastProyectId}
+								idProject={this.state.idProject}/> }
+						/>
+						<Route path='/Graphics' render={() =>
+							<Graphic
+								selectProjects={this.state.projects}
+								filterTaskSelect={this.state.tasks}
+							/> }
+						/>
+					</Switch>
 				</div>
 			);
 		}

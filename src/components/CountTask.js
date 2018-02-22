@@ -105,7 +105,6 @@ class CountTask extends React.Component {
 		this.setState({
 			lastStartTime: startHour
 		})
-		//Asignamos el id del último proyecto introducido
 	}
 
 	addTaskFirebase () {
@@ -115,7 +114,8 @@ class CountTask extends React.Component {
 			taskName: this.props.inputTask,
 			counter: this.state.count,
 			initTime: this.state.lastStartTime.getHours() + ':' + this.state.lastStartTime.getMinutes(),
-			projectId: this.props.idProject
+			projectId: this.props.idProject,
+			projectName: this.props.inputProject
 		};
 		//Recogemos la referencia al array de tareas de la base de datos
 		const dbRef =firebase.database().ref('tasks');
@@ -142,6 +142,7 @@ class CountTask extends React.Component {
 				{tasksToShow.map(
 					(task) => <ul className="task__item">
 						<li>{ task.taskName }</li>
+						<li>{ task.projectName} </li>
 						<li>{ task.initTime }</li>
 						<li>{ this.calculateFinalTime(task.initTime, task.counter) }</li>
 						<li>{ this.formatTime(task.counter) }</li>
@@ -153,7 +154,7 @@ class CountTask extends React.Component {
 	render () {
 
 		return (
-			<div>
+			<div className="component_container">
 				<div className="timer">
 					<div>
 						<div>
@@ -169,9 +170,11 @@ class CountTask extends React.Component {
 						<button className="timer__btn timer__btn--stop" type="button" name="reset_btn" id="reset_btn" onClick={this.stopTimer}>Stop</button>
 					</div>
 				</div>
+				<input className="calendar" type="date"></input>
 				<div className="task__container">
-					<div className="task__item">
+					<div className="task__title">
 						<span>¿En qué estoy trabajando?</span>
+						<span>Proyecto</span>
 						<span>Hora de inicio</span>
 						<span>Hora de fin</span>
 						<span>Tiempo invertido</span>
