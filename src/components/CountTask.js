@@ -5,6 +5,7 @@ class CountTask extends React.Component {
 	constructor (props) {
 		super(props);
 
+		this.selectProject = this.selectProject.bind(this);
 		this.formatTime = this.formatTime.bind(this);
 		this.calculateFinalTime = this.calculateFinalTime.bind(this);
 		this.formatTimeWithoutSeconds = this.formatTimeWithoutSeconds.bind(this);
@@ -19,6 +20,21 @@ class CountTask extends React.Component {
 			count: 0,
 			customNumber: 0,
 		}
+	}
+
+	selectProject(){
+		let arrayProject = this.props.projects;
+		console.log(arrayProject)
+
+		return(<select className="" onChange={this.props.handleCreatedProjects}>
+			<option>Selecciona un proyecto</option>
+			{
+				arrayProject.map(
+					project =>
+						<option value={project.projectId}>{project.projectName}</option>
+				)
+			}
+		</select>);
 	}
 
 	tick () {
@@ -89,7 +105,7 @@ class CountTask extends React.Component {
 		this.setState({
 			lastStartTime: startHour
 		})
-		this.props.setLastProyectId();
+		//Asignamos el id del último proyecto introducido
 	}
 
 	addTaskFirebase () {
@@ -141,6 +157,7 @@ class CountTask extends React.Component {
 				<div className="timer">
 					<div>
 						<div>
+							{this.selectProject()}
 							<input type="text" placeholder="introduce el projecto" onChange={this.props.handleInputProject}/>
 							<button type="button" onClick={this.props.addProject}>Añadir proyecto</button>
 						</div>
