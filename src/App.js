@@ -132,7 +132,7 @@ class App extends React.Component {
 				<Header displayName={this.state.user.displayName}
 				name={this.state.user.name}
 				url={this.state.user.photoURL}
-				onClick={this.handleLogout} />
+				handleLogout={this.handleLogout} />
 				{/* <Login
 					// renderLoginButton={this.renderLoginButton()}
 					handleAuthGoogle = {this.handleAuthGoogle}

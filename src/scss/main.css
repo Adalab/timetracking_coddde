@@ -67,6 +67,8 @@ body {
     font-size: 20px; }
   .form-title h1, .form-title p {
     margin: 10px; }
+  .form-title .ui-dialog {
+    background-color: red !important; }
   @media all and (min-width: 500px) {
     .form-title {
       font-size: 25px; } }

@@ -1,5 +1,6 @@
 import React from 'react';
 import firebase from 'firebase';
+import {Dialog} from 'primereact/components/dialog/Dialog';
 
 class Login extends React.Component {
 	constructor (props) {
@@ -9,10 +10,13 @@ class Login extends React.Component {
 		this.handleAuthGoogle = this.handleAuthGoogle.bind(this);
 		this.handleNewUser = this.handleNewUser.bind(this);
 		this.recoverPass = this.recoverPass.bind(this);
+		this.onClick = this.onClick.bind(this);
+		this.onHide = this.onHide.bind(this);
 
 		this.state = {
 			email: '',
-			password: ''
+			password: '',
+			visible: false
 		}
 	}
 	handleNewUser(){
@@ -26,6 +30,7 @@ class Login extends React.Component {
 		console.log(errorMessage);
 	  // ...
 	});
+		this.setState ({ visible: false});
 	}
 
 	recoverPass(){
@@ -63,6 +68,14 @@ class Login extends React.Component {
 			.catch(error => console.log(`Error ${error.code}:${error.message}`));
 		}
 
+	onClick(event) {
+	    this.setState({visible: true});
+	}
+
+	onHide(event) {
+	    this.setState({visible: false});
+	}
+
 	render() {
 		return (
 			<div className="login-container">
@@ -81,8 +94,14 @@ class Login extends React.Component {
 						<button className="login__button" type="button" onClick={this.handleAuthEmail}>Log in</button>
 						<button className="login__button" type="button" onClick={this.handleAuthGoogle}>Log in with Google
 						</button>
-						<button className="login__button" type="button" onClick={this.handleNewUser}>New User
-						</button>
+						<Dialog header="" className="newUser-window" visible={this.state.visible} width="350px" modal={true} onHide={this.onHide}>
+							<input name="onLoginSuccess" value={this.state.email} className="login__input" type="text" placeholder="E-mail" ref="email" onChange={e => this.handleInputChange('email', e.target.value)}/>
+							<input value={this.state.password} className="login__input" type="password"  placeholder="Password" ref="password" onChange={e => this.handleInputChange('password', e.target.value)}/>
+							<button className="login__button" type="button" onClick={this.handleNewUser}>Create new user</button>
+						</Dialog>
+
+						<button label="Show" className="login__button" type="button" icon="fa-external-link-square" onClick={this.onClick}>New user</button>
+
 						<button className="login__button" type="button" onClick={this.recoverPass}>Forgot Password
 						</button>
 						{/* { this.props.renderLoginButton } */}

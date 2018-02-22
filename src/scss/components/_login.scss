@@ -13,6 +13,9 @@
 	h1, p{
 		margin: 10px;
 	}
+	.ui-dialog {
+		background-color: red !important;
+	}
 @media all and(min-width: 500px){
 		font-size: 25px;
 	}
