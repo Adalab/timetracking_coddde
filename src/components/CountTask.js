@@ -99,7 +99,8 @@ class CountTask extends React.Component {
 			taskName: this.props.inputTask,
 			counter: this.state.count,
 			initTime: this.state.lastStartTime.getHours() + ':' + this.state.lastStartTime.getMinutes(),
-			projectId: this.props.idProject
+			projectId: this.props.idProject,
+			projectName: this.props.inputProject
 		};
 		//Recogemos la referencia al array de tareas de la base de datos
 		const dbRef =firebase.database().ref('tasks');
@@ -126,6 +127,7 @@ class CountTask extends React.Component {
 				{tasksToShow.map(
 					(task) => <ul className="task__item">
 						<li>{ task.taskName }</li>
+						<li>{ task.projectName} </li>
 						<li>{ task.initTime }</li>
 						<li>{ this.calculateFinalTime(task.initTime, task.counter) }</li>
 						<li>{ this.formatTime(task.counter) }</li>
@@ -155,6 +157,7 @@ class CountTask extends React.Component {
 				<div className="task__container">
 					<div className="task__item">
 						<span>¿En qué estoy trabajando?</span>
+						<span>Proyecto</span>
 						<span>Hora de inicio</span>
 						<span>Hora de fin</span>
 						<span>Tiempo invertido</span>

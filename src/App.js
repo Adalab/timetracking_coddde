@@ -48,7 +48,7 @@ class App extends React.Component {
 		firebase.database().ref('projects').on('child_added', snapshot => {
 			const project = snapshot.val();
 			project.projectId = snapshot.key;
-			console.log(project);
+			if(typeof(this.state.user) !== 'undefined' && this.state.user !== null && snapshot.val().projectUser === this.state.user.uid)
 			this.setState ({
 				projects: this.state.projects.concat(project),//devuelve un array nuevo basado en el anterior con los nuevos datos
 			});
