@@ -48,7 +48,7 @@ class App extends React.Component {
 		firebase.database().ref('projects').on('child_added', snapshot => {
 			const project = snapshot.val();
 			project.projectId = snapshot.key;
-			console.log(project);
+			if(typeof(this.state.user) !== 'undefined' && this.state.user !== null && snapshot.val().projectUser === this.state.user.uid)
 			this.setState ({
 				projects: this.state.projects.concat(project),//devuelve un array nuevo basado en el anterior con los nuevos datos
 			});
@@ -109,15 +109,6 @@ class App extends React.Component {
 		}
 		const dbRefProject = firebase.database().ref('projects');
 		dbRefProject.push(objectProject);
-
-			//Para recuperar el ultimo key
-			// const idProject = childSnapshot.key;
-			// console.log(`Éste sería el key que acabas de introducir ${idProject}`);
-			// //Para recuperar el último nodo
-			// 	const snap = childSnapshot.val();
-			// 	//Recupero el valor de la clave projectName del ultimo nodo introducido
-			// 	console.log(`Objeto snap ${snap.projectName}`);
-			// // Lo meto en el estado para poder usarlo luego
 	}
 
 	setLastProyectId(){

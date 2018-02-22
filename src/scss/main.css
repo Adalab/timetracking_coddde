@@ -51,7 +51,6 @@ body {
   background: linear-gradient(to bottom right, #f6f7f8 30%, rgba(255, 0, 0, 0)), url("../images/login.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  width: 100vw;
   margin-bottom: -23px;
   height: 40%;
   padding-bottom: 20px; }
@@ -235,14 +234,19 @@ body {
   border-color: red; }
 
 .task__list {
-  list-style: none;
-  padding: 20px 40px; }
+  list-style: none; }
 
 .task__item {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin: 20px; }
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  list-style: none;
+  padding: 0; }
+
+.task__title {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  color: #282626;
+  font-weight: bold; }
 
 #quesito {
   width: 900px !important;
