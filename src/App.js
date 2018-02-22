@@ -154,7 +154,9 @@ class App extends React.Component {
 					{/* <input type="date"></input> */}
 					<Databasetest />
 					<input className="calendar" type="date"></input>
-					<Graphic />
+					<Graphic
+						selectProjects={this.state.projects}
+						filterTaskSelect={this.state.tasks}/>
 					<ChartBar
 						selectProjects={this.state.projects}
 					 	filterTaskSelect={this.state.tasks}/>

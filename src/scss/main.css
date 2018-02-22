@@ -245,9 +245,6 @@ body {
   margin: 20px; }
 
 #barras {
-  width: 300px !important;
-  height: 100px !important; }
-
-#quesito {
-  width: 300px !important;
-  height: 250px !important; }
+  width: 800px !important;
+  height: 250px !important;
+  margin-left: 350px !important; }

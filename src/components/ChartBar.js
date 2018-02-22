@@ -17,10 +17,10 @@ class ChartBar extends React.Component {
 		filterTask.projectId.includes(projectsFiltered));
 		console.log(filteredTasks);
 
-		let TaskFor = '';
-		for (let i = 0; i < filteredTasks.length; i++) {
-			TaskFor = filteredTasks[i];
-		}
+		// let TaskFor = '';
+		// for (let i = 0; i < filteredTasks.length; i++) {
+		// 	TaskFor = filteredTasks[i];
+		// }
 		let namestasles = filteredTasks.map(element => element.taskName);
 		let counters = filteredTasks.map(element => element.counter);
 
@@ -85,7 +85,7 @@ class ChartBar extends React.Component {
 							{ this.selectProject() }
 
 							<div className="content-section implementation">
-                  <Chart  id="barras" type="bar" data={this.state.taskData} className="chartBar"/>
+                  <Chart id="barras" type="bar" data={this.state.taskData} className="chartBar"/>
               </div>
           </div>
 				)
