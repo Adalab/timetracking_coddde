@@ -1,6 +1,7 @@
 import React from 'react';
 import firebase from 'firebase';
 
+
 class CountTask extends React.Component {
 	constructor (props) {
 		super(props);
@@ -19,6 +20,7 @@ class CountTask extends React.Component {
 			count: 0,
 			customNumber: 0,
 			stopClick: false,
+
 		}
 	}
 
@@ -87,6 +89,7 @@ class CountTask extends React.Component {
 	startTimer () {
 		let startHour = new Date()
 
+
 		// Ponemos en marcha el contador
 		clearInterval(this.timer)
 		this.timer = setInterval(this.tick.bind(this), 1000)
@@ -104,7 +107,7 @@ class CountTask extends React.Component {
 			createdBy: this.props.user.uid,
 			taskName: this.props.inputTask,
 			counter: this.state.count,
-
+			date: this.state.lastStartTime.toDateString(),
 			initTime: this.state.lastStartTime.getHours() + ':' + this.state.lastStartTime.getMinutes(),
 			projectId: this.props.idProject
 		};
@@ -112,7 +115,6 @@ class CountTask extends React.Component {
 		const dbRef =firebase.database().ref('tasks');
 		//Insertamos la nueva tarea
 		dbRef.push(objectTask);
-
 		//Si quisiéramos que la tarea dependiera del usuario:
 		// const dbRef =firebase.database().ref(this.props.user.uid);
 		// //Insertamos la nueva tarea
@@ -152,8 +154,11 @@ class CountTask extends React.Component {
 
 		return (
 			<div>
+				<progress max="100" value="60" class="shadow"></progress>
 				<div className="timer">
 					<div>
+						<div>
+						</div>
 						<div>
 							<input type="text" placeholder="introduce el projecto" onChange={this.props.handleInputProject}/>
 							<button type="button" onClick={this.props.addProject}>Añadir proyecto</button>
