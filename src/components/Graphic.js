@@ -16,28 +16,29 @@ class Graphic extends React.Component {
 	}
 	handleFilteredProject (event) {
 		let projectsFiltered = event.currentTarget.value;
+
 		let filteredTasks = this.props.filterTaskSelect.filter(filterTask =>
 		filterTask.projectId.includes(projectsFiltered));
 		console.log(filteredTasks);
-
 		// let TaskFor = '';
 		// for (let i = 0; i < filteredTasks.length; i++) {
 		// 	TaskFor = filteredTasks[i];
 		// }
 		let namestasles = filteredTasks.map(element => element.taskName);
 		let counters = filteredTasks.map(element => element.counter);
+		let colours =["#FAD74F","#F2B230","#F39D32","#F98F5F","#FD7A5C",
+"#F9CD23","#F0A202","#F18805","#F9814B","#FC6745","#F9C80E","#C58502","#F87337",
+"#FC4117","#CCA40C","#AF7602","#C67005","#E25D21","#FC2F00","#B6920B","#996802","#9A5704","#B54B1B","#E62B00","#886E08","#6E4A01","#583202","#583202","#B82300"];
+
+
 
 		let data = {
 				labels: namestasles,
 				datasets: [
 						{
 								data: counters,
-								backgroundColor: [
-									"LightSkyBlue","Yellow","Green","HotPink","AliceBlue","AntiqueWhite","Aqua","Aquamarine","YellowGreen","Azure","Beige","Bisque","Black","BlanchedAlmond","Blue","BlueViolet","Brown","BurlyWood","CadetBlue","Chartreuse","Chocolate","Coral","CornflowerBlue","Cornsilk","Crimson","Cyan","DarkBlue","DarkCyan","DarkGoldenRod","DarkGray","DarkGrey","DarkGreen","DarkKhaki","DarkMagenta","DarkOliveGreen","Darkorange","DarkOrchid","DarkRed","DarkSalmon","DarkSeaGreen","DarkSlateBlue","DarkSlateGray","DarkSlateGrey","DarkTurquoise","DarkViolet","DeepPink","DeepSkyBlue","DimGray","DimGrey","DodgerBlue","FireBrick","FloralWhite","ForestGreen","Fuchsia","Gainsboro","GhostWhite","Gold","GoldenRod","Gray","Grey","GreenYellow","HoneyDew","IndianRed","Indigo","Ivory","Khaki","LavenderBlush","LawnGreen","LemonChiffon","LightBlue","LightCoral","LightCyan","LightGoldenRodYellow","LightGray","LightGrey","LightGreen","LightPink","LightSalmon","LightSeaGreen","LightSlateGray","LightSlateGrey","LightSteelBlue","LightYellow","Lime","LimeGreen","Linen","Magenta","Maroon","MediumAquaMarine","MediumBlue","MediumOrchid","MediumPurple","MediumSeaGreen","MediumSlateBlue","MediumSpringGreen","MediumTurquoise","MediumVioletRed","MidnightBlue","MintCream","MistyRose","Moccasin","NavajoWhite","Navy","OldLace","Olive","OliveDrab","Orange","OrangeRed","Orchid","PaleGoldenRod","PaleGreen","PaleTurquoise","PaleVioletRed","PapayaWhip","PeachPuff","Peru","Pink","Plum","PowderBlue","Purple","Red","RosyBrown","RoyalBlue","SaddleBrown","Salmon","SandyBrown","SeaGreen","Sienna","Silver","SkyBlue","SlateBlue","SlateGray","SlateGrey","Snow","SpringGreen","SteelBlue","Tan","Teal","Thistle","Tomato","Turquoise","Violet","Wheat","White","WhiteSmoke"
-								],
-								hoverBackgroundColor: [
-										"LightSkyBlue","Yellow","Green","HotPink","AliceBlue","AntiqueWhite","Aqua","Aquamarine","YellowGreen","Azure","Beige","Bisque","Black","BlanchedAlmond","Blue","BlueViolet","Brown","BurlyWood","CadetBlue","Chartreuse","Chocolate","Coral","CornflowerBlue","Cornsilk","Crimson","Cyan","DarkBlue","DarkCyan","DarkGoldenRod","DarkGray","DarkGrey","DarkGreen","DarkKhaki","DarkMagenta","DarkOliveGreen","Darkorange","DarkOrchid","DarkRed","DarkSalmon","DarkSeaGreen","DarkSlateBlue","DarkSlateGray","DarkSlateGrey","DarkTurquoise","DarkViolet","DeepPink","DeepSkyBlue","DimGray","DimGrey","DodgerBlue","FireBrick","FloralWhite","ForestGreen","Fuchsia","Gainsboro","GhostWhite","Gold","GoldenRod","Gray","Grey","GreenYellow","HoneyDew","IndianRed","Indigo","Ivory","Khaki","LavenderBlush","LawnGreen","LemonChiffon","LightBlue","LightCoral","LightCyan","LightGoldenRodYellow","LightGray","LightGrey","LightGreen","LightPink","LightSalmon","LightSeaGreen","LightSlateGray","LightSlateGrey","LightSteelBlue","LightYellow","Lime","LimeGreen","Linen","Magenta","Maroon","MediumAquaMarine","MediumBlue","MediumOrchid","MediumPurple","MediumSeaGreen","MediumSlateBlue","MediumSpringGreen","MediumTurquoise","MediumVioletRed","MidnightBlue","MintCream","MistyRose","Moccasin","NavajoWhite","Navy","OldLace","Olive","OliveDrab","Orange","OrangeRed","Orchid","PaleGoldenRod","PaleGreen","PaleTurquoise","PaleVioletRed","PapayaWhip","PeachPuff","Peru","Pink","Plum","PowderBlue","Purple","Red","RosyBrown","RoyalBlue","SaddleBrown","Salmon","SandyBrown","SeaGreen","Sienna","Silver","SkyBlue","SlateBlue","SlateGray","SlateGrey","Snow","SpringGreen","SteelBlue","Tan","Teal","Thistle","Tomato","Turquoise","Violet","Wheat","White","WhiteSmoke"
-								]
+								backgroundColor: colours,
+								hoverBackgroundColor: colours
 						}]
 				};
 
