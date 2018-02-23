@@ -26,7 +26,7 @@ class CountTask extends React.Component {
 		let arrayProject = this.props.projects;
 		console.log(arrayProject)
 
-		return(<select className="" onChange={this.props.handleCreatedProjects}>
+		return(<select className="addproject__btn" onChange={this.props.handleCreatedProjects}>
 			<option>Selecciona un proyecto</option>
 			{
 				arrayProject.map(
@@ -97,7 +97,6 @@ class CountTask extends React.Component {
 
 	startTimer () {
 		let startHour = new Date()
-
 		// Ponemos en marcha el contador
 		clearInterval(this.timer)
 		this.timer = setInterval(this.tick.bind(this), 1000)
@@ -124,15 +123,14 @@ class CountTask extends React.Component {
 	}
 
 	stopTimer () {
-
 		clearInterval(this.timer)
+
 		this.addTaskFirebase();
 
 		//reseteamos el contador
 		this.setState({
 			count: 0,
 		});
-
 	}
 
 	paintTasks() {
@@ -156,21 +154,17 @@ class CountTask extends React.Component {
 		return (
 			<div className="component_container">
 				<div className="timer">
-					<div>
-						<div>
-							{this.selectProject()}
-							<input type="text" placeholder="introduce el projecto" onChange={this.props.handleInputProject}/>
-							<button type="button" onClick={this.props.addProject}>Añadir proyecto</button>
-						</div>
-					</div>
+					<input className="calendar" type="date"></input>
+					{this.selectProject()}
+					<input type="text" className="task__input" placeholder="introduce el projecto" onChange={this.props.handleInputProject}/>
+					<button className="addproject__btn" type="button" onClick={this.props.addProject}>Añadir proyecto</button>
 					<input type="text" className="task__input" placeholder="Define brevemente tu tarea" onChange={this.props.handleInputTask}/>
-					<counter className="timer__counter" >{this.display()}</counter>
 					<div className="timer__buttons">
-						<button className="timer__btn timer__btn--play" type="button" name="start_btn" id="start_btn" onClick={this.startTimer}>Start</button>
-						<button className="timer__btn timer__btn--stop" type="button" name="reset_btn" id="reset_btn" onClick={this.stopTimer}>Stop</button>
+						<counter className="timer__counter" >{this.display()}</counter>
+						<button className="timer__btn timer__btn--play" type="button" name="start_btn" id="start_btn" onClick={this.startTimer}>▶</button>
+						<button className="timer__btn timer__btn--stop" type="button" name="reset_btn" id="reset_btn" onClick={this.stopTimer}>■</button>
 					</div>
 				</div>
-				<input className="calendar" type="date"></input>
 				<div className="task__container">
 					<div className="task__title">
 						<span>¿En qué estoy trabajando?</span>
