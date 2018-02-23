@@ -1,10 +1,16 @@
 .task__list{
 	list-style: none;
-  padding: 20px 40px;
 }
+
 .task__item{
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	margin: 20px;
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	list-style: none;
+	padding: 0;
+}
+.task__title{
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	color: #282626;
+	font-weight: bold;
 }

@@ -7,11 +7,10 @@ class Header extends React.Component {
 		return (
 
 			<div className="header">
-				<img className="logo" alt="logo" src=""/>
-				<div className="app_title">
-					<span className="app_name"></span>
-					<button className="reports_button"></button>
-				</div>
+
+				<img className="logo" alt="" src=""/>
+				<h1 className="header_title">FireTimer</h1>
+
 				<div className="login">
 
 					<div className="info--user">

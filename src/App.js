@@ -1,12 +1,12 @@
 import React from 'react';
 import firebase from 'firebase';
+import { Link, Route, Switch } from 'react-router-dom';
 import Header from './components/Header';
 import Projects from './components/Projects';
 import Databasetest from './components/Databasetest';
 import CountTask from './components/CountTask';
 import Login from './pages/Login';
 import Graphic from './components/Graphic';
-import ChartBar from './components/ChartBar';
 import {reactLocalStorage} from 'reactjs-localstorage';
 
 import 'primereact/resources/primereact.min.css';
@@ -18,6 +18,7 @@ class App extends React.Component {
 
 		this.handleLogout = this.handleLogout.bind(this);
 		this.handleInputProject = this.handleInputProject.bind(this);
+		this.handleCreatedProjects = this.handleCreatedProjects.bind(this);
 		this.addProject = this.addProject.bind(this);
 		this.setLastProyectId = this.setLastProyectId.bind(this);
 		this.handleInputTask = this.handleInputTask.bind(this);
@@ -28,7 +29,6 @@ class App extends React.Component {
 			inputProject: '',
 			projects: [],
 			idProject: '',
-			idProjects: [],
 			tasks: [],
 			inputTask: '',
 		}
@@ -49,24 +49,15 @@ class App extends React.Component {
 				}
 			});
 
-		firebase.database().ref('projects').on('child_added', snapshot => {
-			const project = snapshot.val();
-			project.projectId = snapshot.key;
-			console.log(project);
-			this.setState ({
-				projects: this.state.projects.concat(project),//devuelve un array nuevo basado en el anterior con los nuevos datos
-			});
-		})
-
-
-
-		//Almaceno en el array idProjects todos los id de los proyectos
-		firebase.database().ref('projects').limitToLast(1).on('child_added', 	childSnapshot=> {
-			this.setState({
-				idProject: childSnapshot.key
+			firebase.database().ref('projects').on('child_added', snapshot => {
+				const project = snapshot.val();
+				project.projectId = snapshot.key;
+				if(typeof(this.state.user) !== 'undefined' && this.state.user !== null && snapshot.val().projectUser === this.state.user.uid)
+				this.setState ({
+					projects: this.state.projects.concat(project),//devuelve un array nuevo basado en el anterior con los nuevos datos
+				});
 			})
-		}).bind(this);
-});
+		});
 		reactLocalStorage.set('var', true);
 		reactLocalStorage.get('var', true);
 		reactLocalStorage.setObject('var', {'test': 'test'});
@@ -83,19 +74,37 @@ class App extends React.Component {
 		firebase.auth().signOut()
 			.then(result => console.log(`${result.user.email} ha salido`))
 			.catch(error => console.log(`Error ${error.code}:${error.message}`));
+		this.setState({
+			user: null,
+			logged: false,
+			inputProject: '',
+			projects: [],
+			idProject: '',
+			tasks: [],
+			inputTask: '',
+		})
 	}
 
-	//recogemos el valor del input de proyectos
+	//Recogemos el valor del input de proyectos
 	handleInputProject (event) {
 		this.setState ({
 			inputProject: event.target.value
 		})
 	}
-	//recogemos el valor del input de tareas
+	//Recogemos el valor del input de tareas
 	handleInputTask(e) {
 		this.setState({
 			inputTask: e.target.value
 		});
+	}
+
+	//Recogemos el valor del proyecto seleccionado en CountTask
+	handleCreatedProjects (event) {
+		let projectFiltered = event.currentTarget.value;
+
+		this.setState({
+			idProject: projectFiltered
+		})
 	}
 
 	addProject(){
@@ -106,19 +115,13 @@ class App extends React.Component {
 		const dbRefProject = firebase.database().ref('projects');
 		dbRefProject.push(objectProject);
 
-			//Para recuperar el ultimo key
-			// const idProject = childSnapshot.key;
-			// console.log(`Éste sería el key que acabas de introducir ${idProject}`);
-			// //Para recuperar el último nodo
-			// 	const snap = childSnapshot.val();
-			// 	//Recupero el valor de la clave projectName del ultimo nodo introducido
-			// 	console.log(`Objeto snap ${snap.projectName}`);
-			// // Lo meto en el estado para poder usarlo luego
+		//Al añadir el proyecto vamos a llamar a la función que nos va a devolver el id de proyecto que insertaremos posteriormente en la tarea.
+		this.setLastProyectId()
 	}
 
 	setLastProyectId(){
 		//Nos trae el valor de la clave de la última instancia introducida en projects
-		firebase.database().ref('projects').limitToLast(100000).on('child_added', 	childSnapshot=> {
+		firebase.database().ref('projects').limitToLast(1).on('child_added', 	childSnapshot=> {
 			//Introducimos en el estado el id del último proyecto añadido
 			this.setState({
 				idProject: childSnapshot.key
@@ -126,50 +129,49 @@ class App extends React.Component {
 		}).bind(this);
 	}
 
-
 	render() {
 		if(this.state.user) {
 			return (
+				<div className="App">
+					<Header displayName={this.state.user.displayName}
+						email={this.state.user.email}
+						url={this.state.user.photoURL}
+						handleLogout={this.handleLogout} />
+					<ul className="window">
+						<li className="list_menu"><Link className="nav_menu" to='/'>Home</Link>
+						</li>
+						<li className="list_menu"><Link className="nav_menu" to='/Graphics'>Informes</Link>
+						</li>
+					</ul>
+					<Switch>
+						<Route exact path='/' render={() =>
+							<CountTask
+								user={this.state.user}
+								inputTask={this.state.inputTask}
+								handleInputTask={this.handleInputTask}
+								tasks={this.state.tasks}
+								inputProject={this.state.inputProject}
+								handleInputProject={this.handleInputProject}
+								projects={this.state.projects}
+								handleCreatedProjects={this.handleCreatedProjects}
+								addProject={this.addProject}
+								setLastProyectId={this.setLastProyectId}
+								idProject={this.state.idProject}/> }
+						/>
+						<Route path='/Graphics' render={() =>
+							<Graphic
+								selectProjects={this.state.projects}
+								filterTaskSelect={this.state.tasks}
+							/> }
+						/>
+					</Switch>
 
-      <div className="App">
-				<Header displayName={this.state.user.displayName}
-				name={this.state.user.name}
-				url={this.state.user.photoURL}
-				handleLogout={this.handleLogout} />
-				{/* <Login
-					// renderLoginButton={this.renderLoginButton()}
-					handleAuthGoogle = {this.handleAuthGoogle}
-				/> */}
-					<CountTask
-						user={this.state.user}
-						inputTask={this.state.inputTask}
-						handleInputTask={this.handleInputTask}
-						tasks={this.state.tasks}
-						handleInputProject={this.handleInputProject}
-						addProject={this.addProject}
-						setLastProyectId={this.setLastProyectId}
-						inputProject={this.state.inputProject}
-						idProject={this.state.idProject}
-					/>
-					<Projects
-						user={this.state.user}
-						inputProject={this.state.inputProject} handleInputProject={this.handleInputProject}
-						projects={this.state.projects} />
-					{/* <input type="date"></input> */}
-					<Databasetest />
-					<input className="calendar" type="date"></input>
-					<Graphic />
-					<ChartBar
-						tasks={this.state.tasks}
-						selectProjects={this.state.projects} />
 				</div>
 
 			);
 		}
-		return (<Login
-			onLoginSuccess = {this.setUser}
-			handleAuthGoogle = {this.handleAuthGoogle}
-			/>
+		return (<Login onLoginSuccess = {this.setUser}/>
+
 		);
 	}
 }

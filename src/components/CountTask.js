@@ -104,6 +104,7 @@ class CountTask extends React.Component {
 			createdBy: this.props.user.uid,
 			taskName: this.props.inputTask,
 			counter: this.state.count,
+
 			initTime: this.state.lastStartTime.getHours() + ':' + this.state.lastStartTime.getMinutes(),
 			projectId: this.props.idProject
 		};
