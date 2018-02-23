@@ -26,10 +26,9 @@ class Graphic extends React.Component {
 		// }
 		let namestasles = filteredTasks.map(element => element.taskName);
 		let counters = filteredTasks.map(element => element.counter);
-		let colours =["#FAD74F","#F2B230","#F39D32","#F98F5F","#FD7A5C",
-"#F9CD23","#F0A202","#F18805","#F9814B","#FC6745","#F9C80E","#C58502","#F87337",
-"#FC4117","#CCA40C","#AF7602","#C67005","#E25D21","#FC2F00","#B6920B","#996802","#9A5704","#B54B1B","#E62B00","#886E08","#6E4A01","#583202","#583202","#B82300"];
+		let colours =["#b0c4de","#dda0dd","#2e8b57","#808000","#afeeee","#583202",
 
+"#f0e68c","#f08080","#ffff00","#0000ff","#3cb371","#4169e1","#800080","#ff8c00","#00ff7f","#ffd700","#008080","#4b0082","#c71585","#7b68ee","#db7093","#40e0d0","#d2b48c","#2e8b57","#ff0000","#ffc0cb","#00ffff","#0000cd","#800000"];
 
 
 		let data = {

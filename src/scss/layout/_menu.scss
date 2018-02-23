@@ -13,12 +13,14 @@
 	color: #F5BF2E;
 	font-weight: bold;
 	text-decoration: none;
+	vertical-align: -webkit-baseline-middle; ;
 
 }
 .list_menu {
 	background-color: #f4f6f7;
 	justify-content: space-between;
-	border-radius: 25% 25% 0 0;
+	border-radius:23% 23% 0 0;
 	padding: 0 5px 0 5px;
-	height: 25px;
+	height: 23px;
+	border-left: 3px solid black;
 }

@@ -54,14 +54,16 @@
   align-items: baseline;
   color: #F5BF2E;
   font-weight: bold;
-  text-decoration: none; }
+  text-decoration: none;
+  vertical-align: -webkit-baseline-middle; }
 
 .list_menu {
   background-color: #f4f6f7;
   justify-content: space-between;
-  border-radius: 25% 25% 0 0;
+  border-radius: 23% 23% 0 0;
   padding: 0 5px 0 5px;
-  height: 25px; }
+  height: 23px;
+  border-left: 3px solid black; }
 
 body {
   margin: 0;
@@ -75,7 +77,8 @@ body {
   background-size: cover;
   margin-bottom: -23px;
   height: 40%;
-  padding-bottom: 20px; }
+  padding-bottom: 20px;
+  height: 100vh; }
 
 .App-header {
   background-color: #222;
@@ -269,6 +272,11 @@ body {
   grid-template-columns: repeat(5, 1fr);
   color: #282626;
   font-weight: bold; }
+
+#barras {
+  width: 800px !important;
+  height: 200px !important;
+  margin-left: 230px !important; }
 
 #quesito {
   width: 1000px !important;
