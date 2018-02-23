@@ -19,6 +19,7 @@ class App extends React.Component {
 		this.addProject = this.addProject.bind(this);
 		this.setLastProyectId = this.setLastProyectId.bind(this);
 		this.handleInputTask = this.handleInputTask.bind(this);
+		this.resetInputs = this.resetInputs.bind(this);
 
 		this.state = {
 			user: null,
@@ -98,13 +99,17 @@ class App extends React.Component {
 
 	//Recogemos el valor del proyecto seleccionado en CountTask
 	handleCreatedProjects (event) {
+		//Recogemos el value, que es el id
 		const projectFiltered = event.currentTarget.value;
+
+		//Recogemos el texto, que es el nombre
 		const projectNameSelected = event.currentTarget.options[event.currentTarget.selectedIndex].text;
 
 		console.log(projectNameSelected);
 
 		this.setState({
-			idProject: projectFiltered
+			idProject: projectFiltered,
+			inputProject: projectNameSelected
 		})
 	}
 
@@ -128,6 +133,16 @@ class App extends React.Component {
 				idProject: childSnapshot.key
 			})
 		}).bind(this);
+	}
+
+	resetInputs () {
+		this.setState({
+			inputProject: ''
+		})
+
+		this.setState({
+			inputTask: ''
+		})
 	}
 
 	render() {
@@ -157,7 +172,9 @@ class App extends React.Component {
 								handleCreatedProjects={this.handleCreatedProjects}
 								addProject={this.addProject}
 								setLastProyectId={this.setLastProyectId}
-								idProject={this.state.idProject}/> }
+								idProject={this.state.idProject}
+								resetInputs={this.resetInputs}
+							/> }
 						/>
 						<Route path='/Graphics' render={() =>
 							<Graphic

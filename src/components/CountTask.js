@@ -24,10 +24,9 @@ class CountTask extends React.Component {
 
 	selectProject(){
 		let arrayProject = this.props.projects;
-		console.log(arrayProject)
 
 		return(<select className="" onChange={this.props.handleCreatedProjects}>
-			<option>Selecciona un proyecto</option>
+			<option>Select your project</option>
 			{
 				arrayProject.map(
 					project =>
@@ -121,6 +120,7 @@ class CountTask extends React.Component {
 		const dbRef =firebase.database().ref('tasks');
 		//Insertamos la nueva tarea
 		dbRef.push(objectTask);
+
 	}
 
 	stopTimer () {
@@ -133,6 +133,8 @@ class CountTask extends React.Component {
 			count: 0,
 		});
 
+		//Reseteamos todos los campos de los inputs
+		this.props.resetInputs();
 	}
 
 	paintTasks() {
@@ -159,11 +161,11 @@ class CountTask extends React.Component {
 					<div>
 						<div>
 							{this.selectProject()}
-							<input type="text" placeholder="introduce el projecto" onChange={this.props.handleInputProject}/>
-							<button type="button" onClick={this.props.addProject}>Añadir proyecto</button>
+							<input type="text" value={this.props.inputProject} placeholder="Name of new project" onChange={this.props.handleInputProject}/>
+							<button type="button" onClick={this.props.addProject}>Add new project</button>
 						</div>
 					</div>
-					<input type="text" className="task__input" placeholder="Define brevemente tu tarea" onChange={this.props.handleInputTask}/>
+					<input type="text" className="task__input" value={this.props.inputTask} placeholder="Title of your task" onChange={this.props.handleInputTask}/>
 					<counter className="timer__counter" >{this.display()}</counter>
 					<div className="timer__buttons">
 						<button className="timer__btn timer__btn--play" type="button" name="start_btn" id="start_btn" onClick={this.startTimer}>Start</button>
