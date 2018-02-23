@@ -49,6 +49,7 @@ class App extends React.Component {
 			firebase.database().ref('projects').on('child_added', snapshot => {
 				const project = snapshot.val();
 				project.projectId = snapshot.key;
+				// project.projectName = snapshot.projectName;
 				if(typeof(this.state.user) !== 'undefined' && this.state.user !== null && snapshot.val().projectUser === this.state.user.uid)
 				this.setState ({
 					projects: this.state.projects.concat(project),//devuelve un array nuevo basado en el anterior con los nuevos datos
@@ -97,7 +98,10 @@ class App extends React.Component {
 
 	//Recogemos el valor del proyecto seleccionado en CountTask
 	handleCreatedProjects (event) {
-		let projectFiltered = event.currentTarget.value;
+		const projectFiltered = event.currentTarget.value;
+		const projectNameSelected = event.currentTarget.options[event.currentTarget.selectedIndex].text;
+
+		console.log(projectNameSelected);
 
 		this.setState({
 			idProject: projectFiltered
@@ -112,7 +116,7 @@ class App extends React.Component {
 		const dbRefProject = firebase.database().ref('projects');
 		dbRefProject.push(objectProject);
 
-		//Al añadir el proyecto vamos a llamar a la función que nos va a devolver el id de proyecto que insertaremos posteriormente en la tarea.
+		//Al añadir el proyecto vamos a llamar a la función que nos va a devolver el id de proyecto, el cual insertaremos posteriormente en la tarea.
 		this.setLastProyectId()
 	}
 

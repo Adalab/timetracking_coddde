@@ -18,7 +18,7 @@ class Graphic extends React.Component {
 		let projectsFiltered = event.currentTarget.value;
 		let filteredTasks = this.props.filterTaskSelect.filter(filterTask =>
 		filterTask.projectId.includes(projectsFiltered));
-		console.log(filteredTasks);
+		// console.log(filteredTasks);
 
 		// let TaskFor = '';
 		// for (let i = 0; i < filteredTasks.length; i++) {
