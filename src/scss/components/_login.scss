@@ -99,36 +99,3 @@
 		padding-right: 20px;
 	}
 }
-.login__buttons {
-	display: flex;
-	justify-content: space-between;
-	flex-direction: column;
-	margin: auto;
-}
-.login__button {
-	justify-content: space-between;
-	margin: 5px;
-	height: 35px;
-	width: 150px;
-	border-radius: 5px;
-	border: 0;
-	background-color: #F5BF2E;
-	color: black;
-	opacity: 0.8;
-	font-weight: bold;
-	cursor: pointer;
-	background: -webkit-linear-gradient(white, #F5BF2E 60%);
-	&:hover{
-		opacity: 1;
-	}
-	@media all and(min-width: 810px){
-		width: 200px;
-		height: 35px;
-	}
-}
-.new__user{
-	background-image: url('../images/newUserBlack32.png'), -webkit-linear-gradient(white, #F5BF2E 80%);
-	background-repeat: no-repeat;
-	background-position: right;
-	color: black;
-}
