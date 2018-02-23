@@ -7,6 +7,7 @@ import Databasetest from './components/Databasetest';
 import CountTask from './components/CountTask';
 import Login from './pages/Login';
 import Graphic from './components/Graphic';
+import ChartBar from './components/ChartBar';
 import {reactLocalStorage} from 'reactjs-localstorage';
 
 class App extends React.Component {
@@ -158,6 +159,8 @@ class App extends React.Component {
 						</li>
 						<li className="list_menu"><Link className="nav_menu" to='/Graphics'>Informes</Link>
 						</li>
+						<li className="list_menu"><Link className="nav_menu" to='/ChartBar'>Reports</Link>
+						</li>
 					</ul>
 					<Switch>
 						<Route exact path='/' render={() =>
@@ -178,6 +181,12 @@ class App extends React.Component {
 						/>
 						<Route path='/Graphics' render={() =>
 							<Graphic
+								selectProjects={this.state.projects}
+								filterTaskSelect={this.state.tasks}
+							/> }
+						/>
+						<Route path='/ChartBar' render={() =>
+							<ChartBar
 								selectProjects={this.state.projects}
 								filterTaskSelect={this.state.tasks}
 							/> }
