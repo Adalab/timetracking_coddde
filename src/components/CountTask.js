@@ -149,8 +149,8 @@ class CountTask extends React.Component {
 			<div className="task__list">
 				{tasksToShow.map(
 					(task) => <ul className="task__item">
-						<li>{ task.taskName }</li>
-						<li>{ task.projectName} </li>
+						<li className="item__data">{ task.taskName }</li>
+						<li className="item__data">{ task.projectName} </li>
 						<li>{ task.initTime }</li>
 						<li>{ this.calculateFinalTime(task.initTime, task.counter) }</li>
 						<li>{ this.formatTime(task.counter) }</li>
