@@ -17,6 +17,8 @@
 	}
 	.ui-dialog {
 		background-color: #f0f3f6!important;
+		display: flex;
+		justify-content: flex-end;
 	}
 	.login__input__dialog {
 		color: black;
@@ -32,12 +34,14 @@
 		font-size: 14px;
 	}
 	.login__input__dialog::placeholder {
-		color: black;
+		color: #9D9BAA;
 		text-align: right;
 		font-size: 16px;
 		padding-right: 12px;
 	}
-
+	.ui-dialog.title {
+		color: #9D9BAA;
+	}
 	.dialog_container {
 		display: flex;
 		flex-direction: column;
@@ -77,6 +81,12 @@
 		}
 	}
 }
+.newUser-window {
+	@media all and(min-width: 630px){
+		width: 200px;
+		padding-top: 0;
+	}
+}
 .login-container {
 	background: url('../images/login.jpg') no-repeat center;
 	background-size: cover;
@@ -93,6 +103,9 @@
 	height: 50px;
 	right: 0;
 	top: 0;
+	justify-content: flex-end;
+	align-items: flex-end;
+	align-content: flex-end;
 }
 .ui-widget-overlay {
 	display: none;

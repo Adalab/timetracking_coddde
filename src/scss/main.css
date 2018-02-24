@@ -185,7 +185,9 @@ h1, p {
   margin: 10px; }
 
 .ui-dialog {
-  background-color: #f0f3f6 !important; }
+  background-color: #f0f3f6 !important;
+  display: flex;
+  justify-content: flex-end; }
 
 .login__input__dialog {
   color: black;
@@ -201,10 +203,13 @@ h1, p {
   font-size: 14px; }
 
 .login__input__dialog::placeholder {
-  color: black;
+  color: #9D9BAA;
   text-align: right;
   font-size: 16px;
   padding-right: 12px; }
+
+.ui-dialog.title {
+  color: #9D9BAA; }
 
 .dialog_container {
   display: flex;
@@ -242,6 +247,11 @@ h1, p {
   p {
     margin-bottom: 45px; } }
 
+@media all and (min-width: 630px) {
+  .newUser-window {
+    width: 200px;
+    padding-top: 0; } }
+
 .login-container {
   background: url("../images/login.jpg") no-repeat center;
   background-size: cover;
@@ -257,7 +267,10 @@ h1, p {
   width: 50px;
   height: 50px;
   right: 0;
-  top: 0; }
+  top: 0;
+  justify-content: flex-end;
+  align-items: flex-end;
+  align-content: flex-end; }
 
 .ui-widget-overlay {
   display: none; }
