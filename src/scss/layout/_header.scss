@@ -4,7 +4,7 @@
 	flex-direction: row;
 	justify-content: space-around;
 	align-items: center;
-	background-color: black;
+	background-color: $colorBlack;
 }
 .logo{
 	background: url('../images/logoLeter.png');
@@ -14,14 +14,14 @@
 	margin-top: 40px;
 }
 .header_title{
-	background: -webkit-linear-gradient(white, #F5BF2E 75%, white);
+	background: -webkit-linear-gradient($colorWhite, $colorPrimary 75%, $colorWhite);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 	opacity: 0.8;
 	font-size: 50px;
 }
 .welcome--user{
-	color: white;
+	color: $colorWhite;
 }
 .image--user{
 	border-radius: 50%;
