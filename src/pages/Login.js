@@ -97,8 +97,8 @@ class Login extends React.Component {
 						<button className="login__button" type="button" onClick={this.handleAuthEmail}>Log in</button>
 						<button className="login__button" type="button" onClick={this.handleAuthGoogle}>Log in with Google
 						</button>
-						<Dialog header="Create new user" className="newUser-window" visible={this.state.visible} width="350px" height="400px" modal={true} onHide={this.onHide}>
-						<img className="close_button" alt="cerrar" src={cerrar} onClick={this.onHide} />
+						<Dialog header="" className="newUser-window" visible={this.state.visible} width="350px" height="400px" modal={true} onHide={this.onHide}>
+							<div className="close-container"><span className="dialog-title">Create new user</span><img className="close_button" alt="cerrar" src={cerrar} onClick={this.onHide} /></div>
 						<div className="dialog_container">
 
 							<input name="onLoginSuccess" value={this.state.email} className="login__input__dialog" type="text" placeholder="E-mail" ref="email" onChange={e => this.handleInputChange('email', e.target.value)}/>
