@@ -170,11 +170,11 @@ class CountTask extends React.Component {
 				</div>
 				<div className="task__container">
 					<div className="task__title">
-						<span>¿En qué estoy trabajando?</span>
-						<span>Proyecto</span>
-						<span>Hora de inicio</span>
-						<span>Hora de fin</span>
-						<span>Tiempo invertido</span>
+						<span>What am I working on?</span>
+						<span>Project</span>
+						<span>Start time</span>
+						<span>End time</span>
+						<span>Time invested</span>
 					</div>
 					{this.paintTasks()}
 				</div>

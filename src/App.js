@@ -157,9 +157,9 @@ class App extends React.Component {
 					<ul className="window">
 						<li className="list_menu"><Link className="nav_menu" to='/'>Home</Link>
 						</li>
-						<li className="list_menu"><Link className="nav_menu" to='/Graphics'>Informes</Link>
+						<li className="list_menu"><Link className="nav_menu" to='/Graphics'>Doughnut Chart</Link>
 						</li>
-						<li className="list_menu"><Link className="nav_menu" to='/ChartBar'>Reports</Link>
+						<li className="list_menu"><Link className="nav_menu" to='/ChartBar'>Bar Chart</Link>
 						</li>
 					</ul>
 					<Switch>

@@ -9,7 +9,8 @@ class ChartBar extends React.Component {
 		this.handleFilteredProject = this.handleFilteredProject.bind(this);
 		this.state = {
 			projectsFiltered: '',
-			taskData: ''
+			taskData: '',
+			projectName: 'Select a Project'
 		}
 	}
 	handleFilteredProject (event) {
@@ -43,8 +44,13 @@ let data = {
 						// }
 				]
 		};
+
+		let arrayProject = this.props.selectProjects;
+		let projectSelected = arrayProject.filter(project => project.projectId.includes(projectsFiltered));
+
 		this.setState({
-			taskData: data
+			taskData: data,
+			projectName: projectSelected[0].projectName
 		})
 	}
 
@@ -69,8 +75,8 @@ let data = {
 		          <div>
 								<div className="content-section introduction">
 									<div className="feature-intro">
-										<h1>Tiempo invertido</h1>
-										<p>Tiempo invertido en proyectos y tareas.</p>
+										<h1>{this.state.projectName}</h1>
+										<p>Invested time of the tasks in a project</p>
 									</div>
 								</div>
 

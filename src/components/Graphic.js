@@ -11,7 +11,8 @@ class Graphic extends React.Component {
 		this.handleFilteredProject = this.handleFilteredProject.bind(this);
 		this.state = {
 			projectsFiltered: '',
-			taskData: ''
+			taskData: '',
+			projectName: 'Select a Project'
 		}
 	}
 	handleFilteredProject (event) {
@@ -34,8 +35,13 @@ class Graphic extends React.Component {
 					}]
 				};
 
+				let arrayProject = this.props.selectProjects;
+				let projectSelected = arrayProject.filter(project => project.projectId.includes(projectsFiltered));
+
+
 				this.setState({
-					taskData: data
+					taskData: data,
+					projectName: projectSelected[0].projectName
 				})
 			}
 
@@ -58,8 +64,8 @@ class Graphic extends React.Component {
 					<div className="component_container">
 						<div className="content-section introduction">
 							<div className="feature-intro">
-								<h1>Proyecto 1</h1>
-								<p>Tiempo invertido de tareas en el proyecto</p>
+								<h1>{this.state.projectName}</h1>
+								<p>Invested time of the tasks in a project</p>
 							</div>
 						</div>
 						{ this.selectProject() }
@@ -71,5 +77,5 @@ class Graphic extends React.Component {
 				)
 			}
 		}
-		
+
 		export default Graphic;
