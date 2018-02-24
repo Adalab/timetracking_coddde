@@ -13,8 +13,10 @@
 	width: 180px;
 	height: 120px;
 	margin-top: 30px;
-	margin-left: 30px;
-
+	margin-left: 15px;
+	@media all and(min-width: 810px){
+		margin-left: 25px;
+	}
 }
 .header_title{
 	background: -webkit-linear-gradient($colorWhite, $colorPrimary 75%, $colorWhite);
@@ -22,9 +24,17 @@
 	-webkit-text-fill-color: transparent;
 	opacity: 0.8;
 	display: none;
+	@media all and(min-width: 700px){
+		display: block;
+		font-size: 45px;
+	}
 	@media all and(min-width: 810px){
 		display: block;
-		font-size: 30px;
+		font-size: 50px;
+	}
+	@media all and(min-width: 1024px){
+		display: block;
+		font-size: 70px;
 	}
 }
 .welcome--user{
@@ -32,13 +42,16 @@
 }
 .image--user{
 	border-radius: 50%;
-	height: 30px;
+	height: 45px;
 	width: initial;
-
+	margin-right: 5px;
 }
 .login{
 	display: flex;
-	flex-direction: column;
-	justify-content: center;
+	flex-direction: row;
+	justify-content: space-around;
 	align-items: center;
+	margin-right: 5px;
+	padding-right: 5px;
+	padding-bottom: 40px;
 }
