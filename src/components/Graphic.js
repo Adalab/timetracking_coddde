@@ -12,7 +12,7 @@ class Graphic extends React.Component {
 		this.state = {
 			projectsFiltered: '',
 			taskData: '',
-			projectName: 'Select a Project'
+			projectName: 'Project'
 		}
 	}
 	handleFilteredProject (event) {
@@ -47,8 +47,8 @@ class Graphic extends React.Component {
 
 			selectProject(){
 				let arrayProject = this.props.selectProjects;
-				return(<select className="" onChange={this.handleFilteredProject}>
-					<option>selecciona un proyecto</option>
+				return(<select className="addproject__btn" onChange={this.handleFilteredProject}>
+					<option>Select a Project</option>
 					{
 						arrayProject.map(
 							project =>

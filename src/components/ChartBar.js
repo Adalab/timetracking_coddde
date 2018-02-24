@@ -10,7 +10,7 @@ class ChartBar extends React.Component {
 		this.state = {
 			projectsFiltered: '',
 			taskData: '',
-			projectName: 'Select a Project'
+			projectName: 'Project'
 		}
 	}
 	handleFilteredProject (event) {
@@ -58,8 +58,8 @@ let data = {
 			let arrayProject = this.props.selectProjects;
 			// console.log(arrayProject)
 
-			return(<select className="" onChange={this.handleFilteredProject}>
-							<option>selecciona un proyecto</option>
+			return(<select className="addproject__btn" onChange={this.handleFilteredProject}>
+							<option>Select a Project</option>
 				{
 					arrayProject.map(
 						project =>
