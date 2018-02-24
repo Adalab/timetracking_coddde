@@ -72,13 +72,17 @@
   vertical-align: -webkit-baseline-middle; }
 
 .list_menu {
+  border-radius: 14% 51% 0 0;
+  height: 50px;
   background-color: #f4f6f7;
   justify-content: space-between;
-  border-radius: 14% 69% 0 0;
   padding: 0 5px 0 5px;
-  height: 23px;
   border-left: 3px solid black;
   width: 166px; }
+  @media all and (min-width: 425px) {
+    .list_menu {
+      border-radius: 14% 69% 0 0;
+      height: 23px; } }
 
 body {
   margin: 0;
