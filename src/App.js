@@ -163,7 +163,7 @@ class App extends React.Component {
 						</li>
 					</ul>
 					<Switch>
-						{/* <Route exact path='/' render={() =>
+						<Route exact path='/' render={() =>
 							<CountTask
 								user={this.state.user}
 								inputTask={this.state.inputTask}
@@ -178,7 +178,7 @@ class App extends React.Component {
 								idProject={this.state.idProject}
 								resetInputs={this.resetInputs}
 							/> }
-						/> */}
+						/>
 						<Route path='/Graphics' render={() =>
 							<Graphic
 								selectProjects={this.state.projects}
