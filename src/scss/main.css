@@ -70,9 +70,8 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   margin-bottom: -23px;
-  height: 100vh;
-  padding-bottom: 20px;
-  height: 100vh; }
+  min-height: 100vh;
+  padding-bottom: 20px; }
 
 .App-header {
   background-color: #222;
@@ -295,19 +294,17 @@ body {
   color: #282626;
   font-weight: bold; }
 
-<<<<<<< HEAD
 .task__input {
   padding: 5px; }
 
 .project__select {
   height: 20px;
   background-color: #F5BF2E; }
-=======
+
 #barras {
   width: auto !important;
   height: auto !important;
   margin-left: 100px !important; }
->>>>>>> 21666679cbfdab5ae784e4e91d7ad99734c4c719
 
 #quesito {
   width: 1000px !important;
