@@ -25,7 +25,11 @@
 	align-items: center;
 	position: relative;
 	top: 45px;
+	right: 155px;
 	width: 200px;
+	@media all and(min-width: 450px){
+		right: 0;
+	}
 }
 .project__select{
 	height: 20px;

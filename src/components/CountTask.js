@@ -110,7 +110,7 @@ class CountTask extends React.Component {
 
 		this.setState({
 			lastStartTime: startHour
-		})
+		});
 	}
 
 	addTaskFirebase () {
@@ -159,6 +159,10 @@ class CountTask extends React.Component {
 			</div>);
 	}
 
+	handleChildClick(e) {
+		e.stopPropagation();
+	}
+
 	render () {
 
 		return (
@@ -169,7 +173,7 @@ class CountTask extends React.Component {
 						{this.state.folderVisible ?
 							<div className="folder__select">
 								{this.selectProject()}
-								<input type="text" className="task__input" value={this.props.inputProject} placeholder="New project" onChange={this.props.handleInputProject}/>
+								<input type="text" className="task__input" value={this.props.inputProject} placeholder="New project" onClick={this.handleChildClick} onChange={this.props.handleInputProject}/>
 								<button className="project__btn project__btn--add" type="button" onClick={this.props.addProject}>+</button>
 							</div>
 						: null }

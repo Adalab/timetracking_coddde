@@ -149,7 +149,6 @@ body {
 .project__btn {
   margin: 10px;
   height: 35px;
-  width: 80px;
   border-radius: 5px;
   border: 0;
   background-color: #F5BF2E;
@@ -341,7 +340,11 @@ body {
   align-items: center;
   position: relative;
   top: 45px;
+  right: 155px;
   width: 200px; }
+  @media all and (min-width: 450px) {
+    .folder__select {
+      right: 0; } }
 
 .project__select {
   height: 20px;

@@ -81,7 +81,7 @@ class App extends React.Component {
 	//recogemos el valor del input de proyectos
 	handleInputProject (event) {
 		this.setState ({
-			inputProject: event.target.value
+			inputProject: event.target.value,
 		})
 	}
 	//recogemos el valor del input de tareas
@@ -94,7 +94,7 @@ class App extends React.Component {
 	addProject(){
 		const objectProject = {
 			projectName: this.state.inputProject,
-			projectUser: this.state.user.uid
+			projectUser: this.state.user.uid,
 		}
 		const dbRefProject = firebase.database().ref('projects');
 		dbRefProject.push(objectProject);
@@ -105,7 +105,6 @@ class App extends React.Component {
 				idProject: childSnapshot.key
 			})
 		}).bind(this);
-
 			//Para recuperar el ultimo key
 			// const idProject = childSnapshot.key;
 			// console.log(`Éste sería el key que acabas de introducir ${idProject}`);
@@ -162,7 +161,7 @@ class App extends React.Component {
 				</div>
 			);
 		}
-		
+
 		return (<Login
 			onLoginSuccess = {this.setUser}
 			handleAuthGoogle = {this.handleAuthGoogle}
