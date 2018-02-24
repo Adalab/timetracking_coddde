@@ -33,8 +33,16 @@
 	color: black;
 }
 //Timer control button
-.addproject__btn{
-	margin: 5px;
+.folder__btn {
+	background: url('../images/folder.png') center no-repeat;
+	background-size: cover;
+	height: 50px;
+	width: 50px;
+	border: none;
+	cursor: pointer;
+}
+.project__btn{
+	margin: 10px;
 	height: 35px;
 	width: 80px;
 	border-radius: 5px;
@@ -49,6 +57,12 @@
 		height: 35px;
 	}
 }
+.project__btn--add {
+	height: 30px;
+	width: 30px;
+	border-radius: 50%;
+	font-weight: bold;
+}
 .timer__buttons{
 	display: flex;
 	flex-direction: row;
@@ -59,25 +73,23 @@
 	margin: 10px;
 	border-radius: 50%;
 	border-style: none;
-	background-color: white;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	cursor: pointer;
 	height: 40px;
 	width: 40px;
 }
-.timer__btn--play{
-	color: green;
-	cursor: pointer;
-	font-size: 24px;
+.timer__btn--play {
+	background: url('../images/play.png') no-repeat center;
+	background-size: cover;
 }
-.timer__btn--stop{
-	color: red;
-	cursor: pointer;
-	font-size: 30px;
+.timer__btn--stop {
+	background: url('../images/stop.png') no-repeat center;
+	background-size: cover;
 }
 //Exit user button
-.btn_exit--user{
+.btn_exit--user {
 	background-image: url('../images/off.png');
 	background-repeat: no-repeat;
 	background-color: transparent;

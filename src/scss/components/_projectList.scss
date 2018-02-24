@@ -14,12 +14,24 @@
 	font-weight: bold;
 }
 .task__input{
+	margin: 10px;
 	padding: 5px;
 }
-.calendar {
-	// border-radius: 5px;
-	// border-style: none;
-	// background-color: white;
+.folder__select {
+	background-color: white;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	top: 45px;
+	width: 200px;
+}
+.wat{
+	display: none;
+	// & :hover{
+	// 	display: block;
+	// }
 }
 .project__select{
 	height: 20px;
