@@ -33,7 +33,7 @@ class CountTask extends React.Component {
 	selectProject(){
 		let arrayProject = this.props.projects;
 
-		return(<select className="project__btn" onChange={this.props.handleCreatedProjects}>
+		return(<select className="project__btn select__btn--folder" onChange={this.props.handleCreatedProjects}>
 			<option>Select project</option>
 			{
 				arrayProject.map(
@@ -149,11 +149,11 @@ class CountTask extends React.Component {
 			<div className="task__list">
 				{tasksToShow.map(
 					(task) => <ul className="task__item">
-						<li className="item__data">{ task.taskName }</li>
-						<li className="item__data">{ task.projectName} </li>
-						<li>{ task.initTime }</li>
-						<li>{ this.calculateFinalTime(task.initTime, task.counter) }</li>
-						<li>{ this.formatTime(task.counter) }</li>
+						<li className="item__data item1">{ task.taskName }</li>
+						<li className="item__data item2">{ task.projectName} </li>
+						<li className="item3">{ task.initTime }</li>
+						<li className="item4">{ this.calculateFinalTime(task.initTime, task.counter) }</li>
+						<li className="item5">{ this.formatTime(task.counter) }</li>
 					</ul>).reverse()
 				}
 			</div>);
@@ -187,11 +187,11 @@ class CountTask extends React.Component {
 				</div>
 				<div className="task__container">
 					<div className="task__title">
-						<span>What are you working on?</span>
-						<span>Project</span>
-						<span>Init time</span>
-						<span>End time</span>
-						<span>Total time</span>
+						<span className="span1">What are you working on?</span>
+						<span className="span2">Project</span>
+						<span className="span3">Init time</span>
+						<span className="span4">End time</span>
+						<span className="span5">Total time</span>
 					</div>
 					{this.paintTasks()}
 				</div>
