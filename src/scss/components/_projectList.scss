@@ -1,7 +1,6 @@
 .task__list{
 	list-style: none;
 }
-
 .task__item{
 	display: grid;
 	grid-template-columns: repeat(5, 1fr);
@@ -13,4 +12,16 @@
 	grid-template-columns: repeat(5, 1fr);
 	color: #282626;
 	font-weight: bold;
+}
+.task__input{
+	padding: 5px;
+}
+.calendar {
+	// border-radius: 5px;
+	// border-style: none;
+	// background-color: white;
+}
+.project__select{
+	height: 20px;
+	background-color: #F5BF2E;
 }

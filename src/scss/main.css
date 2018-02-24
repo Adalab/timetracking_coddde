@@ -31,16 +31,6 @@
   justify-content: center;
   align-items: center; }
 
-.btn_exit--user {
-  background-image: url("../images/off.png");
-  background-repeat: no-repeat;
-  background-color: transparent;
-  border: none;
-  height: 35px;
-  width: 35px;
-  text-align: center;
-  margin-left: 30px; }
-
 .window {
   list-style: none;
   background-color: black;
@@ -91,6 +81,91 @@ body {
 
 .App-intro {
   font-size: large; }
+
+.login__buttons {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  margin: auto; }
+
+.login__button {
+  justify-content: space-between;
+  margin: 5px;
+  height: 35px;
+  width: 150px;
+  border-radius: 5px;
+  border: 0;
+  background-color: #F5BF2E;
+  color: black;
+  opacity: 0.8;
+  font-weight: bold;
+  cursor: pointer;
+  background: -webkit-linear-gradient(white, #F5BF2E 60%); }
+  .login__button:hover {
+    opacity: 1; }
+  @media all and (min-width: 810px) {
+    .login__button {
+      width: 200px;
+      height: 35px; } }
+
+.new__user {
+  background-image: url("../images/newUserBlack32.png"), -webkit-linear-gradient(white, #F5BF2E 80%);
+  background-repeat: no-repeat;
+  background-position: right;
+  color: black; }
+
+.addproject__btn {
+  margin: 5px;
+  height: 35px;
+  width: 80px;
+  border-radius: 5px;
+  border: 0;
+  background-color: #F5BF2E;
+  color: #282626;
+  font-weight: bold;
+  cursor: pointer;
+  background: -webkit-linear-gradient(white, #F5BF2E 60%); }
+  @media all and (min-width: 810px) {
+    .addproject__btn {
+      width: 190px;
+      height: 35px; } }
+
+.timer__buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  min-width: 200px; }
+
+.timer__btn {
+  margin: 10px;
+  border-radius: 50%;
+  border-style: none;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 40px; }
+
+.timer__btn--play {
+  color: green;
+  cursor: pointer;
+  font-size: 24px; }
+
+.timer__btn--stop {
+  color: red;
+  cursor: pointer;
+  font-size: 30px; }
+
+.btn_exit--user {
+  background-image: url("../images/off.png");
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border: none;
+  height: 35px;
+  width: 35px;
+  text-align: center;
+  margin-left: 30px; }
 
 .form-title {
   margin: 0;
@@ -243,69 +318,18 @@ h1, p {
     .login__input::placeholder {
       padding-right: 20px; } }
 
-.login__buttons {
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-  margin: auto; }
-
-.login__button {
-  justify-content: space-between;
-  margin: 5px;
-  height: 35px;
-  width: 150px;
-  border-radius: 5px;
-  border: 0;
-  background-color: #F5BF2E;
-  color: black;
-  opacity: 0.8;
-  font-weight: bold;
-  cursor: pointer;
-  background: -webkit-linear-gradient(white, #F5BF2E 60%); }
-  .login__button:hover {
-    opacity: 1; }
-  @media all and (min-width: 810px) {
-    .login__button {
-      width: 200px;
-      height: 35px; } }
-
 .timer {
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: space-around;
   align-items: center;
   padding: 10px;
-  margin: 40px;
-  border: 2px groove rgba(128, 128, 128, 0.4); }
+  margin: 40px; }
 
 .timer__counter {
-  margin: 0 20px; }
-
-.timer__buttons {
+  margin: 0 20px;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  min-width: 200px; }
-
-.timer__btn {
-  padding: 8px;
-  border-radius: 5px;
-  border-style: groove;
-  height: 40px;
-  width: 60px;
-  font-weight: bold; }
-
-.timer__btn--play {
-  background: #69f76a;
-  border-color: #69f76a; }
-
-.timer__btn--pause {
-  background: orange;
-  border-color: orange; }
-
-.timer__btn--stop {
-  background: red;
-  border-color: red; }
+  align-items: center; }
 
 .task__list {
   list-style: none; }
@@ -321,6 +345,13 @@ h1, p {
   grid-template-columns: repeat(5, 1fr);
   color: #282626;
   font-weight: bold; }
+
+.task__input {
+  padding: 5px; }
+
+.project__select {
+  height: 20px;
+  background-color: #F5BF2E; }
 
 #barras {
   width: auto !important;
