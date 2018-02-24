@@ -1,34 +1,57 @@
 .header{
-	height: 150px;
+	height: 100px;
 	display: flex;
 	flex-direction: row;
-	justify-content: space-around;
+	justify-content: space-between;
 	align-items: center;
-	background-color: black;
+	padding-top: 10px;
+	background-color: $colorBlack;
 }
 .logo{
 	background: url('../images/logoLeter.png');
 	background-repeat: no-repeat;
 	width: 180px;
 	height: 120px;
-	margin-top: 40px;
+	margin-top: 30px;
+	margin-left: 15px;
+	@media all and(min-width: 810px){
+		margin-left: 25px;
+	}
 }
 .header_title{
-	background: -webkit-linear-gradient(white, #F5BF2E 75%, white);
+	background: -webkit-linear-gradient($colorWhite, $colorPrimary 75%, $colorWhite);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 	opacity: 0.8;
-	font-size: 50px;
+	display: none;
+	@media all and(min-width: 700px){
+		display: block;
+		font-size: 45px;
+	}
+	@media all and(min-width: 810px){
+		display: block;
+		font-size: 50px;
+	}
+	@media all and(min-width: 1024px){
+		display: block;
+		font-size: 70px;
+	}
+}
+.welcome--user{
+	color: $colorPrimary;
 }
 .image--user{
 	border-radius: 50%;
-	height: 40px;
+	height: 45px;
 	width: initial;
-
+	margin-right: 5px;
 }
 .login{
 	display: flex;
-	flex-direction: column;
-	justify-content: center;
+	flex-direction: row;
+	justify-content: space-around;
 	align-items: center;
+	margin-right: 5px;
+	padding-right: 5px;
+	padding-bottom: 40px;
 }

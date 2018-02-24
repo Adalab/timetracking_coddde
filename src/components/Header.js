@@ -11,13 +11,11 @@ class Header extends React.Component {
 					<button className="reports_button"></button>
 				</div> */}
 				<div className="login">
-					<div className="info--user">
 						<img className="image--user" src={this.props.url} alt={this.props.email} />
 						<p className="welcome--user">{/*Bienvenido/a*/} {this.props.displayName}
 						{/*{this.props.email}*/}
 						</p>
-					</div>
-					<button className="btn_exit--user" onClick={this.props.handleLogout}></button>
+						<button className="btn_exit--user" onClick={this.props.handleLogout}></button>
 				</div>
 
 			</div>

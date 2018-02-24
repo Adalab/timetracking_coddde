@@ -1,6 +1,6 @@
 .window {
 	list-style: none;
-	background-color: black;
+	background-color: $colorBlack;
 	padding: 0;
 	margin: 0;
 	display: flex;
@@ -9,17 +9,17 @@
 .nav_menu {
 	justify-content: space-between;
 	align-items: baseline;
-	color: #F5BF2E;
+	color:  $colorBlack;
 	font-weight: bold;
 	text-decoration: none;
-	vertical-align: -webkit-baseline-middle; ;
-
+	vertical-align: -webkit-baseline-middle;
 }
 .list_menu {
 	background-color: #f4f6f7;
 	justify-content: space-between;
-	border-radius:23% 23% 0 0;
+	border-radius:14% 69% 0 0;;
 	padding: 0 5px 0 5px;
 	height: 23px;
-	border-left: 3px solid black;
+	border-left: 3px solid $colorBlack;
+	width: 85px;
 }

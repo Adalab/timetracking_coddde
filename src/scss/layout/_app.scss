@@ -4,22 +4,21 @@
 	background-repeat: no-repeat;
 	background-size: cover;
 	margin-bottom: -23px;
-	height: 100vh;
+	min-height: 100vh;
 	padding-bottom: 20px;
-	height: 100vh;
 }
 
 .App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+	background-color: #222;
+	height: 150px;
+	padding: 20px;
+	color: $colorWhite;
 }
 
 .App-title {
-  font-size: 1.5em;
+	font-size: 1.5em;
 }
 
 .App-intro {
-  font-size: large;
+	font-size: large;
 }
