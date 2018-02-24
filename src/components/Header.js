@@ -17,9 +17,8 @@ class Header extends React.Component {
 						{/*{this.props.email}*/}
 						</p>
 					</div>
-					<button className="btn_exit--user" onClick={this.props.handleLogout}></button>
 				</div>
-
+				<button className="btn_exit--user" onClick={this.props.handleLogout}></button>
 			</div>
 		);
 	}

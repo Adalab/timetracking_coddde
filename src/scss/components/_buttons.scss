@@ -78,12 +78,16 @@
 }
 //Exit user button
 .btn_exit--user{
-	background-image: url('../images/off.png');
+	background-image: url('../images/iconExit32.png');
 	background-repeat: no-repeat;
 	background-color: transparent;
 	border: none;
 	height: 35px;
 	width: 35px;
-	text-align: center;
-	margin-left: 30px;
+	margin-right: 30px;
+	margin-left: -40px;
+	margin-top: 30px;
+	@media all and(min-width: 500px){
+	margin-right: 20px;
+	}
 }
