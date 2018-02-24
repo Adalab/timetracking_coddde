@@ -5,6 +5,7 @@ class CountTask extends React.Component {
 	constructor (props) {
 		super(props);
 
+		this.handleExpanded = this.handleExpanded.bind(this);
 		this.selectProject = this.selectProject.bind(this);
 		this.formatTime = this.formatTime.bind(this);
 		this.calculateFinalTime = this.calculateFinalTime.bind(this);
@@ -19,14 +20,21 @@ class CountTask extends React.Component {
 		this.state = {
 			count: 0,
 			customNumber: 0,
+			folderVisible: false,
 		}
+	}
+
+	handleExpanded() {
+		this.setState(
+			(prevState, props) => ({folderVisible: !prevState.folderVisible})
+		);
 	}
 
 	selectProject(){
 		let arrayProject = this.props.projects;
 
-		return(<select className="addproject__btn" onChange={this.props.handleCreatedProjects}>
-			<option>Select your project</option>
+		return(<select className="project__btn" onChange={this.props.handleCreatedProjects}>
+			<option>Select project</option>
 			{
 				arrayProject.map(
 					project =>
@@ -119,7 +127,6 @@ class CountTask extends React.Component {
 		const dbRef =firebase.database().ref('tasks');
 		//Insertamos la nueva tarea
 		dbRef.push(objectTask);
-
 	}
 
 	stopTimer () {
@@ -158,23 +165,29 @@ class CountTask extends React.Component {
 			<div className="component_container">
 				<div className="timer">
 					<input className="calendar" type="date"></input>
-					{this.selectProject()}
-					<input type="text" className="task__input" value={this.props.inputProject} placeholder="Name of new project" onChange={this.props.handleInputProject}/>
-					<button className="addproject__btn" type="button" onClick={this.props.addProject}>Add new project</button>
-					<input type="text" className="task__input" value={this.props.inputTask} placeholder="Title of your task" onChange={this.props.handleInputTask}/>
+					<button className="folder__btn" onClick={this.handleExpanded}>
+						{this.state.folderVisible ?
+							<div className="folder__select">
+								{this.selectProject()}
+								<input type="text" className="task__input" value={this.props.inputProject} placeholder="New project" onChange={this.props.handleInputProject}/>
+								<button className="project__btn project__btn--add" type="button" onClick={this.props.addProject}>+</button>
+							</div>
+						: null }
+					</button>
+					<input type="text" className="task__input" value={this.props.inputTask} placeholder="Task name" onChange={this.props.handleInputTask}/>
 					<div className="timer__buttons">
 						<counter className="timer__counter" >{this.display()}</counter>
-						<button className="timer__btn timer__btn--play" type="button" name="start_btn" id="start_btn" onClick={this.startTimer}>▶</button>
-						<button className="timer__btn timer__btn--stop" type="button" name="reset_btn" id="reset_btn" onClick={this.stopTimer}>■</button>
+						<button className="timer__btn timer__btn--play" type="button" name="start_btn" id="start_btn" onClick={this.startTimer}></button>
+						<button className="timer__btn timer__btn--stop" type="button" name="reset_btn" id="reset_btn" onClick={this.stopTimer}></button>
 					</div>
 				</div>
 				<div className="task__container">
 					<div className="task__title">
-						<span>What am I working on?</span>
+						<span>What are you working on?</span>
 						<span>Project</span>
-						<span>Start time</span>
+						<span>Init time</span>
 						<span>End time</span>
-						<span>Time invested</span>
+						<span>Total time</span>
 					</div>
 					{this.paintTasks()}
 				</div>
