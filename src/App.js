@@ -20,6 +20,7 @@ class App extends React.Component {
 		this.addProject = this.addProject.bind(this);
 		this.setLastProyectId = this.setLastProyectId.bind(this);
 		this.handleInputTask = this.handleInputTask.bind(this);
+		this.resetInputs = this.resetInputs.bind(this);
 
 		this.state = {
 			user: null,
@@ -50,6 +51,7 @@ class App extends React.Component {
 			firebase.database().ref('projects').on('child_added', snapshot => {
 				const project = snapshot.val();
 				project.projectId = snapshot.key;
+				// project.projectName = snapshot.projectName;
 				if(typeof(this.state.user) !== 'undefined' && this.state.user !== null && snapshot.val().projectUser === this.state.user.uid)
 				this.setState ({
 					projects: this.state.projects.concat(project),//devuelve un array nuevo basado en el anterior con los nuevos datos
@@ -98,10 +100,17 @@ class App extends React.Component {
 
 	//Recogemos el valor del proyecto seleccionado en CountTask
 	handleCreatedProjects (event) {
-		let projectFiltered = event.currentTarget.value;
+		//Recogemos el value, que es el id
+		const projectFiltered = event.currentTarget.value;
+
+		//Recogemos el texto, que es el nombre
+		const projectNameSelected = event.currentTarget.options[event.currentTarget.selectedIndex].text;
+
+		console.log(projectNameSelected);
 
 		this.setState({
-			idProject: projectFiltered
+			idProject: projectFiltered,
+			inputProject: projectNameSelected
 		})
 	}
 
@@ -113,7 +122,7 @@ class App extends React.Component {
 		const dbRefProject = firebase.database().ref('projects');
 		dbRefProject.push(objectProject);
 
-		//Al añadir el proyecto vamos a llamar a la función que nos va a devolver el id de proyecto que insertaremos posteriormente en la tarea.
+		//Al añadir el proyecto vamos a llamar a la función que nos va a devolver el id de proyecto, el cual insertaremos posteriormente en la tarea.
 		this.setLastProyectId()
 	}
 
@@ -125,6 +134,16 @@ class App extends React.Component {
 				idProject: childSnapshot.key
 			})
 		}).bind(this);
+	}
+
+	resetInputs () {
+		this.setState({
+			inputProject: ''
+		})
+
+		this.setState({
+			inputTask: ''
+		})
 	}
 
 	render() {
@@ -156,7 +175,9 @@ class App extends React.Component {
 								handleCreatedProjects={this.handleCreatedProjects}
 								addProject={this.addProject}
 								setLastProyectId={this.setLastProyectId}
-								idProject={this.state.idProject}/> }
+								idProject={this.state.idProject}
+								resetInputs={this.resetInputs}
+							/> }
 						/>
 						<Route path='/Graphics' render={() =>
 							<Graphic

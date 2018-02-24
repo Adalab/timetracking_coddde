@@ -19,7 +19,7 @@ class Graphic extends React.Component {
 
 		let filteredTasks = this.props.filterTaskSelect.filter(filterTask =>
 		filterTask.projectId.includes(projectsFiltered));
-		console.log(filteredTasks);
+
 		// let TaskFor = '';
 		// for (let i = 0; i < filteredTasks.length; i++) {
 		// 	TaskFor = filteredTasks[i];
