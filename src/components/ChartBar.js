@@ -19,10 +19,7 @@ class ChartBar extends React.Component {
 		let filteredTasks = this.props.filterTaskSelect.filter(filterTask =>
 		filterTask.projectId.includes(projectsFiltered));
 		console.log(filteredTasks);
-		// let TaskFor = '';
-		// for (let i = 0; i < filteredTasks.length; i++) {
-		// 	TaskFor = filteredTasks[i];
-		// }
+
 		let namestasles = filteredTasks.map(element => element.taskName);
 		let counters = filteredTasks.map(element => element.counter);
 
@@ -60,7 +57,7 @@ class ChartBar extends React.Component {
 			let arrayProject = this.props.selectProjects;
 			// console.log(arrayProject)
 
-			return(<select className="addproject__btn" onChange={this.handleFilteredProject}>
+			return(<select className="add project__btn" onChange={this.handleFilteredProject}>
 							<option>Select a Project</option>
 				{
 					arrayProject.map(

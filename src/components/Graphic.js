@@ -47,7 +47,7 @@ class Graphic extends React.Component {
 
 			selectProject(){
 				let arrayProject = this.props.selectProjects;
-				return(<select className="addproject__btn" onChange={this.handleFilteredProject}>
+				return(<select className="add project__btn" onChange={this.handleFilteredProject}>
 					<option>Select a Project</option>
 					{
 						arrayProject.map(
