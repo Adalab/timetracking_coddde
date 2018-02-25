@@ -1,9 +1,13 @@
 import React from 'react';
+import firebase from 'firebase';
+
 
 class Header extends React.Component {
 	render() {
 		return (
+
 			<div className="header">
+
 				<img className="logo" alt="" src=""/>
 				<h1 className="header_title">FireTimer</h1>
 				{/* <button className="reports_button"></button>*/}
@@ -13,6 +17,7 @@ class Header extends React.Component {
 					</p>
 					<button className="btn_exit--user" onClick={this.props.handleLogout}></button>
 				</div>
+
 
 			</div>
 		);

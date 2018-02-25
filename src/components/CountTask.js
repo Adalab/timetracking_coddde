@@ -1,6 +1,7 @@
 import React from 'react';
 import firebase from 'firebase';
 
+
 class CountTask extends React.Component {
 	constructor (props) {
 		super(props);
@@ -14,6 +15,7 @@ class CountTask extends React.Component {
 		this.stopTimer = this.stopTimer.bind(this);
 		this.addTaskFirebase = this.addTaskFirebase.bind(this);
 		this.paintTasks = this.paintTasks.bind(this);
+		this.handleSelectedDate = this.handleSelectedDate.bind(this);
 
 		setInterval (this.updateClock,1000);
 
@@ -21,7 +23,30 @@ class CountTask extends React.Component {
 			count: 0,
 			customNumber: 0,
 			folderVisible: false,
+			daySelected: ''
 		}
+	}
+
+	selectDay(){
+		const dateOfTasks = this.props.tasks;
+
+		return(<select className="project__btn select__btn--folder" onChange={this.handleSelectedDate}>
+			<option>Filter by date</option>
+			<option value="">All</option>
+			{
+				dateOfTasks.map(element =>
+					<option value={element.date}>{element.date}</option>
+				)
+			}
+		</select>);
+	}
+
+	handleSelectedDate(e){
+		const dayFiltered = e.currentTarget.value;
+
+		this.setState({
+			daySelected: dayFiltered
+		})
 	}
 
 	handleExpanded() {
@@ -88,14 +113,18 @@ class CountTask extends React.Component {
 	}
 
 	calculateFinalTime(initTime, count){
-		let hours = parseInt(initTime.split(':')[0]);
-		let minutes = parseInt(initTime.split(':')[1]);
+		if (initTime != null && typeof(initTime !== 'undefined')) {
 
-		let finalCount = (hours * 3600) + (minutes * 60) + count;
+			let hours = parseInt(initTime.split(':')[0]);
+			let minutes = parseInt(initTime.split(':')[1]);
 
-		let endHour = this.formatTimeWithoutSeconds(finalCount);
+			let finalCount = (hours * 3600) + (minutes * 60) + count;
+
+			let endHour = this.formatTimeWithoutSeconds(finalCount);
 
 		return endHour;
+	}
+	else return "";
 	}
 
 	display () {
@@ -104,6 +133,7 @@ class CountTask extends React.Component {
 
 	startTimer () {
 		let startHour = new Date()
+
 		// Ponemos en marcha el contador
 		clearInterval(this.timer)
 		this.timer = setInterval(this.tick.bind(this), 1000)
@@ -114,11 +144,13 @@ class CountTask extends React.Component {
 	}
 
 	addTaskFirebase () {
+		this.props.setLastProyectId();
 		//Objeto que irá dentro de la base de datos
 		const objectTask = {
 			createdBy: this.props.user.uid,
 			taskName: this.props.inputTask,
 			counter: this.state.count,
+			date: this.state.lastStartTime.toDateString(),
 			initTime: this.state.lastStartTime.getHours() + ':' + this.state.lastStartTime.getMinutes(),
 			projectId: this.props.idProject,
 			projectName: this.props.inputProject
@@ -137,6 +169,8 @@ class CountTask extends React.Component {
 		//reseteamos el contador
 		this.setState({
 			count: 0,
+			stopClick: true,
+			inputTask: ''
 		});
 
 		//Reseteamos todos los campos de los inputs
@@ -144,10 +178,14 @@ class CountTask extends React.Component {
 	}
 
 	paintTasks() {
-		let tasksToShow = this.props.tasks; //esto es como el ejemplo de los perros de Isra
+		//Si se aplica este filtro, se mostrarán sólo las tareas de la fecha seleccionada
+		let filteredTasks = this.props.tasks.filter(filterTask =>
+		filterTask.date.includes(this.state.daySelected));
+		console.log(filteredTasks);
+
 		return (
-			<div className="task__list">
-				{tasksToShow.map(
+			<div className="task__list">{this.state.daySelected}
+				{filteredTasks.map(
 					(task) => <ul className="task__item">
 						<li className="item__data item1">{ task.taskName }</li>
 						<li className="item__data item2">{ task.projectName} </li>
@@ -165,9 +203,9 @@ class CountTask extends React.Component {
 
 	render () {
 		return (
-			<div className="component_container">
+			<div>
 				<div className="timer">
-					<input className="calendar" type="date"></input>
+					{this.selectDay()}
 					<button className="folder__btn" onClick={this.handleExpanded}>
 						{this.state.folderVisible ?
 							<div className="folder__select">
@@ -191,6 +229,7 @@ class CountTask extends React.Component {
 						<span className="span3">Init time</span>
 						<span className="span4">End time</span>
 						<span className="span5">Total time</span>
+
 					</div>
 					{this.paintTasks()}
 				</div>
