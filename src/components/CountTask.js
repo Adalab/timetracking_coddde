@@ -1,6 +1,7 @@
 import React from 'react';
 import firebase from 'firebase';
 
+
 class CountTask extends React.Component {
 	constructor (props) {
 		super(props);
@@ -88,14 +89,18 @@ class CountTask extends React.Component {
 	}
 
 	calculateFinalTime(initTime, count){
-		let hours = parseInt(initTime.split(':')[0]);
-		let minutes = parseInt(initTime.split(':')[1]);
+		if (initTime != null && typeof(initTime !== 'undefined')) {
 
-		let finalCount = (hours * 3600) + (minutes * 60) + count;
+			let hours = parseInt(initTime.split(':')[0]);
+			let minutes = parseInt(initTime.split(':')[1]);
 
-		let endHour = this.formatTimeWithoutSeconds(finalCount);
+			let finalCount = (hours * 3600) + (minutes * 60) + count;
+
+			let endHour = this.formatTimeWithoutSeconds(finalCount);
 
 		return endHour;
+	}
+	else return "";
 	}
 
 	display () {
@@ -104,6 +109,7 @@ class CountTask extends React.Component {
 
 	startTimer () {
 		let startHour = new Date()
+
 		// Ponemos en marcha el contador
 		clearInterval(this.timer)
 		this.timer = setInterval(this.tick.bind(this), 1000)
@@ -114,14 +120,15 @@ class CountTask extends React.Component {
 	}
 
 	addTaskFirebase () {
+		this.props.setLastProyectId();
 		//Objeto que irá dentro de la base de datos
 		const objectTask = {
 			createdBy: this.props.user.uid,
 			taskName: this.props.inputTask,
 			counter: this.state.count,
+			date: this.state.lastStartTime.toDateString(),
 			initTime: this.state.lastStartTime.getHours() + ':' + this.state.lastStartTime.getMinutes(),
-			projectId: this.props.idProject,
-			projectName: this.props.inputProject
+			projectId: this.props.idProject
 		};
 		//Recogemos la referencia al array de tareas de la base de datos
 		const dbRef =firebase.database().ref('tasks');
@@ -137,6 +144,8 @@ class CountTask extends React.Component {
 		//reseteamos el contador
 		this.setState({
 			count: 0,
+			stopClick: true,
+			inputTask: ''
 		});
 
 		//Reseteamos todos los campos de los inputs
@@ -166,7 +175,9 @@ class CountTask extends React.Component {
 	render () {
 
 		return (
-			<div className="component_container">
+			<div>
+
+				<progress max="100" value="60" class="shadow"></progress>
 				<div className="timer">
 					<input className="calendar" type="date"></input>
 					<button className="folder__btn" onClick={this.handleExpanded}>
@@ -192,6 +203,7 @@ class CountTask extends React.Component {
 						<span className="span3">Init time</span>
 						<span className="span4">End time</span>
 						<span className="span5">Total time</span>
+
 					</div>
 					{this.paintTasks()}
 				</div>
