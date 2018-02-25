@@ -87,8 +87,8 @@ class Login extends React.Component {
 			<div className="login-container">
 				<header className="form-header">
 					<div className="form-title">
-						<h1>FireTimer</h1>
-						<p>Control your time production</p>
+						<h1 className="title-login">FireTimer</h1>
+						<p className="subtitle-login">Control your time production</p>
 					</div>
 				</header>
 				<form className="login__form">
