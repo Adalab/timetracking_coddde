@@ -173,7 +173,6 @@ class CountTask extends React.Component {
 	}
 
 	render () {
-
 		return (
 			<div>
 

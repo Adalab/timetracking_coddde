@@ -1,5 +1,5 @@
- import React from 'react';
- import { Chart } from 'primereact/components/chart/Chart';
+import React from 'react';
+import { Chart } from 'primereact/components/chart/Chart';
 
 class ChartBar extends React.Component {
 
@@ -31,21 +31,15 @@ class ChartBar extends React.Component {
 		console.log(this.state.projectName);
 
 		let data = {
-				labels: namestasles,
-				datasets: [
-						{
-								label: projectSelected[0].projectName,
-								backgroundColor: '#F5BF2E',
-								borderColor: '#000000',
-								data: counters
-						},
-						// {
-						// 		label: 'My Second dataset',
-						// 		backgroundColor: '#9CCC65',
-						// 		borderColor: '#7CB342',
-						// 		data: [28, 48, 40, 19, 86, 27, 90]
-						// }
-				]
+			labels: namestasles,
+			datasets: [
+				{
+					label: projectSelected[0].projectName,
+					backgroundColor: '#F5BF2E',
+					borderColor: '#000000',
+					data: counters
+				},
+			]
 		};
 
 		this.setState({
@@ -54,39 +48,37 @@ class ChartBar extends React.Component {
 	}
 
 	selectProject(){
-			let arrayProject = this.props.selectProjects;
-			// console.log(arrayProject)
+		let arrayProject = this.props.selectProjects;
 
-			return(<select className="add project__btn" onChange={this.handleFilteredProject}>
-							<option>Select a Project</option>
-				{
-					arrayProject.map(
-						project =>
-							<option value={project.projectId}>{project.projectName}</option>
-					)
+		return(<select className="add project__btn" onChange={this.handleFilteredProject}>
+			<option>Select a Project</option>
+			{
+				arrayProject.map(
+					project =>
+						<option value={project.projectId}>{project.projectName}</option>
+				)
 			}
 		</select>);
 		}
 
-		render() {
+	render() {
+    return (
+			<div>
+				<div className="content-section introduction">
+					<div className="feature-intro">
+						<h1>{this.state.projectName}</h1>
+						<p>Invested time of the tasks in a project</p>
+					</div>
+				</div>
 
-		      return (
-		          <div>
-								<div className="content-section introduction">
-									<div className="feature-intro">
-										<h1>{this.state.projectName}</h1>
-										<p>Invested time of the tasks in a project</p>
-									</div>
-								</div>
+				{ this.selectProject() }
 
-								{ this.selectProject() }
-
-								<div className="content-section implementation">
-									<Chart  id="barras" type="bar" data={this.state.taskData} className="chartBar"/>
-		              </div>
-		          </div>
-						)
-		}
-		}
+				<div className="content-section implementation">
+					<Chart  id="barras" type="bar" data={this.state.taskData} className="chartBar"/>
+				</div>
+			</div>
+		)
+	}
+}
 
 export default ChartBar;
