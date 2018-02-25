@@ -223,13 +223,34 @@ body {
   justify-content: center;
   padding: 20px;
   padding-top: 53px; }
-
-.form-title p {
-  font-size: 20px;
-  color: #ffffff; }
-
-.form-title h1, p {
-  margin: 10px; }
+  .form-title p {
+    font-size: 20px;
+    color: #ffffff; }
+  .form-title h1, .form-title p {
+    margin: 10px; }
+  .form-title h1 {
+    background: -webkit-linear-gradient(#ffffff, #F5BF2E 75%, #ffffff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    opacity: 0.8;
+    font-size: 50px; }
+    @media all and (min-width: 500px) {
+      .form-title h1 {
+        font-size: 65px; } }
+    @media all and (min-width: 810px) {
+      .form-title h1 {
+        font-size: 70px; } }
+    @media all and (min-width: 1024px) {
+      .form-title h1 {
+        font-size: 80px; } }
+  @media all and (min-width: 500px) {
+    .form-title {
+      font-size: 25px; } }
+  @media all and (min-width: 810px) {
+    .form-title {
+      font-size: 35px; }
+      .form-title p {
+        margin-bottom: 45px; } }
 
 .ui-dialog {
   background-color: #f0f3f6 !important;
@@ -237,7 +258,7 @@ body {
   justify-content: flex-end; }
 
 .login__input__dialog {
-  color: black;
+  color: grey;
   margin: 10px;
   margin-bottom: 30px;
   height: 30px;
@@ -281,32 +302,6 @@ body {
 
 .dialog {
   justify-content: space-between; }
-
-@media all and (min-width: 500px) {
-  font-size: 25px;
-  .form-title h1 {
-    background: -webkit-linear-gradient(#ffffff, #F5BF2E 75%, #ffffff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    opacity: 0.8;
-    font-size: 50px; } }
-  @media all and (min-width: 500px) and (min-width: 500px) {
-    .form-title h1 {
-      font-size: 65px; } }
-  @media all and (min-width: 500px) and (min-width: 810px) {
-    .form-title h1 {
-      font-size: 70px; } }
-  @media all and (min-width: 500px) and (min-width: 1024px) {
-    .form-title h1 {
-      font-size: 80px; } }
-
-@media all and (min-width: 500px) and (min-width: 500px) {
-  font-size: 25px; }
-
-@media all and (min-width: 500px) and (min-width: 810px) {
-  font-size: 35px;
-  .form-title p {
-    margin-bottom: 45px; } }
 
 @media all and (min-width: 630px) {
   .newUser-window {
