@@ -2,7 +2,6 @@ import React from 'react';
 import firebase from 'firebase';
 import { Link, Route, Switch } from 'react-router-dom';
 import Header from './components/Header';
-import Projects from './components/Projects';
 import Databasetest from './components/Databasetest';
 import CountTask from './components/CountTask';
 import Login from './pages/Login';
