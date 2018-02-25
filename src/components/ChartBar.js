@@ -25,16 +25,25 @@ class ChartBar extends React.Component {
 
 		let arrayProject = this.props.selectProjects;
 		let projectSelected = arrayProject.filter(project => project.projectId.includes(projectsFiltered));
-		this.setState({
-			projectName: projectSelected[0].projectName
-		})
-		console.log(this.state.projectName);
+
+		if(projectSelected.length == 0){
+			this.setState({
+				taskData: data,
+				projectName: 'Project'
+			})
+		}
+		else {
+			this.setState({
+				taskData: data,
+				projectName: projectSelected[0].projectName
+			})
+		}
 
 		let data = {
 			labels: namestasles,
 			datasets: [
 				{
-					label: projectSelected[0].projectName,
+					label: 'Time',
 					backgroundColor: '#F5BF2E',
 					borderColor: '#000000',
 					data: counters
