@@ -15,7 +15,7 @@ class CountTask extends React.Component {
 		this.stopTimer = this.stopTimer.bind(this);
 		this.addTaskFirebase = this.addTaskFirebase.bind(this);
 		this.paintTasks = this.paintTasks.bind(this);
-		this.handleDates = this.handleDates.bind(this);
+		this.handleSelectedDate = this.handleSelectedDate.bind(this);
 
 		setInterval (this.updateClock,1000);
 
@@ -23,7 +23,30 @@ class CountTask extends React.Component {
 			count: 0,
 			customNumber: 0,
 			folderVisible: false,
+			daySelected: ''
 		}
+	}
+
+	selectDay(){
+		const dateOfTasks = this.props.tasks;
+
+		return(<select className="project__btn select__btn--folder" onChange={this.handleSelectedDate}>
+			<option>Filter by date</option>
+			<option value="">All</option>
+			{
+				dateOfTasks.map(element =>
+					<option value={element.date}>{element.date}</option>
+				)
+			}
+		</select>);
+	}
+
+	handleSelectedDate(e){
+		const dayFiltered = e.currentTarget.value;
+
+		this.setState({
+			daySelected: dayFiltered
+		})
 	}
 
 	handleExpanded() {
@@ -155,10 +178,14 @@ class CountTask extends React.Component {
 	}
 
 	paintTasks() {
-		let tasksToShow = this.props.tasks; //esto es como el ejemplo de los perros de Isra
+		//Si se aplica este filtro, se mostrarán sólo las tareas de la fecha seleccionada
+		let filteredTasks = this.props.tasks.filter(filterTask =>
+		filterTask.date.includes(this.state.daySelected));
+		console.log(filteredTasks);
+
 		return (
-			<div className="task__list">
-				{tasksToShow.map(
+			<div className="task__list">{this.state.daySelected}
+				{filteredTasks.map(
 					(task) => <ul className="task__item">
 						<li className="item__data item1">{ task.taskName }</li>
 						<li className="item__data item2">{ task.projectName} </li>
@@ -173,48 +200,12 @@ class CountTask extends React.Component {
 	handleChildClick(e) {
 		e.stopPropagation();
 	}
-	selectDay(){
-		const dateOfTasks = this.props.tasks;
-
-		return(<select className="project__btn select__btn--folder" onChange={this.handleDates}>
-			<option>Select day</option>
-			{
-				dateOfTasks.map(element =>
-					<option value={element.date}>{element.date}</option>
-				)
-			}
-		</select>);
-	}
-
-	handleDates(e){
-		const dayFiltered = e.currentTarget.value;
-
-		let filteredTasks = this.props.tasks.filter(filterTask =>
-		filterTask.date.includes(dayFiltered));
-		console.log(filteredTasks);
-	}
-
-	paintProgress(){
-		const tasksToShow2 = this.props.tasks;
-		return (
-			<div className="task__list">
-				{tasksToShow2.map(
-					(task2) => <div value={task2.counter}>{task2.taskName}</div>
-				)
-				}
-			</div>
-		);
-	}
 
 	render () {
 		return (
 			<div>
-				{/* {this.handleDates()} */}
-				{this.selectDay()}
-				{this.paintProgress()}
-				<progress max="100" value="60" class="shadow"></progress>
 				<div className="timer">
-					<input className="calendar" type="date"></input>
+					{this.selectDay()}
 					<button className="folder__btn" onClick={this.handleExpanded}>
 						{this.state.folderVisible ?
 							<div className="folder__select">
