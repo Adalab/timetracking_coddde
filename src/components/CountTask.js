@@ -128,7 +128,8 @@ class CountTask extends React.Component {
 			counter: this.state.count,
 			date: this.state.lastStartTime.toDateString(),
 			initTime: this.state.lastStartTime.getHours() + ':' + this.state.lastStartTime.getMinutes(),
-			projectId: this.props.idProject
+			projectId: this.props.idProject,
+			projectName: this.props.inputProject
 		};
 		//Recogemos la referencia al array de tareas de la base de datos
 		const dbRef =firebase.database().ref('tasks');
