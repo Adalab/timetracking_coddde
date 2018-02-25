@@ -28,14 +28,17 @@ class Login extends React.Component {
 		const email = this.state.email;
 		const password = this.state.password;
 		firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+		if (password.length<6) {
+				alert('Your password must be longer than 6 characters')
+			}
+
 	  // Handle Errors here.
 	  var errorCode = error.code;
 	  var errorMessage = error.message;
 	  // ...
 	});
 		this.setState ({ visible: false});
-	}
-
+}
 	recoverPass(){
 		let auth = firebase.auth();
 		let emailAdress = this.state.email;
