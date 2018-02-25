@@ -164,7 +164,6 @@ class CountTask extends React.Component {
 	}
 
 	render () {
-
 		return (
 			<div className="component_container">
 				<div className="timer">
