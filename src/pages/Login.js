@@ -107,7 +107,7 @@ class Login extends React.Component {
 						</div>
 						</Dialog>
 
-						<button label="Show" className="login__button" type="button" icon="fa-external-link-square" onClick={this.onClick}>New user</button>
+						<button label="Show" className="login__button new__user" type="button" icon="fa-external-link-square" onClick={this.onClick}>New user</button>
 
 						<button className="login__button" type="button" onClick={this.recoverPass}>Forgot Password
 						</button>
